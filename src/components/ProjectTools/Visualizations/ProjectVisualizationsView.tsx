@@ -14,7 +14,7 @@ export default class ProjectVisualizationsView extends React.Component<IProjectV
   
   public render() {
     return (
-      <Container fluid>
+      <Container fluid className='p-5'>
           <Row>
               <Col>
                { this.getVisualizations() }

@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 const App: React.FC = () => {
   return (
     <div className="App">
-      <ProjectDashboard projectTitle="Healthcare" projectDescription="Lorem ipsum"/>
+      <ProjectDashboard projectTitle="Healthcare" projectDescription="This is a sample project! Here is where the description would go."/>
     </div>
   );
 }

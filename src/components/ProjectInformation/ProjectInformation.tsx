@@ -13,7 +13,7 @@ export interface IProjectInformationProps {
 export default class ProjectInformation extends React.Component<IProjectInformationProps> {
   public render() {
     return (
-      <Container fluid>
+      <Container fluid className='p-5'>
         <Row className="justify-content-start"> 
           <Col xs={10} sm={10} md={10} lg={10} className="justify-content-start align-content-start">
               <div className="text-left">
