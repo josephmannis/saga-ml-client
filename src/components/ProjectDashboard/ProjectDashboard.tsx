@@ -1,6 +1,6 @@
 import * as React from 'react';
-import ProjectInformation from '../ProjectInformation/ProjectInformation';
-import ProjectToolsTabView from '../ProjectTools/ProjectToolsTabView'
+import ProjectInformation from './ProjectInformation/ProjectInformation';
+import ProjectToolsTabView from './ProjectTools/ProjectToolsTabView'
 
 
 export interface IProjectDashboardProps {
