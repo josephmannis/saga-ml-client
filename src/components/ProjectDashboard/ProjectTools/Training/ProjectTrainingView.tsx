@@ -2,8 +2,8 @@ import * as React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Filters from '../../Shared/Filters';
-import SearchBar from '../../Shared/SearchBar';
+import Filters from '../../../Shared/Filters';
+import SearchBar from '../../../Shared/SearchBar';
 import DataItem from './DataItem';
 import DataItemModel from './model/DataItemModel';
 
