@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 
 
 interface IProjectCollectionProps {
@@ -6,7 +6,7 @@ interface IProjectCollectionProps {
 }
 
 const ProjectCollection: React.FC<IProjectCollectionProps> = props => {
-
+  return <p>TODO</p>
 }
 
-export default ProjectCollection
+export default ProjectCollection;
