@@ -1,9 +1,9 @@
-import React from 'react'
-import Image from 'react-bootstrap/Image'
+import React from './node_modules/react'
+import Image from './node_modules/react-bootstrap/Image'
 import ProjectVisualization from './model/ProjectVisualizationModel';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Container from './node_modules/react-bootstrap/Container';
+import Row from './node_modules/react-bootstrap/Row';
+import Col from './node_modules/react-bootstrap/Col';
 
 interface IVisualizationProps {
     model: ProjectVisualization;

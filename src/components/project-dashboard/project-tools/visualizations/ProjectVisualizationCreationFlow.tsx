@@ -1,4 +1,4 @@
-import react from 'react'
+import react from './node_modules/react'
 
 
 interface IProjectVisualizationCreationFlowProps {

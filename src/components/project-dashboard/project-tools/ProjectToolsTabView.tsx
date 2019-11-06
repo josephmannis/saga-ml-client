@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Tabs from 'react-bootstrap/tabs';
 import Tab from 'react-bootstrap/tab';
-import ProjectDataManagementView from './DataManagement/ProjectDataManagementView';
-import ProjectVisualizationsView from './Visualizations/ProjectVisualizationsView';
-import ProjectTrainingView from './Training/ProjectTrainingView';
-import ProjectVisualizationModel from './Visualizations/model/ProjectVisualizationModel';
-import DataItemModel from './Training/model/DataItemModel';
+import ProjectDataManagementView from './data-management/ProjectDataManagementView';
+import ProjectVisualizationsView from './visualizations/ProjectVisualizationsView';
+import ProjectTrainingView from './training/ProjectTrainingView';
+import ProjectVisualizationModel from './visualizations/model/ProjectVisualizationModel';
+import DataItemModel from './training/model/DataItemModel';
 
 export interface IProjectToolsTabViewProps {
 

@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Filters from '../../../shared/Filters';
 import SearchBar from '../../../shared/SearchBar';
 import DataItem from './DataItem';
-import DataItemModel from './model/DataItemModel';
+
 
 export interface IProjectTrainingViewProps {
   dataItems: Array<DataItemModel>
