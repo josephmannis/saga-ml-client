@@ -21,7 +21,9 @@
     "react-select": "^3.0.8",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "typescript": "3.6.4"
+    "typescript": "3.6.4",
+    "react-chartjs-2": "^2.8.0",
+    "chart.js": "^2.9.2"
   },
   "scripts": {
     "start": "react-scripts start",
