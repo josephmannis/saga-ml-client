@@ -20,4 +20,4 @@ class ProjectDiscoveryHome extends React.Component<IProjectDiscoveryProps, IProj
 }
 
 
-export default Component
+export default ProjectDiscoverHome;

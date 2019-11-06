@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 
 
 interface IProjectPanelContainerProps {
@@ -6,7 +6,7 @@ interface IProjectPanelContainerProps {
 }
 
 const ProjectPanelContainer: React.FC<IProjectPanelContainerProps> = props => {
-    
-}
+    return <p>TODO</p>
+};
 
-export default ProjectPanelContainer
+export default ProjectPanelContainer;
