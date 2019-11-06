@@ -18,7 +18,7 @@ export interface IProject {
 }
 
 export interface IProjectData {
-     dataRows: string[];
+     dataRows: string[][];
      columnTypes: IColumnType[];
 }
 

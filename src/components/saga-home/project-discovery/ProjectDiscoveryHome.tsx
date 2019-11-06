@@ -1,5 +1,5 @@
 import React from 'react';
-import { IProjectModel } from '../../model';
+import { IProjectModel } from '../../model.ts';
 
 interface IProjectDiscoveryProps {
     projects: IProjectModel[];

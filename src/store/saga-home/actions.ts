@@ -1,5 +1,4 @@
-import { UserProject, PublishedProject } from './StateTypes';
-import { UserProject } from './reducers';
+import { UserProject, PublishedProject } from './datatypes';
 
 // Types
 export enum HomeActions {
@@ -23,27 +22,27 @@ interface CreateUserProjectAction {
     project: UserProject;
 }
 
-export type HomeAction =
+export type HomeActionType =
 | FetchFeaturedProjectsAction
 | FetchUserProjectsAction
 | CreateUserProjectAction
 
 // Creators
-export function fetchPublishedProjects(projects: PublishedProject[]): HomeAction {
+export function fetchPublishedProjects(projects: PublishedProject[]): HomeActionType {
     return {
         type: HomeActions.FETCH_FEATURED_PROJECTS,
         publishedProjects: projects
     }
 }
 
-export function fetchUserProjects(projects: UserProject[]): HomeAction {
+export function fetchUserProjects(projects: UserProject[]): HomeActionType {
     return {
         type: HomeActions.FETCH_USER_PROJECTS,
         userProjects: projects
     }
 }
 
-export function createUserProject(project: UserProject): HomeAction {
+export function createUserProject(project: UserProject): HomeActionType {
     return {
         type: HomeActions.CREATE_USER_PROJECT,
         project: project
