@@ -1,14 +1,31 @@
 import React from 'react';
 import './App.css';
-import ProjectDashboard from './components/ProjectDashboard/ProjectDashboard';
+import ProjectDashboard from './components/project-dashboard/ProjectDashboard';
 import 'bootstrap/dist/css/bootstrap.css';
+import { IProject } from './components/model';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <ProjectDashboard projectTitle="Healthcare" projectDescription="This is a sample project! Here is where the description would go."/>
+      <ProjectDashboard project={ getSampleProject() }/>
     </div>
   );
+}
+
+function getSampleProject(): IProject {
+  return (
+    {
+      id: 'no', 
+      owner: {id: 'joe', username: 'jo1'},
+      title: 'Healthcare',
+      description: 'Sample project',
+      visualizations: [],
+      data: {dataRows: [[''],['']], columnTypes: []},
+      comments: [],
+      topics: []
+    }
+     
+  )
 }
 
 export default App;

@@ -1,12 +1,12 @@
 import React from 'react'
 import Image from 'react-bootstrap/Image'
-import ProjectVisualization from './model/ProjectVisualizationModel';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { IProjectVisualization } from '../../../model';
 
 interface IVisualizationProps {
-    model: ProjectVisualization;
+    model: IProjectVisualization;
 }
 
 const Visualization: React.FC<IVisualizationProps> =
@@ -14,7 +14,7 @@ const Visualization: React.FC<IVisualizationProps> =
      <Container fluid>
          <Row>
              <Col xs={5} sm={5} md={5} lg={5} >
-                <Image src={require('../../../assets/graph.svg')}/>
+                <Image src={require('../../../../assets/graph.svg')}/>
              </Col>
 
             <Col className='text-left'>

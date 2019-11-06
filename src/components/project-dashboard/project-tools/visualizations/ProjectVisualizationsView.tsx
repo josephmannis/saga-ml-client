@@ -3,11 +3,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import ProjectVisualizationModel from './model/ProjectVisualizationModel';
 import Visualization from './Visualization';
+import { IProjectVisualization } from '../../../model';
 
 export interface IProjectVisualizationsViewProps {
-  visualizations: Array<ProjectVisualizationModel>;
+  visualizations: IProjectVisualization[];
 }
 
 export default class ProjectVisualizationsView extends React.Component<IProjectVisualizationsViewProps> {
