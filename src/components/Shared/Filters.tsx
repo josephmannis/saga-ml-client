@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
+import React, { Component } from './node_modules/react';
+import Container from './node_modules/react-bootstrap/Container';
+import Col from './node_modules/react-bootstrap/Col';
+import Form from './node_modules/react-bootstrap/Form';
+import Card from './node_modules/react-bootstrap/Card';
 
 interface IFiltersProps {
     filters: Array<string>;

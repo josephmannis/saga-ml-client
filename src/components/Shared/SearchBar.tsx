@@ -1,7 +1,7 @@
-import React from 'react';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Button from 'react-bootstrap/Button';
-import FormControl from 'react-bootstrap/FormControl';
+import React from './node_modules/react';
+import InputGroup from './node_modules/react-bootstrap/InputGroup';
+import Button from './node_modules/react-bootstrap/Button';
+import FormControl from './node_modules/react-bootstrap/FormControl';
 
 interface SearchBarProps {
     hintText: string; 
