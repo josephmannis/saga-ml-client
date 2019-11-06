@@ -1,7 +1,20 @@
-import react from 'react'
+import React from 'react';
 
-const ConnectedProjectDiscovery: React.FC = () => {
+
+interface IConnectedProjectDiscoveryProps {
 
 }
 
-export default ConnectedProjectDiscovery
+interface IConnectedProjectDiscoveryState {
+
+}
+
+class ConnectedProjectDiscovery extends React.Component<IConnectedProjectDiscoveryProps, IConnectedProjectDiscoveryState> {
+    constructor(props: IConnectedProjectDiscoveryProps) {
+        super(props);
+        this.state = {
+        }
+    }
+}
+
+export default ConnectedProjectDiscovery;

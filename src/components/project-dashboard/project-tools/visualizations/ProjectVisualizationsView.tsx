@@ -1,13 +1,13 @@
-import * as React from './node_modules/react';
-import Container from './node_modules/react-bootstrap/Container';
-import Row from './node_modules/react-bootstrap/Row';
-import Col from './node_modules/react-bootstrap/Col';
-import Button from './node_modules/react-bootstrap/Button';
-import ProjectVisualizationModel from './model/ProjectVisualizationModel';
+import * as React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import Visualization from './Visualization';
+import { IProjectVisualization } from '../../../model';
 
 export interface IProjectVisualizationsViewProps {
-  visualizations: Array<ProjectVisualizationModel>;
+  visualizations: IProjectVisualization[];
 }
 
 export default class ProjectVisualizationsView extends React.Component<IProjectVisualizationsViewProps> {

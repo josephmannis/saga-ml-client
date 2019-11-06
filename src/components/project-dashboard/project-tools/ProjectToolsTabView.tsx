@@ -3,12 +3,16 @@ import Tabs from 'react-bootstrap/tabs';
 import Tab from 'react-bootstrap/tab';
 import ProjectDataManagementView from './data-management/ProjectDataManagementView';
 import ProjectVisualizationsView from './visualizations/ProjectVisualizationsView';
-import ProjectTrainingView from './training/ProjectTrainingView';
-import ProjectVisualizationModel from './visualizations/model/ProjectVisualizationModel';
-import DataItemModel from './training/model/DataItemModel';
+import { IProject } from '../../model';
 
 export interface IProjectToolsTabViewProps {
+    project: IProject
+}
 
+
+interface IProjectToolsTabViewState {
+    project: IProject;
+    currentTab: ProjectToolActions;
 }
 
 enum ProjectToolActions {
@@ -17,40 +21,28 @@ enum ProjectToolActions {
     TRAIN = "Train"
 }
 
-export default class ProjectToolsTabView extends React.Component<IProjectToolsTabViewProps> {
-  public render() {
-    return (
-        <Tabs defaultActiveKey={ProjectToolActions.ADD_DATA} id="project-tool-actions">
+
+class ProjectToolsTabView extends React.Component<IProjectToolsTabViewProps, IProjectToolsTabViewState> {
+    constructor(props: IProjectToolsTabViewProps) {
+        super(props);
+        this.state = {
+            project: props.project,
+            currentTab: ProjectToolActions.VISUALIZE,
+        }
+    }
+
+    public render() {
+        return (
+            <Tabs defaultActiveKey={ProjectToolActions.ADD_DATA} id="project-tool-actions">
             <Tab eventKey={ProjectToolActions.VISUALIZE} title={ProjectToolActions.VISUALIZE}>
-                <ProjectVisualizationsView visualizations={this.getVisualizations()}/>
+                <ProjectVisualizationsView visualizations={this.props.project.visualizations}/>
             </Tab>
             <Tab eventKey={ProjectToolActions.ADD_DATA} title={ProjectToolActions.ADD_DATA}>
-                <ProjectDataManagementView/>
-            </Tab>
-            <Tab eventKey={ProjectToolActions.TRAIN} title={ProjectToolActions.TRAIN}>
-                <ProjectTrainingView dataItems={this.getDataItems()}/>
+                <ProjectDataManagementView data={ this.props.project.data } projectTopics={ this.props.project.topics } />
             </Tab>
         </Tabs>
-    );
-  }
-
-  getVisualizations() {
-      return [
-          new ProjectVisualizationModel(
-          "~/assets/graph.svg",
-          "Distribution of Data", 
-          "This is where the description of the data visualization would go! I don't have anything for it yet.")
-        ];
-  }
-
-  getDataItems() {
-      return [
-        new DataItemModel(
-            'Tweet',
-            new Date(),
-            'This would be the body of the example Tweet. Additionally, people could expand this box to see more information about it. Finally, people could add or remove tags by interacting with them.',
-            ['healthcare', 'economics']
         )
-      ]
-  }
+    }
 }
+
+export default ProjectToolsTabView;

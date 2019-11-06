@@ -33,7 +33,8 @@ enum ColumnType {
 }
 
 export interface IProjectVisualization {
-    
+    title: string;
+    description: string;
 }
 
 export interface IComment {

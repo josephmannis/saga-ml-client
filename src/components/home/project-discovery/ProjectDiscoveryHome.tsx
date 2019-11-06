@@ -1,23 +1,20 @@
 import React from 'react';
-import { IProjectModel } from '../../model.ts';
 
-interface IProjectDiscoveryProps {
-    projects: IProjectModel[];
-}
 
-interface IProjectDiscoveryState {
+interface IProjectDiscoveryHomeProps {
 
 }
 
-class ProjectDiscoveryHome extends React.Component<IProjectDiscoveryProps, IProjectDiscoveryState> {
-    constructor(props: IProjectDiscoveryProps) {
+interface IProjectDiscoveryHomeState {
+
+}
+
+class ProjectDiscoveryHome extends React.Component<IProjectDiscoveryHomeProps, IProjectDiscoveryHomeState> {
+    constructor(props: IProjectDiscoveryHomeProps) {
         super(props);
-
         this.state = {
-
         }
     }
 }
 
-
-export default Component
+export default ProjectDiscoveryHome;
