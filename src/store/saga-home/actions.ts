@@ -1,4 +1,5 @@
 import { UserProject, PublishedProject } from './StateTypes';
+import { UserProject } from './reducers';
 
 // Types
 export enum HomeActions {
@@ -8,39 +9,43 @@ export enum HomeActions {
 }
 
 interface FetchFeaturedProjectsAction {
-    type: typeof SagaHomeActions.FETCH_FEATURED_PROJECTS;
+    type: typeof HomeActions.FETCH_FEATURED_PROJECTS;
     publishedProjects: PublishedProject[];
 } 
 
 interface FetchUserProjectsAction {
-    type: typeof SagaHomeActions.FETCH_USER_PROJECTS;
+    type: typeof HomeActions.FETCH_USER_PROJECTS;
     userProjects: UserProject[];
 }
 
 interface CreateUserProjectAction {
-    type: typeof SagaHomeActions.CREATE_USER_PROJECT;
-    creatingProject: boolean;
+    type: typeof HomeActions.CREATE_USER_PROJECT;
+    project: UserProject;
 }
 
+export type HomeAction =
+| FetchFeaturedProjectsAction
+| FetchUserProjectsAction
+| CreateUserProjectAction
 
 // Creators
-export function fetchPublishedProjects(projects: PublishedProject[]): SagaHomeActionTypes {
+export function fetchPublishedProjects(projects: PublishedProject[]): HomeAction {
     return {
-        type: SagaHomeActions.FETCH_FEATURED_PROJECTS,
-        payload: projects
+        type: HomeActions.FETCH_FEATURED_PROJECTS,
+        publishedProjects: projects
     }
 }
 
-export function fetchUserProjects(projects: UserProject[]): SagaHomeActionTypes {
+export function fetchUserProjects(projects: UserProject[]): HomeAction {
     return {
-        type: SagaHomeActions.FETCH_USER_PROJECTS,
-        payload: projects
+        type: HomeActions.FETCH_USER_PROJECTS,
+        userProjects: projects
     }
 }
 
-export function createUserProject(project: UserProject): SagaHomeActionTypes {
+export function createUserProject(project: UserProject): HomeAction {
     return {
-        type: SagaHomeActions.CREATE_USER_PROJECT,
-        payload: project
+        type: HomeActions.CREATE_USER_PROJECT,
+        project: project
     }
 }
