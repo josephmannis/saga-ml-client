@@ -1,4 +1,4 @@
-import react from './node_modules/react'
+import react from 'react'
 
 interface IHeaderProps {
 
