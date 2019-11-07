@@ -23,10 +23,11 @@ class HomePage extends React.Component<IHomePageProps, IHomePageState> {
         super(props);
         this.state = {
             userProjects: props.userProjects,
-            featuredProjects: props.featuredProjects,
+            featuredProjects: [...props.featuredProjects, {projectId: 'fake', projectTitle: 'Donal Tromp twwet', coverImageUrl: 'nah', topics: []}],
             creatingProject: false
         }
     }
+    
 
     selectProject(projectID: string) {
         console.log('selecting project' + projectID)
@@ -40,7 +41,7 @@ class HomePage extends React.Component<IHomePageProps, IHomePageState> {
                         <ProjectPanel projects={ this.state.userProjects } onProjectSelected ={ (projectID: string) => {this.selectProject(projectID)} }/>
                     </Col>
                     <Col xs>
-                        <ProjectDiscovery/>
+                        <ProjectDiscovery publishedProjects={this.state.featuredProjects}/>
                     </Col>
                 </Row>
             </Container>
