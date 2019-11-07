@@ -11,17 +11,26 @@ interface IProjectPanelProps {
     onProjectSelected: (projectID: string) => void;
 }
 
+const style = {
+    justifyContent: 'space-between',
+    padding: '1em 0',
+}
+
+const projectItem = {
+    backgroundColor: 'none'
+}
+
 const ProjectPanel: React.FC<IProjectPanelProps> = props => {
     return (
-         <Container fluid className='p-5'>
-             <Col xs={10} sm={10} md={10} lg={10} className='justify-content-start align-content-start' >
-                 <Row className='space-between'>
+         <Container fluid className=''>
+             <Col className='p-0' xs>
+                 <Row style={style} noGutters>
                     <h2>My Projects</h2>
                     <Button onClick={() => {console.log('create project')}}> + </Button>
                  </Row>
 
                 <ListGroup variant='flush'>
-                    {props.projects.map(item => <ListGroup.Item onClick={() => {props.onProjectSelected(item.projectId)}}>{item.projectTitle}</ListGroup.Item>)}
+                    {props.projects.map((item, index) => <ListGroup.Item className='text-left' style={projectItem} action key={index} onClick={() => {props.onProjectSelected(item.projectId)}}>{item.projectTitle}</ListGroup.Item>)}
                 </ListGroup>
              </Col>
          </Container>

@@ -13,7 +13,6 @@ interface AppProps {
 const App: React.FC<AppProps> = props => {
   return (
     <div className="App">
-      reacc app
       <HomePage userProjects={props.home.userProjects} featuredProjects={props.home.featuredProjects} />
     </div>
   );
@@ -21,7 +20,6 @@ const App: React.FC<AppProps> = props => {
 
 const mapStateToProps = (state: AppState) => ({
   home: state.home,
-
 })
 
 export default connect(mapStateToProps)(App);

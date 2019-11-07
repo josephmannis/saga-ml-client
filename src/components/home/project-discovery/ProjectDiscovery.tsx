@@ -9,12 +9,17 @@ interface IProjectDiscoveryState {
 
 }
 
-
 class ProjectDiscovery extends React.Component<IProjectDiscoveryProps, IProjectDiscoveryState> {
     constructor(props: IProjectDiscoveryProps) {
         super(props);
         this.state = {
         }
+    }
+
+    public render() {
+        return (
+            <div></div>
+        );
     }
 }
 
