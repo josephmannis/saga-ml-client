@@ -5,7 +5,7 @@ import { HomeState } from './state/saga-home/reducers';
 import { AppState } from './state/store';
 import { connect } from 'react-redux';
 import HomePage from './components/home/HomePage';
-import Header from "./components/global/Header";
+import Header from "./components/Global/Header";
 
 interface AppProps {
   home: HomeState;

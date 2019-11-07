@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form, Nav, Navbar} from "react-bootstrap";
-import SearchBar from "../shared/SearchBar";
-import HelpButton from "../shared/HelpButton";
+import SearchBar from "../Shared/SearchBar";
+import HelpButton from "../Shared/HelpButton";
 
 interface IHeaderProps {
 
