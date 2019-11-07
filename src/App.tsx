@@ -13,16 +13,15 @@ interface AppProps {
 const App: React.FC<AppProps> = props => {
   return (
     <div className="App">
+      reacc app
       <HomePage userProjects={props.home.userProjects} featuredProjects={props.home.featuredProjects} />
     </div>
   );
 }
 
-
 const mapStateToProps = (state: AppState) => ({
   home: state.home,
-})
 
-// export default App;
+})
 
 export default connect(mapStateToProps)(App);

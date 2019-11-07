@@ -4,7 +4,6 @@ import ProjectDiscovery from './project-discovery/ProjectDiscovery';
 import { UserProject, PublishedProject } from '../../state/saga-home/datatypes';
 import Container from 'react-bootstrap/Container';
 
-
 interface IHomePageProps {
     userProjects: UserProject[];
     featuredProjects: PublishedProject[];
