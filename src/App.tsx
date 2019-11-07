@@ -5,6 +5,7 @@ import { HomeState } from './state/saga-home/reducers';
 import { AppState } from './state/store';
 import { connect } from 'react-redux';
 import HomePage from './components/home/HomePage';
+import Header from "./components/global/Header";
 
 interface AppProps {
   home: HomeState;
@@ -13,10 +14,11 @@ interface AppProps {
 const App: React.FC<AppProps> = props => {
   return (
     <div className="App">
+      <Header/>
       <HomePage userProjects={props.home.userProjects} featuredProjects={props.home.featuredProjects} />
     </div>
   );
-}
+};
 
 const mapStateToProps = (state: AppState) => ({
   home: state.home,
