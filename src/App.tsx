@@ -1,33 +1,27 @@
 import React from 'react';
 import './App.css';
-import ProjectDashboard from './components/project-dashboard/ProjectDashboard';
 import 'bootstrap/dist/css/bootstrap.css';
-import { IProject } from './components/model';
+import { HomeState } from './state/saga-home/reducers';
+import { AppState } from './state/store';
+import { connect } from 'react-redux';
+import HomePage from './components/home/HomePage';
 import Header from "./components/Global/Header";
 
-const App: React.FC = () => {
+interface AppProps {
+  home: HomeState;
+}
+
+const App: React.FC<AppProps> = props => {
   return (
     <div className="App">
-      <Header />
-      <ProjectDashboard project={ getSampleProject() }/>
+      <Header/>
+      <HomePage userProjects={props.home.userProjects} featuredProjects={props.home.featuredProjects} />
     </div>
   );
 };
 
-function getSampleProject(): IProject {
-  return (
-    {
-      id: 'no', 
-      owner: {id: 'joe', username: 'jo1'},
-      title: 'Healthcare',
-      description: 'Sample project',
-      visualizations: [],
-      data: {dataRows: [[''],['']], columnTypes: []},
-      comments: [],
-      topics: []
-    }
-     
-  )
-}
+const mapStateToProps = (state: AppState) => ({
+  home: state.home,
+})
 
-export default App;
+export default connect(mapStateToProps)(App);

@@ -5,14 +5,12 @@ import { UserProject, PublishedProject } from './datatypes';
 export interface HomeState {
     featuredProjects: PublishedProject[];
     userProjects: UserProject[];
-    displayedProject: UserProject | null;
  }
  
  // Reducer functions
 const initialState: HomeState = {
     featuredProjects: [],
-    userProjects: [],
-    displayedProject: null,
+    userProjects: [{projectId: 'fake', projectTitle: 'Healthcare'}, {projectId: 'fake', projectTitle: 'Healthcare'}, ],
 }
 
 export function homeReducer(state = initialState, action: HomeActionType): HomeState {
@@ -22,7 +20,7 @@ export function homeReducer(state = initialState, action: HomeActionType): HomeS
         case HomeActions.FETCH_USER_PROJECTS:
             return { ...state, userProjects: action.userProjects };
         case HomeActions.CREATE_USER_PROJECT:
-            return { ...state, displayedProject: action.project };
+            return { ...state, userProjects: [...state.userProjects, action.project] };
         default: 
             return state;
     };
