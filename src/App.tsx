@@ -5,7 +5,7 @@ import { HomeState } from './state/saga-home/reducers';
 import { AppState } from './state/store';
 import { connect } from 'react-redux';
 import HomePage from './components/home/HomePage';
-import Header from "./components/Global/Header";
+import Header from "./components/global/Header";
 
 interface AppProps {
   home: HomeState;
@@ -22,6 +22,6 @@ const App: React.FC<AppProps> = props => {
 
 const mapStateToProps = (state: AppState) => ({
   home: state.home,
-})
+});
 
 export default connect(mapStateToProps)(App);
