@@ -3,11 +3,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filters from "../../../shared/Filters";
-import DataSearchResult from './DataSearchResult';
-import { IProjectData } from '../../../model';
+import {DataPoint} from "../../../../state/dashboard/datatypes";
 
 interface IProjectDataManagementViewProps {
-  data: IProjectData,
+  dataPoints: DataPoint[],
   projectTopics: string[]
 }
 

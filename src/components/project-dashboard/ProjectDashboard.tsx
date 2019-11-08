@@ -1,19 +1,19 @@
 import * as React from 'react';
 import ProjectInformation from './project-information/ProjectInformation';
 import ProjectToolsTabView from './project-tools/ProjectToolsTabView';
-import { IProject } from '../model';
+import { DashboardState } from "../../state/dashboard/reducers";
 
 
 export interface IProjectDashboardProps {
-    project: IProject
+    dashBoard: DashboardState
 }
 
 export default class ProjectDashboard extends React.Component<IProjectDashboardProps> {
   public render() {
     return (
       <div>
-        <ProjectInformation projectTitle={this.props.project.title} projectDescription={this.props.project.description}/>
-        <ProjectToolsTabView project={this.props.project}/>
+        <ProjectInformation projectTitle={this.props.dashBoard.project.title} projectDescription={this.props.dashBoard.project.description}/>
+        <ProjectToolsTabView dashBoard={this.props.dashBoard}/>
       </div>
     );
   }

@@ -1,4 +1,7 @@
-import { IUser } from "../../components/model";
+interface IUser {
+    id: string;
+    username: string;
+}
 
 export interface UserProject {
     projectId: string;

@@ -4,10 +4,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Visualization from './Visualization';
-import { IProjectVisualization } from '../../../model';
+import {DataPoint, IVisualization} from "../../../../state/dashboard/datatypes";
 
 export interface IProjectVisualizationsViewProps {
-  visualizations: IProjectVisualization[];
+  visualizations: IVisualization[];
+  dataPoints: DataPoint[];
 }
 
 export default class ProjectVisualizationsView extends React.Component<IProjectVisualizationsViewProps> {
@@ -32,7 +33,7 @@ export default class ProjectVisualizationsView extends React.Component<IProjectV
     let children = [];
 
     for (let vis of this.props.visualizations) {
-      children.push(<Visualization model={vis}/>);
+      children.push(<Visualization model={vis} dataPoints={this.props.dataPoints} />);
     }
      
     return children;

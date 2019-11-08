@@ -4,7 +4,7 @@ import {ProjectDashboard} from './datatypes';
 // State types
 export interface DashboardState {
     project: ProjectDashboard;
-    tab: string;
+    tab: string; // this is unused and ignored probably should be removed
 }
 
 
@@ -19,7 +19,7 @@ const initialState: DashboardState = {
         dataPoints: [],
         visualizations: [],
 },
-    tab: "visualizations"
+    tab: "visualizations" // probably shouldn't be here its never used, keeping as placeholder
 };
 
 export function dashboardReducer(state = initialState, action: DashBoardActionType): DashboardState {

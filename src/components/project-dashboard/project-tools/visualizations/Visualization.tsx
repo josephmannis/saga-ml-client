@@ -3,10 +3,11 @@ import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { IProjectVisualization } from '../../../model';
+import {DataPoint, IVisualization} from "../../../../state/dashboard/datatypes";
 
 interface IVisualizationProps {
-    model: IProjectVisualization;
+    model: IVisualization;
+    dataPoints: DataPoint[];
 }
 
 const Visualization: React.FC<IVisualizationProps> =
