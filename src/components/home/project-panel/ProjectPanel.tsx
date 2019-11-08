@@ -9,6 +9,7 @@ import { UserProject } from '../../../state/saga-home/datatypes';
 interface IProjectPanelProps {
     projects: UserProject[];
     onProjectSelected: (projectID: string) => void;
+    onProjectCreationRequested: () => void;
 }
 
 const style = {
@@ -25,7 +26,7 @@ const ProjectPanel: React.FC<IProjectPanelProps> = props => {
              <Col className='p-0' xs>
                  <Row className='py-3 justify-content-between' noGutters>
                     <h3 className='font-weight-bold'>My Projects</h3>
-                    <Button onClick={() => {console.log('create project')}}> + </Button>
+                    <Button variant='link' onClick={() => props.onProjectCreationRequested()}> Create Project </Button>
                  </Row>
 
                 <ListGroup variant='flush'>

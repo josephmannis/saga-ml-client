@@ -5,6 +5,7 @@ import { UserProject, PublishedProject } from '../../state/saga-home/datatypes';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import CreateProjectForm from './CreateProjectForm';
 
 interface IHomePageProps {
     userProjects: UserProject[];
@@ -28,17 +29,25 @@ class HomePage extends React.Component<IHomePageProps, IHomePageState> {
         }
     }
     
-
     selectProject(projectID: string) {
         console.log('selecting project' + projectID)
+    }
+
+    toggleProjectCreation() {
+        this.setState({...this.state, creatingProject: !this.state.creatingProject});
+    }
+
+    onProjectCreated(projectTitle: string, projectTopics: string[], projectDescription: string) {
+        console.log(projectTitle + ' ' + projectTopics + ' ' + projectDescription);
     }
 
     public render() {
         return (
             <Container fluid className='p-0'>
+                {this.state.creatingProject && <CreateProjectForm onFormCancelled={() => this.toggleProjectCreation()} onFormCompleted={(projectTitle: string,topics: string[], projectDescription: string) => this.onProjectCreated(projectTitle, topics, projectDescription)}/>}
                 <Row noGutters className='align-content-start'>
                     <Col xs={4} className='border-right'>
-                        <ProjectPanel projects={ this.state.userProjects } onProjectSelected ={ (projectID: string) => {this.selectProject(projectID)} }/>
+                        <ProjectPanel onProjectCreationRequested={() => this.toggleProjectCreation()} projects={ this.state.userProjects } onProjectSelected ={ (projectID: string) => {this.selectProject(projectID)} }/>
                     </Col>
                     <Col xs>
                         <ProjectDiscovery publishedProjects={this.state.featuredProjects}/>

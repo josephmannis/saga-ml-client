@@ -10,7 +10,7 @@ export interface HomeState {
  // Reducer functions
 const initialState: HomeState = {
     featuredProjects: [],
-    userProjects: [{projectId: 'fake', projectTitle: 'Healthcare'}, {projectId: 'fake', projectTitle: 'Healthcare'}, ],
+    userProjects: [{projectId: 'fake', projectTitle: 'Healthcare', topics: [], owner: {id: 'fake', username: 'me'}}, {projectId: 'fake', projectTitle: 'Healthcare', topics: [], owner: {id: 'fake', username: 'me'}}, ],
 }
 
 export function homeReducer(state = initialState, action: HomeActionType): HomeState {

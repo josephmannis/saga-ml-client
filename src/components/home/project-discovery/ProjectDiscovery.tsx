@@ -29,7 +29,7 @@ class ProjectDiscovery extends React.Component<IProjectDiscoveryProps, IProjectD
 
                                 <Row className='justify-content-between'>
                                     <CardColumns>
-                                        {this.props.publishedProjects.map((item, i) => <ProjectPreview imageUrl={'https://via.placeholder.com/150'} title={item.projectTitle} description={'Fake description'}/> )}
+                                        {this.props.publishedProjects.map((item, i) => <ProjectPreview key={i} imageUrl={'https://via.placeholder.com/150'} title={item.projectTitle} description={'Fake description'}/> )}
                                     </CardColumns>
                                 </Row>
                             </Col>

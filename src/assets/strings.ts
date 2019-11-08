@@ -1,0 +1,1 @@
+export const PROJECT_CREATION_PROMPT = 'Please provide a name and description for your project. Then, provide the topics that this project will look for in the data you analyze. You can always change this later.';
