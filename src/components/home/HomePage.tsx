@@ -44,10 +44,11 @@ class HomePage extends React.Component<IHomePageProps, IHomePageState> {
     public render() {
         return (
             <Container fluid className='p-0'>
-                {this.state.creatingProject && <CreateProjectForm onFormCancelled={() => this.toggleProjectCreation()} onFormCompleted={(projectTitle: string,topics: string[], projectDescription: string) => this.onProjectCreated(projectTitle, topics, projectDescription)}/>}
+                {this.state.creatingProject && <CreateProjectForm onFormCancelled={() => this.toggleProjectCreation()}
+                 onFormCompleted={(projectTitle: string,topics: string[], projectDescription: string) => this.onProjectCreated(projectTitle, topics, projectDescription)}/>}
                 <Row noGutters className='align-content-start'>
                     <Col xs={4} className='border-right'>
-                        <ProjectPanel onProjectCreationRequested={() => this.toggleProjectCreation()} projects={ this.state.userProjects } onProjectSelected ={ (projectID: string) => {this.selectProject(projectID)} }/>
+                        <ProjectPanel onProjectCreationRequested={() => this.toggleProjectCreation()} projects={ this.state.userProjects } onProjectSelected = { (projectID: string) => {this.selectProject(projectID)} }/>
                     </Col>
                     <Col xs>
                         <ProjectDiscovery publishedProjects={this.state.featuredProjects}/>
