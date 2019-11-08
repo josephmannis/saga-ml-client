@@ -26,7 +26,7 @@ const App: React.FC<AppProps> = props => {
             <ProjectDashboard dashBoard={props.dashBoard}/>
           </Route>
           <Route path='/search'>
-            <ProjectSearch/>
+            <ProjectSearch projectResults={[]}/>
           </Route>
           <Route path='/'>
             <HomePage userProjects={props.home.userProjects} featuredProjects={props.home.featuredProjects} />
