@@ -5,11 +5,12 @@ export interface DataPoint {
     tags: string[]; // The tags on the datapoint
 }
 
-export interface Visualization {
+export interface IVisualization {
+    title: string;
+    description: string;
     startTime: Date; // The start of the time window of the visualization
     endTime: Date; // The end of the time window
     tagsToInclude: string[]; // What tags to include datapoints off
-    typesToInclude: string[]; // What types of datapoints to render
     type: string; // Bar or Pie or etc
 }
 
@@ -19,5 +20,5 @@ export interface ProjectDashboard {
     description: string; // Description of the project
     topics: string[]; // Tags for the project
     dataPoints: DataPoint[]; // All the data points for the project
-    visualizations: Visualization[] // All the visualizations
+    visualizations: IVisualization[] // All the visualizations
 }

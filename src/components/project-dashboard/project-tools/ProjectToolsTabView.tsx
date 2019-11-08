@@ -1,16 +1,17 @@
 import * as React from 'react';
 import ProjectDataManagementView from './data-management/ProjectDataManagementView';
 import ProjectVisualizationsView from './visualizations/ProjectVisualizationsView';
-import { IProject } from '../../model';
+import { DashboardState } from '../../../state/dashboard/reducers';
 import { Tabs, Tab } from 'react-bootstrap';
+import {ProjectDashboard} from "../../../state/dashboard/datatypes";
 
 export interface IProjectToolsTabViewProps {
-    project: IProject
+    dashBoard: DashboardState
 }
 
 
 interface IProjectToolsTabViewState {
-    project: IProject;
+    project: ProjectDashboard;
     currentTab: ProjectToolActions;
 }
 
@@ -25,7 +26,7 @@ class ProjectToolsTabView extends React.Component<IProjectToolsTabViewProps, IPr
     constructor(props: IProjectToolsTabViewProps) {
         super(props);
         this.state = {
-            project: props.project,
+            project: props.dashBoard.project,
             currentTab: ProjectToolActions.VISUALIZE,
         }
     }
@@ -34,10 +35,10 @@ class ProjectToolsTabView extends React.Component<IProjectToolsTabViewProps, IPr
         return (
             <Tabs defaultActiveKey={ProjectToolActions.ADD_DATA} id="project-tool-actions">
             <Tab eventKey={ProjectToolActions.VISUALIZE} title={ProjectToolActions.VISUALIZE}>
-                <ProjectVisualizationsView visualizations={this.props.project.visualizations}/>
+                <ProjectVisualizationsView visualizations={this.props.dashBoard.project.visualizations} dataPoints={this.props.dashBoard.project.dataPoints}/>
             </Tab>
             <Tab eventKey={ProjectToolActions.ADD_DATA} title={ProjectToolActions.ADD_DATA}>
-                <ProjectDataManagementView data={ this.props.project.data } projectTopics={ this.props.project.topics } />
+                <ProjectDataManagementView dataPoints={ this.props.dashBoard.project.dataPoints } projectTopics={ this.props.dashBoard.project.topics } />
             </Tab>
         </Tabs>
         )

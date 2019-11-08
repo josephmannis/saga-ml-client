@@ -3,11 +3,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filters from "../../../shared/Filters";
-import DataSearchResult from './DataSearchResult';
-import { IProjectData } from '../../../model';
+import {DataPoint} from "../../../../state/dashboard/datatypes";
 
 interface IProjectDataManagementViewProps {
-  data: IProjectData,
+  dataPoints: DataPoint[],
   projectTopics: string[]
 }
 
@@ -20,7 +19,9 @@ const ProjectDataManagementView: React.FC<IProjectDataManagementViewProps> = pro
             </Col>
 
             Insert project data table.
-            
+            List Length: {props.dataPoints.length}
+            Item1: {props.dataPoints[0] && JSON.stringify(props.dataPoints[0])}
+
         </Row>
       </Container>
     );
