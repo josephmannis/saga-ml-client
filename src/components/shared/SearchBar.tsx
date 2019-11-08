@@ -1,25 +1,24 @@
 import React from 'react';
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from 'react-bootstrap/Button';
-import FormControl from 'react-bootstrap/FormControl';
+import {Form, Input} from '@rocketseat/unform';
+
 
 interface SearchBarProps {
     hintText: string; 
+    onSearch: (data: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = (props) => {
     return (
-        <InputGroup className="mb-3">
-            <FormControl
-                placeholder={props.hintText}
-                aria-label={props.hintText}
-                aria-describedby="basic-addon2"
-            />
-        
-        <InputGroup.Append>
-          <Button variant="outline-secondary">Search</Button>
-        </InputGroup.Append>
-      </InputGroup>
+        <Form onSubmit={(data) => props.onSearch(data.query)}>
+            <InputGroup>
+                    <Input className='form-control' name='query' placeholder={props.hintText} />
+                <InputGroup.Append>
+                    <Button type='submit' variant="outline-secondary">Search</Button>
+                </InputGroup.Append>
+            </InputGroup>
+        </Form>
     )
 }
 
