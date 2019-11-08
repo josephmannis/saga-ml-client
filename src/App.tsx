@@ -9,11 +9,11 @@ import Header from "./components/global/Header";
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProjectSearch from './components/home/project-search/ProjectSearch';
 import ProjectDashboard from './components/project-dashboard/ProjectDashboard';
- 
+import {DashboardState} from "./state/dashboard/reducers";
 
 interface AppProps {
   home: HomeState;
-
+  dashBoard: DashboardState;
 }
 
 const App: React.FC<AppProps> = props => {
@@ -23,7 +23,7 @@ const App: React.FC<AppProps> = props => {
         <Header/>
         <Switch>
           <Route path='/project'>
-            <div>Project page</div>
+            <ProjectDashboard dashBoard={props.dashBoard}/>
           </Route>
           <Route path='/search'>
             <ProjectSearch/>
@@ -39,6 +39,8 @@ const App: React.FC<AppProps> = props => {
 
 const mapStateToProps = (state: AppState) => ({
   home: state.home,
+  dashBoard: state.dashboard
+
 });
 
 export default connect(mapStateToProps)(App);
