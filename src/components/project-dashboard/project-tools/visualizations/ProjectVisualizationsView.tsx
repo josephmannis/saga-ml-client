@@ -34,6 +34,7 @@ export default class ProjectVisualizationsView extends React.Component<IProjectV
 
     for (let vis of this.props.visualizations) {
       children.push(<Visualization model={vis} dataPoints={this.props.dataPoints} />);
+      children.push(<br/>)
     }
      
     return children;

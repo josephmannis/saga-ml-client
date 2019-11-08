@@ -11,7 +11,6 @@ export interface IVisualization {
     startTime: Date; // The start of the time window of the visualization
     endTime: Date; // The end of the time window
     tagsToInclude: string[]; // What tags to include datapoints off
-    typesToInclude: string[]; // What types of datapoints to render
     type: string; // Bar or Pie or etc
 }
 

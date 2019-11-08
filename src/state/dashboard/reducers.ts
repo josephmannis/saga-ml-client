@@ -1,5 +1,5 @@
 import { DashboardActions, DashBoardActionType } from './actions';
-import {DataPoint, ProjectDashboard} from './datatypes';
+import {DataPoint, IVisualization, ProjectDashboard} from './datatypes';
 
 // State types
 export interface DashboardState {
@@ -36,6 +36,36 @@ function randomDataPointList(length: number): DataPoint[] {
     return Array(length).fill(0).map(randomDataPoint);
 }
 
+export interface IVisualization {
+    title: string;
+    description: string;
+    startTime: Date; // The start of the time window of the visualization
+    endTime: Date; // The end of the time window
+    tagsToInclude: string[]; // What tags to include datapoints off
+    typesToInclude: string[]; // What types of datapoints to render
+    type: string; // Bar or Pie or etc
+}
+
+
+function sampleVis(): IVisualization[] {
+    return [{
+        title: "Line sample",
+    description: "line sample grpah description",
+    startTime: new Date(2015, 0),
+    endTime: new Date(2019, 0),
+    tagsToInclude: ['education', 'immigration', 'healthcare'],
+    type: 'line',
+},
+        {
+            title: "Pie sample",
+            description: "pie sample grpah description",
+            startTime: new Date(2015, 0),
+            endTime: new Date(2019, 0),
+            tagsToInclude: ['education', 'immigration', 'healthcare'],
+            type: 'pie',
+        }]
+}
+
 // Reducer functions
 const initialState: DashboardState = {
     project: {
@@ -43,8 +73,8 @@ const initialState: DashboardState = {
         title: 'Title',
         description: 'Fake Title',
         topics: ['Topic 1', 'Topic 2'],
-        dataPoints: randomDataPointList(1000),
-        visualizations: [],
+        dataPoints: randomDataPointList(1000), // For now random datapoints.
+        visualizations: sampleVis(),
 },
     tab: "visualizations" // probably shouldn't be here its never used, keeping as placeholder
 };
