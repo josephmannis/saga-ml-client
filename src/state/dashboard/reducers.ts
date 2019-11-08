@@ -6,12 +6,6 @@ export interface DashboardState {
     project: ProjectDashboard;
     tab: string; // this is unused and ignored probably should be removed
 }
-const ex: DataPoint = {
-    timeStamp: new Date(2018, 0, 1),
-    type: 'tweet',
-    text: "trump tweeted about education",
-    tags: ['trump', 'education']
-};
 
 /*https://stackoverflow.com/questions/9035627/elegant-method-to-generate-array-of-random-dates-within-two-dates*/
 function randomDate(start: Date, end: Date): Date {

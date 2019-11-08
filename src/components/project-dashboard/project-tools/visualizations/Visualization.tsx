@@ -58,7 +58,7 @@ const Visualization: React.FC<IVisualizationProps> =
       datasets: datasetsToInclude
     };
 
-    if (model.type == 'line') {
+    if (model.type === 'line') {
       return (
         <Container fluid>
           <Row>
