@@ -19,7 +19,9 @@ const ProjectDataManagementView: React.FC<IProjectDataManagementViewProps> = pro
             </Col>
 
             Insert project data table.
-            
+            List Length: {props.dataPoints.length}
+            Item1: {props.dataPoints[0] && JSON.stringify(props.dataPoints[0])}
+
         </Row>
       </Container>
     );
