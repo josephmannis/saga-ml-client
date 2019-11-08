@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { UserProject } from '../../../state/saga-home/datatypes';
+import { Link } from 'react-router-dom';
 
 interface IProjectPanelProps {
     projects: UserProject[];
@@ -30,7 +31,7 @@ const ProjectPanel: React.FC<IProjectPanelProps> = props => {
                  </Row>
 
                 <ListGroup variant='flush'>
-                    {props.projects.map((item, index) => <ListGroup.Item className='text-left' style={projectItem} action key={index} onClick={() => {props.onProjectSelected(item.projectId)}}>{item.projectTitle}</ListGroup.Item>)}
+                    {props.projects.map((item, index) => <Link to='/project'><ListGroup.Item className='text-left' style={projectItem} action key={index} onClick={() => {props.onProjectSelected(item.projectId)}}>{item.projectTitle}</ListGroup.Item></Link>)}
                 </ListGroup>
              </Col>
          </Container>
