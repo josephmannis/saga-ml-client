@@ -12,8 +12,7 @@ interface IProjectPanelProps {
 }
 
 const style = {
-    justifyContent: 'space-between',
-    padding: '1em 0',
+    justifyContent: 'space-between'
 }
 
 const projectItem = {
@@ -24,8 +23,8 @@ const ProjectPanel: React.FC<IProjectPanelProps> = props => {
     return (
          <Container fluid className=''>
              <Col className='p-0' xs>
-                 <Row style={style} noGutters>
-                    <h2>My Projects</h2>
+                 <Row className='py-3 justify-content-between' noGutters>
+                    <h3 className='font-weight-bold'>My Projects</h3>
                     <Button onClick={() => {console.log('create project')}}> + </Button>
                  </Row>
 

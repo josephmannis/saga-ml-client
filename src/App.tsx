@@ -16,6 +16,7 @@ const App: React.FC<AppProps> = props => {
     <div className="App">
       <Header/>
       <HomePage userProjects={props.home.userProjects} featuredProjects={props.home.featuredProjects} />
+
     </div>
   );
 };
