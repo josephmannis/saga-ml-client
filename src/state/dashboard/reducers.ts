@@ -51,7 +51,7 @@ function sampleVis(): IVisualization[] {
     return [{
         title: "Line sample",
     description: "line sample grpah description",
-    startTime: new Date(2015, 0),
+    startTime: new Date(2018, 0),
     endTime: new Date(2019, 0),
     tagsToInclude: ['education', 'immigration', 'healthcare'],
     type: 'line',
