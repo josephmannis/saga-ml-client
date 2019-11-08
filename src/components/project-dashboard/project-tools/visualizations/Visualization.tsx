@@ -13,11 +13,12 @@ interface IVisualizationProps {
 
 const Visualization: React.FC<IVisualizationProps> =
   ({model, dataPoints}) => {
-    let emptyTagToDataSet: { [key: string]: {data: {[date: string]: {t: Date; y: number}}; label:string;} } = {};
+    let emptyTagToDataSet: { [key: string]: {data: {[date: string]: {t: Date; y: number;}}; label:string; borderColor: string;} } = {};
     emptyTagToDataSet = model.tagsToInclude.reduce((acc , cur) => {
       acc[cur] = {
         data: {},
         label: cur,
+        borderColor: '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6), //https://stackoverflow.com/a/1152508
       };
       return acc;
     }, emptyTagToDataSet);
@@ -36,7 +37,7 @@ const Visualization: React.FC<IVisualizationProps> =
   }, emptyTagToDataSet);
 
   const datasetsToInclude = Object.values(tagToDataSet)
-    .map(cur => {return {data: Object.values(cur.data), label: cur.label}});
+    .map(cur => {return {...cur, data: Object.values(cur.data)}});
   datasetsToInclude
     .forEach(cur => {cur.data.sort((a, b) => b.t.getTime() - a.t.getTime())});
 
