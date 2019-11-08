@@ -13,25 +13,34 @@ interface IVisualizationProps {
 
 const Visualization: React.FC<IVisualizationProps> =
   ({model, dataPoints}) => {
-    let emptyTagToDataSet: { [key: string]: {data: {t: Date; y: number}[]; label:string;} } = {};
+    let emptyTagToDataSet: { [key: string]: {data: {[date: string]: {t: Date; y: number}}; label:string;} } = {};
     emptyTagToDataSet = model.tagsToInclude.reduce((acc , cur) => {
       acc[cur] = {
-        data: [],
+        data: {},
         label: cur,
       };
       return acc;
     }, emptyTagToDataSet);
+
   const tagToDataSet = dataPoints.reduce((acc, curDataPoint) => {
     curDataPoint.tags.forEach(curTag => {
+      const dateKey = curDataPoint.timeStamp.getFullYear() + "-" + curDataPoint.timeStamp.getDate();
       if (model.tagsToInclude.includes(curTag)) {
-        acc[curTag].data.push({t: curDataPoint.timeStamp, y: 1})
+        if (!acc[curTag].data[dateKey]) {
+          acc[curTag].data[dateKey] = {t: curDataPoint.timeStamp, y: 1}
+        }
+        acc[curTag].data[dateKey] = {t: curDataPoint.timeStamp, y: acc[curTag].data[dateKey].y + 1}
       }
     });
     return acc;
   }, emptyTagToDataSet);
 
-  const datasetsToInclude = Object.values(tagToDataSet);//.filter(cur => model.tagsToInclude.includes(cur.label));
+  const datasetsToInclude = Object.values(tagToDataSet)
+    .map(cur => {return {data: Object.values(cur.data), label: cur.label}});
+  datasetsToInclude
+    .forEach(cur => {cur.data.sort((a, b) => b.t.getTime() - a.t.getTime())});
 
+console.log(datasetsToInclude);
   const data = {
     datasets: datasetsToInclude
   };
@@ -46,7 +55,8 @@ const Visualization: React.FC<IVisualizationProps> =
                   xAxes: [{
                     type: 'time',
                     time: {
-                      unit: 'month'
+                      unit: 'month',
+                      round: 'month'
                     }
                   }]
                 }
