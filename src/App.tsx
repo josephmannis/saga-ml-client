@@ -23,6 +23,6 @@ const App: React.FC<AppProps> = props => {
 
 const mapStateToProps = (state: AppState) => ({
   home: state.home,
-})
+});
 
 export default connect(mapStateToProps)(App);
