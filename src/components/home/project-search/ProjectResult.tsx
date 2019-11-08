@@ -12,7 +12,7 @@ interface IProjectResultProps {
 
 const ProjectResult: React.FC<IProjectResultProps> = props => {
     return (
-        <Link className='text-reset text-decoration-none' to='/'>
+        <Link className='text-reset text-decoration-none' to='/project'>
             <Card className='text-left'>
                 <Row className='justify-content-between p-3'>
                     <Col xs>
