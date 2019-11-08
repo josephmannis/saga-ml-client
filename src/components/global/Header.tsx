@@ -10,9 +10,8 @@ interface IHeaderProps {
 const Header: React.FC<IHeaderProps> = props => {
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="#home">Saga</Navbar.Brand>
+      <Navbar.Brand href="/">Saga</Navbar.Brand>
       <Nav className="ml-auto">
-        <HelpButton/> {/* Need to make clicking this do something*/}
         <SearchBar hintText={"Search for projects..."}/>
       </Nav>
     </Navbar>
