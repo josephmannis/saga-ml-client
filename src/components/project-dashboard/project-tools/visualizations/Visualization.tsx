@@ -3,12 +3,12 @@ import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {DataPoint, IVisualization} from "../../../../state/dashboard/datatypes";
 import {Line} from 'react-chartjs-2';
+import { IProjectVisualization, IVisualizationDataPoint, IProjectVisualizationType } from '../../../clientTypes';
 
 interface IVisualizationProps {
-  model: IVisualization;
-  dataPoints: DataPoint[];
+  model: IProjectVisualization;
+  dataPoints: IVisualizationDataPoint[];
 }
 
 function randomColor(): string {
@@ -20,7 +20,7 @@ const Visualization: React.FC<IVisualizationProps> =
 
 
     let emptyTagToDataSet: { [key: string]: { data: { [date: string]: { t: Date; y: number; } }; label: string; borderColor: string; } } = {};
-    emptyTagToDataSet = model.tagsToInclude.reduce((acc, cur) => {
+    emptyTagToDataSet = model.labels.reduce((acc, cur) => {
       acc[cur] = {
         data: {},
         label: cur,
@@ -33,7 +33,7 @@ const Visualization: React.FC<IVisualizationProps> =
       curDataPoint.tags.forEach(curTag => {
         const curTS = curDataPoint.timeStamp;
         const dateKey = curTS.getFullYear() + "-" + curTS.getMonth();
-        if (model.tagsToInclude.includes(curTag)
+        if (model.labels.includes(curTag)
           && curTS.getTime() < model.endTime.getTime()
           && curTS.getTime() > model.startTime.getTime()) {
           if (!acc[curTag].data[dateKey]) {
@@ -58,11 +58,11 @@ const Visualization: React.FC<IVisualizationProps> =
       datasets: datasetsToInclude
     };
 
-    if (model.type === 'line') {
-      return (
-        <Container fluid>
-          <Row>
-            <Col xs={5} sm={5} md={5} lg={5}>
+  if (model.type === IProjectVisualizationType.LINE) {
+    return (
+      <Container fluid>
+        <Row>
+          <Col xs={5} sm={5} md={5} lg={5} >
               <Line data={data} width={100} height={100} options={{
                 scales: {
                   xAxes: [{

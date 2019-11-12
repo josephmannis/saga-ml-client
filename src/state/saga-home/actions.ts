@@ -1,4 +1,4 @@
-import { UserProject, PublishedProject } from './datatypes';
+import { IProjectListing } from '../../components/clientTypes';
 
 // Types
 export enum HomeActions {
@@ -9,17 +9,20 @@ export enum HomeActions {
 
 interface FetchFeaturedProjectsAction {
     type: typeof HomeActions.FETCH_FEATURED_PROJECTS;
-    publishedProjects: PublishedProject[];
+    publishedProjects: IProjectListing[];
 } 
 
 interface FetchUserProjectsAction {
     type: typeof HomeActions.FETCH_USER_PROJECTS;
-    userProjects: UserProject[];
+    userProjects: IProjectListing[];
 }
 
 interface CreateUserProjectAction {
     type: typeof HomeActions.CREATE_USER_PROJECT;
-    project: UserProject;
+    projectTitle: string;
+    projectDescription: string;
+    projectTopics: string[];
+    projectOwnerId: string;
 }
 
 export type HomeActionType =
@@ -28,23 +31,26 @@ export type HomeActionType =
 | CreateUserProjectAction
 
 // Creators
-export function fetchPublishedProjects(projects: PublishedProject[]): HomeActionType {
+export function fetchPublishedProjects(projects: IProjectListing[]): HomeActionType {
     return {
         type: HomeActions.FETCH_FEATURED_PROJECTS,
         publishedProjects: projects
     }
 }
 
-export function fetchUserProjects(projects: UserProject[]): HomeActionType {
+export function fetchUserProjects(projects: IProjectListing[]): HomeActionType {
     return {
         type: HomeActions.FETCH_USER_PROJECTS,
         userProjects: projects
     }
 }
 
-export function createUserProject(project: UserProject): HomeActionType {
+export function createUserProject(title: string, description: string, topics: string[], ownerId: string): HomeActionType {
     return {
         type: HomeActions.CREATE_USER_PROJECT,
-        project: project
+        projectTitle: title,
+        projectDescription: description,
+        projectTopics: topics,
+        projectOwnerId: ownerId
     }
 }

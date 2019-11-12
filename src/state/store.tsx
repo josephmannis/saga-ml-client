@@ -3,8 +3,8 @@ import { dashboardReducer} from "./dashboard/reducers";
 import { combineReducers, createStore } from 'redux';
  
 const rootReducer = combineReducers({
-    home: homeReducer,
-    dashboard: dashboardReducer,
+    homeReducer,
+    dashboardReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>

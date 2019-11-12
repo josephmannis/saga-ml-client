@@ -1,16 +1,17 @@
 import { HomeActions, HomeActionType } from './actions';
-import { UserProject, PublishedProject } from './datatypes';
+import { PublishedProject } from './datatypes';
+import { IProjectListing } from '../../components/clientTypes';
 
 // State types
 export interface HomeState {
-    featuredProjects: PublishedProject[];
-    userProjects: UserProject[];
+    featuredProjects: IProjectListing[];
+    userProjects: IProjectListing[];
  }
  
  // Reducer functions
 const initialState: HomeState = {
     featuredProjects: [],
-    userProjects: [{projectId: 'fake', projectTitle: 'Healthcare', topics: [], owner: {id: 'fake', username: 'me'}}, {projectId: 'fake', projectTitle: 'Healthcare', topics: [], owner: {id: 'fake', username: 'me'}}, ],
+    userProjects: [],
 }
 
 export function homeReducer(state = initialState, action: HomeActionType): HomeState {
@@ -20,7 +21,7 @@ export function homeReducer(state = initialState, action: HomeActionType): HomeS
         case HomeActions.FETCH_USER_PROJECTS:
             return { ...state, userProjects: action.userProjects };
         case HomeActions.CREATE_USER_PROJECT:
-            return { ...state, userProjects: [...state.userProjects, action.project] };
+            return { ...state, userProjects: [...state.userProjects, { id: 'new', title: action.projectTitle, coverImageUrl: 'no', description: action.projectDescription, topics: action.projectTopics, ownerId: action.projectOwnerId }] };
         default: 
             return state;
     };

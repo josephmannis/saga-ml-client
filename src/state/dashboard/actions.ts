@@ -1,4 +1,4 @@
-import { ProjectDashboard } from './datatypes';
+import { IProjectDashboard } from "../../components/clientTypes"
 
 // Types
 export enum DashboardActions {
@@ -7,14 +7,14 @@ export enum DashboardActions {
 
 interface FetchProjectAction {
     type: typeof DashboardActions.FETCH_PROJECT;
-    project: ProjectDashboard;
+    project: IProjectDashboard;
 }
 
 export type DashBoardActionType =
 | FetchProjectAction
 
 // Creators
-export function fetchProject(project: ProjectDashboard): DashBoardActionType {
+export function fetchProject(project: IProjectDashboard): DashBoardActionType {
     return {
         type: DashboardActions.FETCH_PROJECT,
         project: project

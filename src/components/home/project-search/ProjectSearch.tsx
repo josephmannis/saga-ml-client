@@ -1,33 +1,46 @@
 import React from 'react';
-import { PublishedProject } from '../../../state/saga-home/datatypes';
 import ProjectResult from './ProjectResult';
 import { Col, Row } from 'react-bootstrap';
+import { IProjectListing } from '../../clientTypes';
 
 
-interface IProjectSearchProps {
-    projectResults: PublishedProject[];
+interface IProjectSearchResultsProps {
+    projectResults: IProjectListing[];
+    onItemClicked: (projectId: string) => void;
 }
 
-// Bad and fake news
-const projectResults = [
-    {
-        projectId: 'fake',
-        projectTitle: 'Presidential Debates of Donald Trump',
-        coverImageUrl: 'no',
-        topics: ['trump', 'healthcare']
-    }
-]
+export const ConnectedProjectSearch: React.FC = () => {
+    // Bad and fake news
+    const projectResults = [
+        {
+            id: 'not real',
+            title: 'fake',
+            coverImageUrl: 'www.fake.com',
+            description: 'Presidential Debates of Donald Trump',
+            topics: ['trump', 'healthcare'],
+            ownerId: '3'
+        }
+    ]
 
-const ProjectSearch: React.FC<IProjectSearchProps> = props => {
+    const onProjectSelected = (projectId: string) => {
+        console.log('navigate to project with id' + projectId)
+    }
+
+    return (
+        <ProjectSearchResults projectResults={projectResults} onItemClicked={onProjectSelected}/>
+    )
+}
+
+const ProjectSearchResults: React.FC<IProjectSearchResultsProps> = props => {
     return (
         <Row className='justify-content-center'>
             <Col className='p-3 text-left' xs='6'>
                 <h2 className='font-weight-bold'>Search Results</h2>
                 <p>1 Result</p>
-                {projectResults.map((result) => <ProjectResult projectTitle={result.projectTitle} projectDescription={'the one and only study about donald trump'} projectTopics={result.topics} />)}
+                {props.projectResults.map((result) => <ProjectResult project={result} onItemClicked={itemId => props.onItemClicked(itemId)}  />)}
             </Col>
         </Row>
     )
 }
 
-export default ProjectSearch;
+export default ConnectedProjectSearch;

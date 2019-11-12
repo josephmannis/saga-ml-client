@@ -4,17 +4,13 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { UserProject } from '../../../state/saga-home/datatypes';
 import { Link } from 'react-router-dom';
+import { IProjectListing } from '../../clientTypes';
 
 interface IProjectPanelProps {
-    projects: UserProject[];
+    projects: IProjectListing[];
     onProjectSelected: (projectID: string) => void;
     onProjectCreationRequested: () => void;
-}
-
-const style = {
-    justifyContent: 'space-between'
 }
 
 const projectItem = {
@@ -27,11 +23,11 @@ const ProjectPanel: React.FC<IProjectPanelProps> = props => {
              <Col className='p-0' xs>
                  <Row className='py-3 justify-content-between' noGutters>
                     <h3 className='font-weight-bold'>My Projects</h3>
-                    <Button variant='link' onClick={() => props.onProjectCreationRequested()}> Create Project </Button>
+                    <Link to='/new'><Button variant='link' onClick={() => props.onProjectCreationRequested()}> Create Project </Button></Link> 
                  </Row>
 
                 <ListGroup variant='flush'>
-                    {props.projects.map((item, index) => <Link to='/project'><ListGroup.Item className='text-left' style={projectItem} action key={index} onClick={() => {props.onProjectSelected(item.projectId)}}>{item.projectTitle}</ListGroup.Item></Link>)}
+                    {props.projects.map((item, index) => <Link to='/project'><ListGroup.Item className='text-left' style={projectItem} action key={index} onClick={() => {props.onProjectSelected(item.id)}}>{item.title}</ListGroup.Item></Link>)}
                 </ListGroup>
              </Col>
          </Container>
