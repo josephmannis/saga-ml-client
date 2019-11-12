@@ -1,5 +1,4 @@
 import { HomeActions, HomeActionType } from './actions';
-import { PublishedProject } from './datatypes';
 import { IProjectListing } from '../../components/clientTypes';
 
 // State types
