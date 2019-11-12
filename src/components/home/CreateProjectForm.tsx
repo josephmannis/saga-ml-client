@@ -25,13 +25,15 @@ const ConnectedCreateProjectForm: React.FC = () => {
     const dispatch = useDispatch();
 
     const onProjectCreated = (title: string, description: string, topics: string[], ownerId: string) => {
-        dispatch({
+        const newProject = {
             type: HomeActions.CREATE_USER_PROJECT,
             projectTitle: title,
             projectDescription: description,
             projectTopics: topics,
             projectOwnerId: ownerId
-        })
+        }
+
+        dispatch(newProject);
         
         toggleForm(false);
     }
@@ -64,15 +66,15 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
     });
 
     // On submit, we pull the data from the form and combine it with the topics from the state. You can integrate the topics with the form state but I'm lazy so I didn't. TODO.
-    handleSumbit = (data: any) => {
-        const { title, description, topics } = data;
+    handleSumbit = (event: any) => {
+        const { projectTitle, projectDescription } = event.data;
+        const topics = this.state.topics.map((topic: any) => topic.label);
 
-        this.props.onFormCompleted(title, description, topics, 'not yet')
+        this.props.onFormCompleted(projectTitle, projectDescription, topics, 'not yet')
     }
 
     // This gets called when you hit X on one of the labels. It just gives you a new value state and so we reset it to that.
     handleTopicChange = (value: any, actionMeta: any) => {
-        console.log('Changing topic');
         this.setState({...this.state, topics: value});
     }
     

@@ -80,7 +80,6 @@ const initialState: DashboardState = {
 };
 
 export function dashboardReducer(state = initialState, action: DashBoardActionType): DashboardState {
-    console.log(initialState);
     switch(action.type) {
         case DashboardActions.FETCH_PROJECT:
             return { ...state, project: action.project };
