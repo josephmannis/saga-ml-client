@@ -4,18 +4,40 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Visualization from './Visualization';
-import {DataPoint, IVisualization} from "../../../../state/dashboard/datatypes";
+import ProjectVisualizationCreationFlow from './ProjectVisualizationCreationFlow';
+import { IVisualizationDataPoint, IProjectVisualization } from '../../../clientTypes';
 
 export interface IProjectVisualizationsViewProps {
-  visualizations: IVisualization[];
-  dataPoints: DataPoint[];
+  visualizations: IProjectVisualization[];
+  dataPoints: IVisualizationDataPoint[];
 }
 
-export default class ProjectVisualizationsView extends React.Component<IProjectVisualizationsViewProps> {
+interface IProjectVisualiationsViewState {
+  showProjectCreation: boolean;
+}
+
+export default class ProjectVisualizationsView extends React.Component<IProjectVisualizationsViewProps, IProjectVisualiationsViewState> {
   
+  constructor(props: IProjectVisualizationsViewProps) {
+    super(props);
+
+    this.state = {
+      showProjectCreation: false,
+    }
+  }
+
+  onVisualiationCreated = () => {
+
+  }
+
+  onVisualizationCreationCancelled = () => {
+
+  }
+
   public render() {
     return (
       <Container fluid className='p-5'>
+    {this.state.showProjectCreation && <ProjectVisualizationCreationFlow onVisualiationCreated={() => this.onVisualiationCreated } onVisualizationCreationCancelled={() => this.onVisualizationCreationCancelled }/>}
           <Row>
               <Col>
                { this.getVisualizations() }

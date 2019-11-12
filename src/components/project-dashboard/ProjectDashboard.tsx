@@ -1,20 +1,30 @@
 import * as React from 'react';
 import ProjectInformation from './project-information/ProjectInformation';
 import ProjectToolsTabView from './project-tools/ProjectToolsTabView';
-import { DashboardState } from "../../state/dashboard/reducers";
+import { IProjectDashboard } from '../clientTypes';
+import { AppState } from '../../state/store';
+import { useSelector } from 'react-redux';
 
 
 export interface IProjectDashboardProps {
-    dashBoard: DashboardState
+    project: IProjectDashboard;
 }
 
-export default class ProjectDashboard extends React.Component<IProjectDashboardProps> {
-  public render() {
-    return (
-      <div>
-        <ProjectInformation projectTitle={this.props.dashBoard.project.title} projectDescription={this.props.dashBoard.project.description}/>
-        <ProjectToolsTabView dashBoard={this.props.dashBoard}/>
-      </div>
-    );
-  }
+export const ConnectedProjectDashboard: React.FC = () => {
+  const { project } = useSelector((state: AppState) => state.dashboardReducer)
+
+  return ( 
+    <ProjectDashboard project={project}/>
+  )
 }
+
+const ProjectDashboard: React.FC<IProjectDashboardProps> = props => {
+  return (
+    <div>
+      <ProjectInformation projectTitle={props.project.title} projectDescription={props.project.description}/>
+      <ProjectToolsTabView project={props.project}/>
+    </div>
+  );
+}
+
+export default ProjectDashboard;

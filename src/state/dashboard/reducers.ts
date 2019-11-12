@@ -1,12 +1,12 @@
 import { DashboardActions, DashBoardActionType } from './actions';
-import {DataPoint, IVisualization, ProjectDashboard} from './datatypes';
+import { IProjectDashboard, IVisualizationDataPoint, IProjectVisualization, IProjectVisualizationType } from '../../components/clientTypes';
 
 // State types
 export interface DashboardState {
-    project: ProjectDashboard;
+    project: IProjectDashboard;
     tab: string; // this is unused and ignored probably should be removed
 }
-const ex: DataPoint = {
+const ex: IVisualizationDataPoint = {
     timeStamp: new Date(2018, 0, 1),
     type: 'tweet',
     text: "trump tweeted about education",
@@ -19,7 +19,7 @@ function randomDate(start: Date, end: Date): Date {
 }
 
 
-function randomDataPoint(): DataPoint {
+function randomDataPoint(): IVisualizationDataPoint {
     const startDate = new Date(2015, 0);
     const endDate = new Date(2019, 0);
     const possibleTags = ['education', 'immigration', 'healthcare', 'republican', 'democrat', 'trump'];
@@ -32,49 +32,49 @@ function randomDataPoint(): DataPoint {
     };
 }
 
-function randomDataPointList(length: number): DataPoint[] {
+function randomDataPointList(length: number): IVisualizationDataPoint[] {
     return Array(length).fill(0).map(randomDataPoint);
 }
 
-export interface IVisualization {
-    title: string;
-    description: string;
-    startTime: Date; // The start of the time window of the visualization
-    endTime: Date; // The end of the time window
-    tagsToInclude: string[]; // What tags to include datapoints off
-    typesToInclude: string[]; // What types of datapoints to render
-    type: string; // Bar or Pie or etc
-}
-
-
-function sampleVis(): IVisualization[] {
-    return [{
-        title: "Line sample",
-    description: "line sample grpah description",
-    startTime: new Date(2015, 0),
-    endTime: new Date(2019, 0),
-    tagsToInclude: ['education', 'immigration', 'healthcare'],
-    type: 'line',
-},
+function sampleVis(): IProjectVisualization[] {
+    return [
         {
+            id: 'fake',
+            title: "Line sample",
+            description: "line sample grpah description",
+            startTime: new Date(2015, 0),
+            endTime: new Date(2019, 0),
+            labels: ['education', 'immigration', 'healthcare'],
+            type: IProjectVisualizationType.LINE,
+            dataPoints: []
+        },
+        {
+            id: 'fake',
             title: "Pie sample",
             description: "pie sample grpah description",
             startTime: new Date(2015, 0),
             endTime: new Date(2019, 0),
-            tagsToInclude: ['education', 'immigration', 'healthcare'],
-            type: 'pie',
-        }]
+            labels: ['education', 'immigration', 'healthcare'],
+            type: IProjectVisualizationType.PIE,
+            dataPoints: []
+        }
+    ]
 }
 
 // Reducer functions
 const initialState: DashboardState = {
     project: {
-        projectId: 'fake',
+        id: 'fake',
         title: 'Title',
         description: 'Fake Title',
         topics: ['Topic 1', 'Topic 2'],
-        dataPoints: randomDataPointList(1000), // For now random datapoints.
+        ownerId: 'fake',
         visualizations: sampleVis(),
+        data: {
+            columnTitles: ['content', 'date', 'tags'],
+            dataRows: []
+        },
+        comments: []
 },
     tab: "visualizations" // probably shouldn't be here its never used, keeping as placeholder
 };

@@ -1,30 +1,52 @@
-import React, { KeyboardEvent } from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 import { Modal, Container, Col, Row, Button } from 'react-bootstrap';
 import { PROJECT_CREATION_PROMPT } from '../../assets/strings';
 import '../../styles/components/form.css';
 import { Form, Input } from '@rocketseat/unform';
 import CreatableSelect from 'react-select';
-import { thisTypeAnnotation } from '@babel/types';
+import { useDispatch } from "react-redux";
+import { HomeActions } from '../../state/saga-home/actions';
+import { Redirect } from 'react-router';
 
 
 interface ICreateProjectFormProps {
     onFormCancelled: () => void;
-    onFormCompleted: (projectTitle: string, projectTopics: string[], projectDescription: string) => void;
+    onFormCompleted: (title: string, description: string, topics: string[], ownerId: string) => void;
 }
 
 interface ICreateProjectFormState {
-    showForm: boolean;
     topics: any;
     inputTopic: string;
 }
 
+const ConnectedCreateProjectForm: React.FC = () => {
+    const [showForm, toggleForm] = useState(true);
 
+    const dispatch = useDispatch();
+
+    const onProjectCreated = (title: string, description: string, topics: string[], ownerId: string) => {
+        dispatch({
+            type: HomeActions.CREATE_USER_PROJECT,
+            projectTitle: title,
+            projectDescription: description,
+            projectTopics: topics,
+            projectOwnerId: ownerId
+        })
+        
+        toggleForm(false);
+    }
+
+    if (showForm) {
+        return(<CreateProjectForm onFormCompleted={onProjectCreated} onFormCancelled={() => toggleForm(false)} />)
+    }
+
+    return (<Redirect to='/'/>)
+}
 
 class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreateProjectFormState> {
     constructor(props: ICreateProjectFormProps) {
         super(props);
         this.state = {
-            showForm: true,
             topics: [],
             inputTopic: '',
         }
@@ -43,15 +65,9 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
 
     // On submit, we pull the data from the form and combine it with the topics from the state. You can integrate the topics with the form state but I'm lazy so I didn't. TODO.
     handleSumbit = (data: any) => {
-        console.log({...data, topics: this.state.topics});
+        const { title, description, topics } = data;
 
-        this.props.onFormCompleted(
-            data.projectTitle,
-            data.projectDescription,
-            this.state.topics
-        )
-
-        this.setState({showForm: false});
+        this.props.onFormCompleted(title, description, topics, 'not yet')
     }
 
     // This gets called when you hit X on one of the labels. It just gives you a new value state and so we reset it to that.
@@ -95,7 +111,7 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
 
     public render() {
         return (
-            <Modal dialogClassName='formModal' show={this.state.showForm} onHide={() => this.props.onFormCancelled()}>
+            <Modal dialogClassName='formModal' show={true} onHide={() => this.props.onFormCancelled()}>
                 <Modal.Header  closeButton>
                     <Modal.Title>Create Project</Modal.Title>
                 </Modal.Header>
@@ -112,11 +128,11 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
                             <h4 className='font-weight-bold'>Details</h4>
                             <hr/>
 
-                            <Form onSubmit={(data) => this.handleSumbit(data)}>
+                            <Form onSubmit={(data) => this.handleSumbit({data})}>
                                 <Row>
                                     <Col xs>
                                         <h5 className='font-weight-bold'>Project Name</h5> 
-                                        <Input className='form-control my-3' name='projectTitle'/>
+                                        <Input type='text' className='form-control my-3' name='projectTitle'/>
                                     </Col>
 
                                     <Col xs>
@@ -154,4 +170,4 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
     }
 }
 
-export default CreateProjectForm;
+export default ConnectedCreateProjectForm;

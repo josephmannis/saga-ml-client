@@ -2,11 +2,12 @@ import React from 'react';
 
 
 interface IProjectVisualizationCreationFlowProps {
-
+    onVisualiationCreated: () => void;
+    onVisualizationCreationCancelled: () => void;
 }
 
 interface IProjectVisualizationCreationFlowState {
-
+    
 }
 
 class ProjectVisualizationCreationFlow extends React.Component<IProjectVisualizationCreationFlowProps, IProjectVisualizationCreationFlowState> {
@@ -14,6 +15,11 @@ class ProjectVisualizationCreationFlow extends React.Component<IProjectVisualiza
         super(props);
         this.state = {
         }
+    }
+
+    public render() {
+        return (<div></div>
+        );
     }
 }
 

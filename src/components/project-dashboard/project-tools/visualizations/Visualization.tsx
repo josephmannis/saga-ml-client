@@ -3,18 +3,18 @@ import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {DataPoint, IVisualization} from "../../../../state/dashboard/datatypes";
 import { Line } from 'react-chartjs-2';
+import { IProjectVisualization, IVisualizationDataPoint, IProjectVisualizationType } from '../../../clientTypes';
 
 interface IVisualizationProps {
-    model: IVisualization;
-    dataPoints: DataPoint[];
+    model: IProjectVisualization;
+    dataPoints: IVisualizationDataPoint[];
 }
 
 const Visualization: React.FC<IVisualizationProps> =
   ({model, dataPoints}) => {
     let emptyTagToDataSet: { [key: string]: {data: {[date: string]: {t: Date; y: number}}; label:string;} } = {};
-    emptyTagToDataSet = model.tagsToInclude.reduce((acc , cur) => {
+    emptyTagToDataSet = model.labels.reduce((acc , cur) => {
       acc[cur] = {
         data: {},
         label: cur,
@@ -25,7 +25,7 @@ const Visualization: React.FC<IVisualizationProps> =
   const tagToDataSet = dataPoints.reduce((acc, curDataPoint) => {
     curDataPoint.tags.forEach(curTag => {
       const dateKey = curDataPoint.timeStamp.getFullYear() + "-" + curDataPoint.timeStamp.getDate();
-      if (model.tagsToInclude.includes(curTag)) {
+      if (model.labels.includes(curTag)) {
         if (!acc[curTag].data[dateKey]) {
           acc[curTag].data[dateKey] = {t: curDataPoint.timeStamp, y: 1}
         }
@@ -45,7 +45,7 @@ console.log(datasetsToInclude);
     datasets: datasetsToInclude
   };
 
-  if (model.type == 'line') {
+  if (model.type === IProjectVisualizationType.LINE) {
     return (
       <Container fluid>
         <Row>
