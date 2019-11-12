@@ -5,60 +5,30 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Visualization from './Visualization';
 import ProjectVisualizationCreationFlow from './ProjectVisualizationCreationFlow';
-import { IVisualizationDataPoint, IProjectVisualization } from '../../../clientTypes';
+import { IProjectVisualization } from '../../../clientTypes';
 
 export interface IProjectVisualizationsViewProps {
   visualizations: IProjectVisualization[];
-  dataPoints: IVisualizationDataPoint[];
+  onVisualizationCreated: () => void;
 }
 
-interface IProjectVisualiationsViewState {
-  showProjectCreation: boolean;
+const ProjectVisualizationsView: React.FC<IProjectVisualizationsViewProps> = props => {
+  const [showVisualizationCreation, toggleVisualizationCreation] = React.useState(false);
+
+  return (
+    <Container fluid className='p-5'>
+      {showVisualizationCreation && <ProjectVisualizationCreationFlow onVisualiationCreated={() => props.onVisualizationCreated() } onVisualizationCreationCancelled={() => toggleVisualizationCreation(false) }/>}
+      <Row>
+          <Col>
+            { props.visualizations.map((vis, i) => <Visualization key={i} model={vis}/>) }
+          </Col>
+
+          <Col xs={2} sm={2} md={2} lg={2}>
+            <Button onClick={() => toggleVisualizationCreation(true)} className="flex" variant="primary">Create New</Button>
+          </Col>
+      </Row>
+    </Container>
+  );
 }
 
-export default class ProjectVisualizationsView extends React.Component<IProjectVisualizationsViewProps, IProjectVisualiationsViewState> {
-  
-  constructor(props: IProjectVisualizationsViewProps) {
-    super(props);
-
-    this.state = {
-      showProjectCreation: false,
-    }
-  }
-
-  onVisualiationCreated = () => {
-
-  }
-
-  onVisualizationCreationCancelled = () => {
-
-  }
-
-  public render() {
-    return (
-      <Container fluid className='p-5'>
-    {this.state.showProjectCreation && <ProjectVisualizationCreationFlow onVisualiationCreated={() => this.onVisualiationCreated } onVisualizationCreationCancelled={() => this.onVisualizationCreationCancelled }/>}
-          <Row>
-              <Col>
-               { this.getVisualizations() }
-              </Col>
-
-              <Col xs={2} sm={2} md={2} lg={2}>
-                <Button className="flex" variant="primary">Create New</Button>
-              </Col>
-          </Row>
-      </Container>
-    );
-  }
-
-  getVisualizations(): Array<React.ReactFragment> {
-    let children = [];
-
-    for (let vis of this.props.visualizations) {
-      children.push(<Visualization model={vis} dataPoints={this.props.dataPoints} />);
-      children.push(<br/>)
-    }
-     
-    return children;
-  }
-}
+export default ProjectVisualizationsView;

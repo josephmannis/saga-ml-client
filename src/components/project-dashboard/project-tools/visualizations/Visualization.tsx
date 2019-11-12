@@ -7,8 +7,7 @@ import {Line} from 'react-chartjs-2';
 import { IProjectVisualization, IVisualizationDataPoint, IProjectVisualizationType } from '../../../clientTypes';
 
 interface IVisualizationProps {
-  model: IProjectVisualization;
-  dataPoints: IVisualizationDataPoint[];
+    model: IProjectVisualization;
 }
 
 function randomColor(): string {
@@ -16,7 +15,7 @@ function randomColor(): string {
 }
 
 const Visualization: React.FC<IVisualizationProps> =
-  ({model, dataPoints}) => {
+  ({model}) => {
 
 
     let emptyTagToDataSet: { [key: string]: { data: { [date: string]: { t: Date; y: number; } }; label: string; borderColor: string; } } = {};
@@ -29,7 +28,7 @@ const Visualization: React.FC<IVisualizationProps> =
       return acc;
     }, emptyTagToDataSet);
 
-    const tagToDataSet = dataPoints.reduce((acc, curDataPoint) => {
+    const tagToDataSet = model.dataPoints.reduce((acc, curDataPoint) => {
       curDataPoint.tags.forEach(curTag => {
         const curTS = curDataPoint.timeStamp;
         const dateKey = curTS.getFullYear() + "-" + curTS.getMonth();
@@ -60,7 +59,7 @@ const Visualization: React.FC<IVisualizationProps> =
 
   if (model.type === IProjectVisualizationType.LINE) {
     return (
-      <Container fluid>
+      <Container className='my-5' fluid>
         <Row>
           <Col xs={5} sm={5} md={5} lg={5} >
               <Line data={data} width={100} height={100} options={{

@@ -8,13 +8,23 @@ import { useSelector } from 'react-redux';
 
 export interface IProjectDashboardProps {
     project: IProjectDashboard;
+    onVisualizationCreated: () => void;
+    onDataAdded: () => void;
 }
 
 export const ConnectedProjectDashboard: React.FC = () => {
   const { project } = useSelector((state: AppState) => state.dashboardReducer)
 
+  const onVisualizationCreated = () => {
+    console.log('creating visualization');
+  }
+
+  const onDataAdded = () => {
+    console.log('adding data');
+  }
+
   return ( 
-    <ProjectDashboard project={project}/>
+    <ProjectDashboard onVisualizationCreated={() => onVisualizationCreated()} onDataAdded={ () => onDataAdded() } project={project}/>
   )
 }
 
@@ -22,9 +32,9 @@ const ProjectDashboard: React.FC<IProjectDashboardProps> = props => {
   return (
     <div>
       <ProjectInformation projectTitle={props.project.title} projectDescription={props.project.description}/>
-      <ProjectToolsTabView project={props.project}/>
+      <ProjectToolsTabView onDataAdded={() => props.onDataAdded()} onVisualizationCreated={() => props.onVisualizationCreated()} project={props.project}/>
     </div>
   );
 }
 
-export default ProjectDashboard;
+export default ConnectedProjectDashboard;

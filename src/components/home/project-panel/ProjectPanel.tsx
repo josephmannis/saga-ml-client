@@ -27,7 +27,7 @@ const ProjectPanel: React.FC<IProjectPanelProps> = props => {
                  </Row>
 
                 <ListGroup variant='flush'>
-                    {props.projects.map((item, index) => <Link to='/project'><ListGroup.Item className='text-left' style={projectItem} action key={index} onClick={() => {props.onProjectSelected(item.id)}}>{item.title}</ListGroup.Item></Link>)}
+                    {props.projects.map((item, index) => <ListGroup.Item className='text-left' style={projectItem} action key={index} onClick={() => {props.onProjectSelected(item.id)}}>{item.title}</ListGroup.Item>)}
                 </ListGroup>
              </Col>
          </Container>
