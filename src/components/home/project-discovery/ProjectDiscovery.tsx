@@ -21,7 +21,7 @@ const ProjectDiscovery: React.FC<IProjectDiscoveryProps> = props => {
 
                             <Row className='justify-content-between'>
                                 <CardColumns>
-                                    {props.publishedProjects.map((item, i) => <Link to={`/project+${item.id}`}><ProjectPreview key={i} imageUrl={'https://via.placeholder.com/150'} title={item.title} description={item.description}/> </Link> )}
+                                    {props.publishedProjects.map((item, i) => <Link key={i} to={`/project+${item.id}`}><ProjectPreview key={i} imageUrl={'https://via.placeholder.com/150'} title={item.title} description={item.description}/> </Link> )}
                                 </CardColumns>
                             </Row>
                         </Col>

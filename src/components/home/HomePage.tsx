@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProjectPanel from './project-panel/ProjectPanel';
 import ProjectDiscovery from './project-discovery/ProjectDiscovery';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { AppState } from '../../state/store';
 import { IProjectListing } from '../clientTypes';
+import ConnectedCreateProjectForm from './CreateProjectForm';
 
 
 interface IHomePageProps {
@@ -15,54 +16,51 @@ interface IHomePageProps {
 }
 
 interface IHomePageState {
+    showProjectCreation: boolean;
     userProjects: IProjectListing[];
     featuredProjects: IProjectListing[];
 }
 
 const ConnectedHomePage: React.FC = () => {
     const { featuredProjects, userProjects } = useSelector((state: AppState) => state.homeReducer )
-    const dispatch = useDispatch();
-    
+
+    console.log('user projects in connector')
+    console.log(userProjects)
+
     return (
+        <div>
+        <p> {userProjects.length} </p>
         <HomePage userProjects={userProjects} featuredProjects={featuredProjects}/>
+        </div>
     )
 }
 
-class HomePage extends React.Component<IHomePageProps, IHomePageState> {
-    constructor(props: IHomePageProps) {
-        super(props);
-        this.state = {
-            userProjects: props.userProjects,
-            featuredProjects: [...props.featuredProjects, {id: 'fake', title: 'Donal Tromp twwet', coverImageUrl: 'nah', description: 'woo', topics: [], ownerId: 'no'}],
-        }
-    }
-    
-    selectProject(projectID: string) {
+
+export const HomePage: React.FC<IHomePageProps> = props => {
+    const [showProjectCreation, toggleModal] = useState(false);
+
+    const selectProject = (projectID: string) => {
         console.log('selecting project' + projectID)
     }
 
-    toggleProjectCreation() {
-        console.log('Create project');
+    const toggleProjectCreation = () => {
+        toggleModal(!showProjectCreation);
     }
+    
+    return (
+        <Container fluid className='p-0'>
+                {showProjectCreation && <ConnectedCreateProjectForm/>}
 
-    onProjectCreated(projectTitle: string, projectTopics: string[], projectDescription: string) {
-        console.log(projectTitle + ' ' + projectTopics + ' ' + projectDescription);
-    }
-
-    public render() {
-        return (
-            <Container fluid className='p-0'>
                 <Row noGutters className='align-content-start'>
                     <Col xs={4} className='border-right'>
-                        <ProjectPanel onProjectCreationRequested={() => this.toggleProjectCreation()} projects={ this.state.userProjects } onProjectSelected = { (projectID: string) => {this.selectProject(projectID)} }/>
+                        <ProjectPanel onProjectCreationRequested={() => toggleProjectCreation()} projects={ props.userProjects } onProjectSelected = { (projectID: string) => {selectProject(projectID)} }/>
                     </Col>
                     <Col xs>
-                        <ProjectDiscovery publishedProjects={this.state.featuredProjects}/>
+                        <ProjectDiscovery publishedProjects={props.featuredProjects}/>
                     </Col>
                 </Row>
-            </Container>
-        );
-    }
+        </Container>
+    )
 }
 
 export default ConnectedHomePage;
