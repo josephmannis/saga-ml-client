@@ -4,7 +4,6 @@ import { IProjectDashboard, IVisualizationDataPoint, IProjectVisualization, IPro
 // State types
 export interface DashboardState {
     project: IProjectDashboard;
-    tab: string; // this is unused and ignored probably should be removed
 }
 const ex: IVisualizationDataPoint = {
     timeStamp: new Date(2018, 0, 1),
@@ -75,8 +74,7 @@ const initialState: DashboardState = {
             dataRows: []
         },
         comments: []
-},
-    tab: "visualizations" // probably shouldn't be here its never used, keeping as placeholder
+    }
 };
 
 export function dashboardReducer(state = initialState, action: DashBoardActionType): DashboardState {

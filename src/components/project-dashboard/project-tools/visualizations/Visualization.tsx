@@ -8,11 +8,10 @@ import { IProjectVisualization, IVisualizationDataPoint, IProjectVisualizationTy
 
 interface IVisualizationProps {
     model: IProjectVisualization;
-    dataPoints: IVisualizationDataPoint[];
 }
 
 const Visualization: React.FC<IVisualizationProps> =
-  ({model, dataPoints}) => {
+  ({model}) => {
     let emptyTagToDataSet: { [key: string]: {data: {[date: string]: {t: Date; y: number}}; label:string;} } = {};
     emptyTagToDataSet = model.labels.reduce((acc , cur) => {
       acc[cur] = {
@@ -22,7 +21,7 @@ const Visualization: React.FC<IVisualizationProps> =
       return acc;
     }, emptyTagToDataSet);
 
-  const tagToDataSet = dataPoints.reduce((acc, curDataPoint) => {
+  const tagToDataSet = model.dataPoints.reduce((acc, curDataPoint) => {
     curDataPoint.tags.forEach(curTag => {
       const dateKey = curDataPoint.timeStamp.getFullYear() + "-" + curDataPoint.timeStamp.getDate();
       if (model.labels.includes(curTag)) {
@@ -47,7 +46,7 @@ console.log(datasetsToInclude);
 
   if (model.type === IProjectVisualizationType.LINE) {
     return (
-      <Container fluid>
+      <Container className='my-5' fluid>
         <Row>
           <Col xs={5} sm={5} md={5} lg={5} >
               <Line data={data} width={100} height={100} options={{
