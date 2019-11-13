@@ -24,7 +24,7 @@ const ProjectToolsTabView: React.FC<IProjectToolsTabViewProps> = props => {
                 <ProjectVisualizationsView visualizations={props.project.visualizations} onVisualizationCreated={() => props.onVisualizationCreated() }/>
             </Tab>
             <Tab eventKey={ProjectToolActions.ADD_DATA} title={ProjectToolActions.ADD_DATA}>
-                {/* <ProjectDataManagementView dataPoints={ props.project.dataPoints } projectTopics={ props.project.topics } /> */}
+                <ProjectDataManagementView onVisualizationCreated={() => props.onVisualizationCreated()} onDataAdded={()=> props.onDataAdded()} data={ props.project.data } projectTopics={ props.project.topics } />
             </Tab>
         </Tabs>
     )

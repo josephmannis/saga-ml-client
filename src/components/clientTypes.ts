@@ -65,6 +65,12 @@ export interface IProjectData {
     dataRows: string[][];
 }
 
+export interface IDataSource {
+    id: string
+    title: string,
+    description: string,
+}
+
 export interface IProjectCommentPage {
     projectId: string;
     commentIds: string[];

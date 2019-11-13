@@ -1,1 +1,2 @@
 export const PROJECT_CREATION_PROMPT = 'Please provide a name and description for your project. Then, provide the topics that this project will look for in the data you analyze. You can always change this later.';
+export const ADD_DATA_SOURCE_PROMPT = 'Search for a data source to pull from. Select what you like, and Saga will add the data to your project and rerun the sentiment analysis.';
