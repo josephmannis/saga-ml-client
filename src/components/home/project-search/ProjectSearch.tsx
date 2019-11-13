@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectResult from './ProjectResult';
+import SearchResult from './SearchResult';
 import { Col, Row } from 'react-bootstrap';
 import { IProjectListing } from '../../clientTypes';
 
@@ -37,7 +37,7 @@ const ProjectSearchResults: React.FC<IProjectSearchResultsProps> = props => {
             <Col className='p-3 text-left' xs='6'>
                 <h2 className='font-weight-bold'>Search Results</h2>
                 <p>1 Result</p>
-                {props.projectResults.map((result) => <ProjectResult project={result} onItemClicked={itemId => props.onItemClicked(itemId)}  />)}
+                {props.projectResults.map((result) => <SearchResult itemTitle={result.title} itemDescription={result.description} itemTags={result.topics} itemId={result.id} onItemClicked={itemId => props.onItemClicked(itemId)}  />)}
             </Col>
         </Row>
     )

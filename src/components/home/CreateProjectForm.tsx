@@ -66,8 +66,8 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
     });
 
     // On submit, we pull the data from the form and combine it with the topics from the state. You can integrate the topics with the form state but I'm lazy so I didn't. TODO.
-    handleSumbit = (event: any) => {
-        const { projectTitle, projectDescription } = event.data;
+    handleSumbit = (data: any) => {
+        const { projectTitle, projectDescription } = data;
         const topics = this.state.topics.map((topic: any) => topic.label);
 
         this.props.onFormCompleted(projectTitle, projectDescription, topics, 'not yet')
@@ -130,7 +130,7 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
                             <h4 className='font-weight-bold'>Details</h4>
                             <hr/>
 
-                            <Form onSubmit={(data) => this.handleSumbit({data})}>
+                            <Form onSubmit={(data) => this.handleSumbit(data)}>
                                 <Row>
                                     <Col xs>
                                         <h5 className='font-weight-bold'>Project Name</h5> 
@@ -164,8 +164,6 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
                             </Form>
                         </Col>
                     </Container>
-
-                  
                 </Modal.Body>
             </Modal>
         )
