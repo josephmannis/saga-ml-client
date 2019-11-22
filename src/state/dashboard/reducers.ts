@@ -1,5 +1,10 @@
-import { DashboardActions, DashBoardActionType } from './actions';
-import { IProjectDashboard, IVisualizationDataPoint, IProjectVisualization, IProjectVisualizationType } from '../../components/clientTypes';
+import {DashboardActions, DashBoardActionType} from './actions';
+import {
+    IProjectDashboard,
+    IProjectVisualization,
+    IProjectVisualizationType,
+    IVisualizationDataPoint
+} from '../../components/clientTypes';
 
 // State types
 export interface DashboardState {
@@ -67,10 +72,11 @@ const initialState: DashboardState = {
         visualizations: sampleVis(),
         data: {
             columnTitles: ['content', 'date', 'tags'],
-            dataRows: [
-                ['Governor @MattBevin has done a wonderful job for the people of Kentucky! He continues to protect your very important Second Amendment. Matt is Strong on Crime and the Border, he Loves our Great Vets and Military', '09/31/19', 'education'],
-                ['MISSISSIPPI! There is a VERY important election for Governor on November 5th. I need you to get out and VOTE for our Great Republican nominee, @TateReeves. Tate is Strong on Crime, tough on Illegal Immigration, and will protect your Second Amendment', '09/31/19', 'immigration, trump']
-            ]
+            dataRows:  randomIProjectDataRows(1000)
+            //   [
+            //     ['Governor @MattBevin has done a wonderful job for the people of Kentucky! He continues to protect your very important Second Amendment. Matt is Strong on Crime and the Border, he Loves our Great Vets and Military', '09/31/19', 'education'],
+            //     ['MISSISSIPPI! There is a VERY important election for Governor on November 5th. I need you to get out and VOTE for our Great Republican nominee, @TateReeves. Tate is Strong on Crime, tough on Illegal Immigration, and will protect your Second Amendment', '09/31/19', 'immigration, trump']
+            // ]
         },
         comments: []
     }
@@ -81,7 +87,9 @@ export function dashboardReducer(state = initialState, action: DashBoardActionTy
         case DashboardActions.FETCH_PROJECT:
             return { ...state, project: action.project };
         case DashboardActions.ADD_PROJECT_DATA:
-            return { ...state, project: {...state.project, data: {...state.project.data, dataRows: state.project.data.dataRows.concat(action.newData)}}}
+            return { ...state, project: {...state.project, data: {...state.project.data, dataRows: state.project.data.dataRows.concat(action.newData)}}};
+        case DashboardActions.ADD_VISUALIZATION:
+            return {... state, project: {...state.project, visualizations: [...state.project.visualizations, action.newVisualization]}};
         default:
             return state;
     };

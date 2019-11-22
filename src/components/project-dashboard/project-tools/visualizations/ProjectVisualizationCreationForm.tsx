@@ -6,16 +6,18 @@ import {useDispatch} from "react-redux";
 import TypeOfVisualizationForm from "./TypeOfVisualizationForm";
 import {IProjectData, IProjectVisualization, IProjectVisualizationType} from "../../../clientTypes";
 import SpecifyVisualizationForm from "./SpecifyVisualizationForm";
+import {extractTags, getDateRange, randomColor} from "./utility";
+import {start} from "repl";
 
 
 interface IProjectVisualizationCreationFlowProps {
-    onVisualiationCreated: () => void;
+    onFormCompleted: (visualization: IProjectVisualization) => void;
     onVisualizationCreationCancelled: () => void;
     data: IProjectData;
 }
 
 const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFlowProps> = props => {
-    const {data, onVisualizationCreationCancelled } = props;
+    const {data, onVisualizationCreationCancelled, onFormCompleted } = props;
     const [showForm, toggleForm] = useState(true);
     const [formStep, progressStep] = useState(0);
     const [chartType, setChartType] = useState(IProjectVisualizationType.LINE);
@@ -23,8 +25,28 @@ const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFl
     const setSelectedData = (newSelectedData: IProjectData) => {
         selectedData.dataRows = newSelectedData.dataRows;
     };
-    const dispatch = useDispatch();
 
+    const [startTime, endTime] = getDateRange(data);
+
+    const newVisualization: IProjectVisualization = {
+        title: "Default Title",
+        description: "Default Description",
+        id: "fake id",
+        type: chartType,
+        startTime: new Date(startTime),
+        endTime: new Date(endTime),
+        labels: extractTags(data).reduce((obj, tag) => {return {...obj, [tag]: randomColor()}}, {})
+    };
+
+    const setVisualizationFields = (startDate: string, endDate: string, labels: string[]) => {
+        newVisualization.startTime = new Date(startDate);
+        newVisualization.endTime = new Date(endDate);
+        newVisualization.labels = labels.reduce((obj, tag) => {return {...obj, [tag]: randomColor()}}, {})
+    };
+
+    const onSubmit = () => {
+        onFormCompleted(newVisualization);
+    };
 
     return (
       <Modal dialogClassName='formModal' show={showForm} onHide={() => onVisualizationCreationCancelled()}>
@@ -42,11 +64,14 @@ const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFl
 
                   <Col xs='10' className='p-0'>
                       {formStep === 0 && <TypeOfVisualizationForm setChartType={setChartType} />}
-                      {formStep === 1 && <SpecifyVisualizationForm data={data} setSelectedData={setSelectedData}/>}
+                      {formStep === 1 && <SpecifyVisualizationForm data={data}
+                                                                   setSelectedData={setSelectedData}
+                                                                   setVisualizationFields={setVisualizationFields}
+                      />}
                   </Col>
 
                   <Row className='justify-content-end'>
-                      {formStep === 1 && <Button onClick={() => {console.log(selectedData)}} type='submit'>Finish</Button>}
+                      {formStep === 1 && <Button onClick={onSubmit} type='submit'>Finish</Button>}
                       {formStep < 1 && <Button onClick={() => progressStep(formStep + 1)}>Continue</Button>}
                   </Row>
               </Container>

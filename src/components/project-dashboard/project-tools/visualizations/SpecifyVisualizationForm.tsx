@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import SearchBar from '../../../shared/SearchBar';
 import SearchResult from '../../../home/project-search/SearchResult';
 import {IDataSource, IProjectData, IProjectVisualizationType} from '../../../clientTypes';
-import { extractTags, filterData, getDateRange } from './utility';
+import {extractTags, filterData, getDateRange, randomColor} from './utility';
 import {Button} from "react-bootstrap";
 import {Choice} from "@rocketseat/unform";
 import ProjectDataTable from "../data-management/ProjectDataTable";
@@ -10,12 +10,13 @@ import {start} from "repl";
 
 interface ISearchDataSourceFormProps {
   setSelectedData: (data: IProjectData) => void;
+  setVisualizationFields: (startDate: string, endDate: string, labels: string[]) => void;
   data: IProjectData;
 }
 
 
 const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => {
-  const { setSelectedData, data } = props;
+  const { setSelectedData, data, setVisualizationFields } = props;
   const [initStartDate, initEndDate] = getDateRange(data);
   const [startDate, setStartDate] = useState(initStartDate);
   const [endDate, setEndDate] = useState(initEndDate);
@@ -25,6 +26,9 @@ const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => 
 
   const selectedData = filterData(data, new Date(startDate), new Date(endDate), selectedTags);
   setSelectedData(selectedData);
+
+  setVisualizationFields(startDate, endDate, selectedTags);
+
 
   const startEndDateSelector = (
     <div>

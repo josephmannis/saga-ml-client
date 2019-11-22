@@ -1,9 +1,10 @@
-import { IProjectDashboard } from "../../components/clientTypes"
+import {IProjectDashboard, IProjectVisualization} from "../../components/clientTypes"
 
 // Types
 export enum DashboardActions {
     FETCH_PROJECT = 'FETCH_PROJECTS',
-    ADD_PROJECT_DATA = 'ADD_PROJECT_DATA'
+    ADD_PROJECT_DATA = 'ADD_PROJECT_DATA',
+    ADD_VISUALIZATION = 'ADD_VISUALIZATION'
 }
 
 interface FetchProjectAction {
@@ -17,9 +18,16 @@ interface AddProjectDataAction {
     newData: string[][];
 }
 
+interface AddVisualizationAction {
+    type: typeof DashboardActions.ADD_VISUALIZATION;
+    projectId: string;
+    newVisualization: IProjectVisualization;
+}
+
 export type DashBoardActionType =
 | FetchProjectAction
 | AddProjectDataAction
+| AddVisualizationAction
 
 // Creators
 export function fetchProject(project: IProjectDashboard): DashBoardActionType {
@@ -34,5 +42,13 @@ export function addDataToProject(projectId: string, newData: string[][]): DashBo
         type: DashboardActions.ADD_PROJECT_DATA,
         projectId: projectId,
         newData: newData
+    }
+}
+
+export function addVisualizationToProject(projectId: string, newVisualization: IProjectVisualization): DashBoardActionType {
+    return {
+        type: DashboardActions.ADD_VISUALIZATION,
+        projectId: projectId,
+        newVisualization
     }
 }
