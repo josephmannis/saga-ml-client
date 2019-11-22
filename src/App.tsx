@@ -5,9 +5,9 @@ import { HomeState } from './state/saga-home/reducers';
 import Header from "./components/global/Header";
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ConnectedProjectSearch } from './components/home/project-search/ProjectSearch';
-import { ConnectedProjectDashboard } from './components/project-dashboard/ProjectDashboard';
 import {DashboardState} from "./state/dashboard/reducers";
 import ConnectedHomePage from './components/home/HomePage';
+import ConnectedProjectDashboard from './components/project-dashboard/ProjectDashboard';
 
 interface AppProps {
   home: HomeState;
