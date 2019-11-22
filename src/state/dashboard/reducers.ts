@@ -112,8 +112,6 @@ export function dashboardReducer(state = initialState, action: DashBoardActionTy
             return { ...state, project: {...state.project, data: {...state.project.data, dataRows: state.project.data.dataRows.concat(action.newData)}}};
         case DashboardActions.ADD_VISUALIZATION:
             return {... state, project: {...state.project, visualizations: [...state.project.visualizations, action.newVisualization]}};
-        default:
-            return { ...state, project: {...state.project, data: {...state.project.data, dataRows: state.project.data.dataRows.concat(action.newData)}}}
         case DashboardActions.ADD_PROJECT_COMMENT:
             return addProjectComment(state, action.authorId, action.comment);
         case DashboardActions.UPVOTE_PROJECT_COMMENT:
