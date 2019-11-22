@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Modal, Row, Container, Col, Button } from 'react-bootstrap';
+import { Row, Container, Col, Button } from 'react-bootstrap';
 import { ADD_DATA_SOURCE_PROMPT } from '../../../../assets/strings';
 import { Form, Input } from '@rocketseat/unform';
 import CustomInputPicker from '../../../shared/CustomInputPicker';
@@ -18,22 +17,18 @@ const AddDataSourceForm: React.FC<IAddDataSourceFormProps> = props => {
     const [hashtagValues, updateHashtags] = React.useState<string[]>([]);
     const [handleValues, updateHandles] = React.useState<string[]>([]);
     
-    const onFormSubmitted = (data: any) => {
-    //    console.log(hashtagValues);
-    //    console.log(handleValues);
-    }
-
-    const dispatch = useDispatch();
-
     const onAddFromCSV = () => {
         
     }
 
     const onDataAdded = (dataRows: any) => {
-        console.log('data rows added');
-        console.log(dataRows);
-        console.log(hashtagValues);
-        console.log(handleValues);
+        // TODO: Fakey fake fake. Faker. 
+        props.onFormCompleted(
+            [
+                ['I want nothing. I want nothing. I want no quid pro quo. Tell zellinsky to do the right thing. This is the final word from the pres of the u.s.', '10/5/19', 'education'],
+                ['Despite the constant negative press covfefe', '10/7/19', 'education']
+            ]
+        );
     }
 
     return (

@@ -84,6 +84,8 @@ export function dashboardReducer(state = initialState, action: DashBoardActionTy
     switch(action.type) {
         case DashboardActions.FETCH_PROJECT:
             return { ...state, project: action.project };
+        case DashboardActions.ADD_PROJECT_DATA:
+            return { ...state, project: {...state.project, data: {...state.project.data, dataRows: state.project.data.dataRows.concat(action.newData)}}}
         default: 
             return state;
     };

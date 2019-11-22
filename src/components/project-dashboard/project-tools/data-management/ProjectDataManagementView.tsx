@@ -7,6 +7,8 @@ import { IProjectData } from '../../../clientTypes';
 import { Button, Modal } from 'react-bootstrap';
 import { ProjectDataTable } from './ProjectDataTable';
 import AddDataSourceForm from './AddDataSourceForm';
+import { useDispatch } from "react-redux";
+import { DashboardActions } from '../../../../state/dashboard/actions';
 
 interface IConnectedProjectDataManagementViewProps {
   data: IProjectData;
@@ -14,7 +16,16 @@ interface IConnectedProjectDataManagementViewProps {
 }
 
 const ConnectedProjectDataManagementView: React.FC<IConnectedProjectDataManagementViewProps> = props => {
-  const onDataAdded = (data: any) => {
+  const dispatch = useDispatch();
+
+  const onDataAdded = (data: string[][]) => {
+    const newData = {
+      type: DashboardActions.ADD_PROJECT_DATA,
+      projectId: 'fake rn',
+      newData: data
+    }
+
+    dispatch(newData);
     console.log(data);
   }
 
@@ -47,9 +58,7 @@ const ProjectDataManagementView: React.FC<IProjectDataManagementViewProps> = pro
           <Col xs='10'>
             <Row className='justify-content-between pb-5'> 
                 <h2 className='font-weight-bold'> All Data </h2>
-                <div>
-                  <Button onClick={() => toggleDataAddedForm(true)}> Add Data </Button>
-                </div>
+                <Button onClick={() => toggleDataAddedForm(true)}> Add Data </Button>
             </Row>
           </Col>
         </Row>
