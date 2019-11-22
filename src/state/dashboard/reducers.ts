@@ -78,7 +78,29 @@ const initialState: DashboardState = {
             //     ['MISSISSIPPI! There is a VERY important election for Governor on November 5th. I need you to get out and VOTE for our Great Republican nominee, @TateReeves. Tate is Strong on Crime, tough on Illegal Immigration, and will protect your Second Amendment', '09/31/19', 'immigration, trump']
             // ]
         },
-        comments: []
+        comments: [
+            {
+                id: 'projectcomment+1',
+                authorId: 'Jules',
+                body: 'Using the republican tag as a baseline for fragments of text about healthcare is probably pretty inaccurate. The model is likely to tag nearly everything which heavily affects visualizations.',
+                votes: 3,
+                replies: []
+            },
+            {
+                id: 'projectcomment+2',
+                authorId: 'Bob',
+                body: 'This is very interesting!',
+                votes: 1,
+                replies: []
+            },
+            {
+                id: 'projectcomment+3',
+                authorId: 'Bob',
+                body: 'I would be careful with what you’re using for data as well. ',
+                votes: -1,
+                replies: []
+            }
+        ]
     }
 };
 
@@ -91,6 +113,28 @@ export function dashboardReducer(state = initialState, action: DashBoardActionTy
         case DashboardActions.ADD_VISUALIZATION:
             return {... state, project: {...state.project, visualizations: [...state.project.visualizations, action.newVisualization]}};
         default:
+            return { ...state, project: {...state.project, data: {...state.project.data, dataRows: state.project.data.dataRows.concat(action.newData)}}}
+        case DashboardActions.ADD_PROJECT_COMMENT:
+            return addProjectComment(state, action.authorId, action.comment);
+        case DashboardActions.UPVOTE_PROJECT_COMMENT:
+            return updateProjectComment(state, action.commentId, 1);
+        case DashboardActions.DOWNVOTE_PROJECT_COMMENT:
+            return updateProjectComment(state, action.commentId, -1);
+        default:
             return state;
     };
+}
+
+
+function updateProjectComment(state: DashboardState, commentId: string, voteChange: number): DashboardState {
+    return(
+        {
+        ...state,
+        project: {...state.project, comments: state.project.comments.map(comment => comment.id === commentId ? {...comment, votes: comment.votes + voteChange} : comment) }
+        }
+    )
+}
+
+function addProjectComment(state: DashboardState, authorId: string, commentBody: string): DashboardState {
+    return {...state, project: {...state.project, comments: [...state.project.comments, {id: 'newcomment+' + state.project.comments.length, votes: 0, authorId: authorId, body: commentBody, replies: [] }]}}
 }

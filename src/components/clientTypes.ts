@@ -70,11 +70,6 @@ export interface IDataSource {
     description: string,
 }
 
-export interface IProjectCommentPage {
-    projectId: string;
-    commentIds: string[];
-}
-
 // A comment on a Project
 export interface IProjectComment { 
     id: string; // the id 

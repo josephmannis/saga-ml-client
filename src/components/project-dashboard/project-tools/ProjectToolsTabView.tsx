@@ -3,6 +3,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import { IProjectDashboard } from '../../clientTypes';
 import ConnectedProjectDataManagementView from './data-management/ProjectDataManagementView';
 import ConnectedProjectVisualizationsView from './visualizations/ProjectVisualizationsView';
+import { ConnectedProjectCommentView } from './project-comments/ProjectCommentView';
 
 
 interface IProjectToolsTabViewProps {
@@ -12,7 +13,8 @@ interface IProjectToolsTabViewProps {
 enum ProjectToolActions {
     VISUALIZE = "Visualize",
     ADD_DATA = "Add Data",
-    TRAIN = "Train"
+    TRAIN = "Train",
+    COMMENT = "Comment"
 }
 
 const ProjectToolsTabView: React.FC<IProjectToolsTabViewProps> = props => {    
@@ -24,6 +26,9 @@ const ProjectToolsTabView: React.FC<IProjectToolsTabViewProps> = props => {
             </Tab>
             <Tab eventKey={ProjectToolActions.ADD_DATA} title={ProjectToolActions.ADD_DATA}>
                 <ConnectedProjectDataManagementView data={ props.project.data } projectTopics={ props.project.topics } />
+            </Tab>
+            <Tab eventKey={ProjectToolActions.COMMENT} title={ProjectToolActions.COMMENT}> 
+                <ConnectedProjectCommentView comments={props.project.comments}/>
             </Tab>
         </Tabs>
     )
