@@ -7,8 +7,21 @@ import Visualization from './Visualization';
 import ProjectVisualizationCreationFlow from './ProjectVisualizationCreationFlow';
 import { IProjectVisualization } from '../../../clientTypes';
 
-export interface IProjectVisualizationsViewProps {
+interface IConnectedProjectVisualizationsViewProps {
   visualizations: IProjectVisualization[];
+}
+
+const ConnectedProjectVisualizationsView: React.FC<IConnectedProjectVisualizationsViewProps> = props => {
+  const onVisualizationCreated = () => {
+    console.log('on visualization created');
+  }
+  
+  return (
+    <ProjectVisualizationsView visualizations={props.visualizations} onVisualizationCreated={() => onVisualizationCreated() }/>
+  )
+}
+
+interface IProjectVisualizationsViewProps extends IConnectedProjectVisualizationsViewProps {
   onVisualizationCreated: () => void;
 }
 
@@ -31,4 +44,4 @@ const ProjectVisualizationsView: React.FC<IProjectVisualizationsViewProps> = pro
   );
 }
 
-export default ProjectVisualizationsView;
+export default ConnectedProjectVisualizationsView;

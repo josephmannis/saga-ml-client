@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import CreatableSelect from 'react-select';
 
-
+// TODO: Debug this
 interface ICustomInputPickerProps {
     placeHolder: string;
     onValuesChanged: (values: string[]) => void;
@@ -27,13 +27,15 @@ const CustomInputPicker: React.FC<ICustomInputPickerProps> = props => {
 
     // This gets called when you hit X on one of the labels. It just gives you a new value state and so we reset it to that.
     const handleTopicChange = (value: any, actionMeta: any) => {
-        updateItems(value);
-        props.onValuesChanged(currentItems.map(input => input.value));
+        console.log(value);
+        if (value) {
+            updateItems(value);
+        }
     }
     
     // This happens when you type something in. 
     const handleInputChange = (inputValue: string) => {
-        updateInput(inputValue)
+        updateInput(inputValue);
     }
 
     // This is when you hit enter or tab, just adds the label that was entered to the global state. 
@@ -44,10 +46,24 @@ const CustomInputPicker: React.FC<ICustomInputPickerProps> = props => {
             case 'Enter':
             case 'Tab':
                 updateInput('');
-                updateItems([...currentItems, formatInput(currentInput)]);
+                updateItems(validateAndGetInputs(currentInput));
                 event.preventDefault();
         }
     }
+
+    const validateAndGetInputs = (newInput: string) => {
+        console.log(`input:` + newInput)
+        if (currentItems.every((item: any) => item.value !== newInput)) {
+             return [...currentItems, formatInput(newInput)];
+        }
+                
+        return currentItems;
+    }
+
+    useEffect(() => {
+        console.log(currentItems.map(input => input.value));
+        props.onValuesChanged(currentItems.map(input => input.value));
+    }, [currentItems]);
     
     return (
         <CreatableSelect
