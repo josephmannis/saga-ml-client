@@ -78,7 +78,6 @@ const Visualization: React.FC<IVisualizationProps> =
                   }]
                 }
               }}>
-
               </Line>
             </Col>
 
