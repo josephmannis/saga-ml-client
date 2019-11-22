@@ -4,6 +4,8 @@ import {ADD_DATA_SOURCE_PROMPT} from "../../../../assets/strings";
 import AddTwitterDataForm from "../data-management/AddTwitterDataForm";
 import {useDispatch} from "react-redux";
 import TypeOfVisualizationForm from "./TypeOfVisualizationForm";
+import {IProjectVisualization, IProjectVisualizationType} from "../../../clientTypes";
+import SpecifyVisualizationForm from "./SpecifyVisualizationForm";
 
 
 interface IProjectVisualizationCreationFlowProps {
@@ -18,11 +20,10 @@ interface IProjectVisualizationCreationFlowState {
 const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFlowProps> = props => {
     const [showForm, toggleForm] = useState(true);
     const [formStep, progressStep] = useState(0);
+    const [chartType, setChartType] = useState(IProjectVisualizationType.LINE);
+    const [chartState, setChartState] = useState({});
     const dispatch = useDispatch();
 
-    const onAddFromCSV = () => {
-
-    }
 
     return (
       <Modal dialogClassName='formModal' show={showForm} onHide={() => props.onVisualizationCreationCancelled()}>
@@ -39,14 +40,13 @@ const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFl
                   </Row>
 
                   <Col xs='10' className='p-0'>
-                      {formStep === 0 && <TypeOfVisualizationForm onDataSourceChosen={dataSourceId => console.log(dataSourceId)} />}
-                      {formStep === 1 && <AddTwitterDataForm onFormSubmitted={() => console.log('subimtted')}/>}
+                      {formStep === 0 && <TypeOfVisualizationForm setChartType={setChartType} />}
+                      {formStep === 1 && <SpecifyVisualizationForm chartType={chartType} setChartState={setChartState}/>}
                   </Col>
 
                   <Row className='justify-content-end'>
-                      <Button onClick={() => formStep === 1 ? toggleForm(false) : progressStep(formStep + 1)} >
-                          {formStep === 1 ? 'Finish' : 'Continue'}
-                      </Button>
+                      {formStep === 1 && <Button type='submit'>Finish</Button>}
+                      {formStep < 1 && <Button onClick={() => {console.log(chartState); return progressStep(formStep + 1)}}>Continue</Button>}
                   </Row>
               </Container>
           </Modal.Body>

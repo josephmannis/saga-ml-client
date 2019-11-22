@@ -1,39 +1,35 @@
-import React, { useState }  from 'react';
+import React, {useState} from 'react';
 import SearchBar from '../../../shared/SearchBar';
 import SearchResult from '../../../home/project-search/SearchResult';
-import { IDataSource } from '../../../clientTypes';
+import {IDataSource, IProjectVisualizationType} from '../../../clientTypes';
+import {Button} from "react-bootstrap";
+
 interface ISearchDataSourceFormProps {
-    onDataSourceChosen: (dataSourceId: string) => void;
+  setChartType: (chartType: number) => void;
 }
 
 const TypeOfVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => {
-    const [searchResults, updateResults] = useState<IDataSource[]>([]);
-    const [selectedResult, selectResult] = useState('');
+  const {setChartType} = props;
 
-    const onSearch = (query: string) => {
-        updateResults([
-            {
-                title: 'Twitter',
-                description:  'Pull data from certain Twitters, Hashtags, and more.',
-                id: 'twt'
-            }
-        ])
-    } 
+  return (
+    <div style={{
+      display: "flex",
+      flex: 1,
+    }}>
+      <div style={{flex: 1,}}>
+        <Button onClick={() => {
+          setChartType(IProjectVisualizationType.LINE)
+        }}>Line</Button>
+      </div>
+      <div style={{flex: 1,}}>
 
-    return (
-        <div>
-            <SearchBar hintText='Search for data source' onSearch={query => onSearch(query)}/>
-            { searchResults.map((result, i) =>
-                    <SearchResult 
-                        key={i} 
-                        selected={selectedResult === result.id}
-                        itemTitle={result.title} 
-                        itemDescription={result.description} 
-                        itemId={result.id} 
-                        onItemClicked={id => selectResult(id)}/>)
-            }
-        </div>
-    )
+        <Button onClick={() => {
+          setChartType(IProjectVisualizationType.PIE)
+        }}>PIE</Button>
+      </div>
+
+    </div>
+  )
 }
 
 export default TypeOfVisualizationForm;

@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {Line} from 'react-chartjs-2';
 import { IProjectVisualization, IVisualizationDataPoint, IProjectVisualizationType } from '../../../clientTypes';
+import dataTransform from "./utility";
 
 interface IVisualizationProps {
     model: IProjectVisualization;
@@ -17,45 +18,7 @@ function randomColor(): string {
 const Visualization: React.FC<IVisualizationProps> =
   ({model}) => {
 
-
-    let emptyTagToDataSet: { [key: string]: { data: { [date: string]: { t: Date; y: number; } }; label: string; borderColor: string; } } = {};
-    emptyTagToDataSet = model.labels.reduce((acc, cur) => {
-      acc[cur] = {
-        data: {},
-        label: cur,
-        borderColor: randomColor(),
-      };
-      return acc;
-    }, emptyTagToDataSet);
-
-    const tagToDataSet = model.dataPoints.reduce((acc, curDataPoint) => {
-      curDataPoint.tags.forEach(curTag => {
-        const curTS = curDataPoint.timeStamp;
-        const dateKey = curTS.getFullYear() + "-" + curTS.getMonth();
-        if (model.labels.includes(curTag)
-          && curTS.getTime() < model.endTime.getTime()
-          && curTS.getTime() > model.startTime.getTime()) {
-          if (!acc[curTag].data[dateKey]) {
-            acc[curTag].data[dateKey] = {t: curDataPoint.timeStamp, y: 0};
-          }
-          acc[curTag].data[dateKey] = {...acc[curTag].data[dateKey], y: acc[curTag].data[dateKey].y + 1}
-        }
-      });
-      return acc;
-    }, emptyTagToDataSet);
-
-    const datasetsToInclude = Object.values(tagToDataSet)
-      .map(cur => {
-        return {...cur, data: Object.values(cur.data)}
-      });
-    datasetsToInclude
-      .forEach(cur => {
-        cur.data.sort((a, b) => b.t.getTime() - a.t.getTime())
-      });
-
-    const data = {
-      datasets: datasetsToInclude
-    };
+  const data = dataTransform({columnTitles: [], dataRows: []});
 
   if (model.type === IProjectVisualizationType.LINE) {
     return (
@@ -104,7 +67,6 @@ const Visualization: React.FC<IVisualizationProps> =
         </Row>
       </Container>
     )
-  }
+};
 
-
-export default Visualization
+export default Visualization;
