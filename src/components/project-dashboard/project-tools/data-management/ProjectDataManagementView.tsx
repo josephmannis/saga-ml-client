@@ -4,37 +4,61 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filters from "../../../shared/Filters";
 import { IProjectData } from '../../../clientTypes';
-import { Table, Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { ProjectDataTable } from './ProjectDataTable';
 import AddDataSourceForm from './AddDataSourceForm';
+import { useDispatch } from "react-redux";
+import { DashboardActions } from '../../../../state/dashboard/actions';
 
-interface IProjectDataManagementViewProps {
+interface IConnectedProjectDataManagementViewProps {
   data: IProjectData;
   projectTopics: string[];
-  onVisualizationCreated: () => void;
-  onDataAdded: () => void;
 }
 
-export const ConnectedProjectDataManagementView: React.FC = () => {
+const ConnectedProjectDataManagementView: React.FC<IConnectedProjectDataManagementViewProps> = props => {
+  const dispatch = useDispatch();
+
+  const onDataAdded = (data: string[][]) => {
+    const newData = {
+      type: DashboardActions.ADD_PROJECT_DATA,
+      projectId: 'fake rn',
+      newData: data
+    }
+
+    dispatch(newData);
+    console.log(data);
+  }
+
   return (
-    <div></div>
+    <ProjectDataManagementView data={props.data} projectTopics={props.projectTopics} onDataAdded={data => onDataAdded(data)} />
   )
+}
+
+interface IProjectDataManagementViewProps extends IConnectedProjectDataManagementViewProps {
+  onDataAdded: (data: any) => void;
 }
 
 const ProjectDataManagementView: React.FC<IProjectDataManagementViewProps> = props => {
   const [showDataAddedForm, toggleDataAddedForm] = React.useState(false);
   
+  const onDataFormCompleted = (data: any) => {
+    toggleDataAddedForm(false);
+    props.onDataAdded(data);
+  }
+
   return (
       <Container fluid className='p-5'>
-        {showDataAddedForm && <AddDataSourceForm onFormCompleted={() => toggleDataAddedForm(false)} onFormCancelled={() => toggleDataAddedForm(false)}/>}
-
+        <Modal dialogClassName='formModal' show={showDataAddedForm}>
+          <Modal.Body>
+              <AddDataSourceForm onFormCompleted={(data) => onDataFormCompleted(data)} onFormCancelled={() => toggleDataAddedForm(false)}/>
+          </Modal.Body>
+        </Modal>
+        
         <Row className='pl-3 justify-content-end'>
           <Col xs='10'>
             <Row className='justify-content-between pb-5'> 
                 <h2 className='font-weight-bold'> All Data </h2>
-                <div>
-                  <Button onClick={() => toggleDataAddedForm(true)}> Add Data </Button>
-                </div>
+                <Button onClick={() => toggleDataAddedForm(true)}> Add Data </Button>
             </Row>
           </Col>
         </Row>
@@ -52,4 +76,4 @@ const ProjectDataManagementView: React.FC<IProjectDataManagementViewProps> = pro
     );
   }
 
-export default ProjectDataManagementView
+export default ConnectedProjectDataManagementView

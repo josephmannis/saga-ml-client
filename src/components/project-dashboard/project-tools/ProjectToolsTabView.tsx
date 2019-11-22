@@ -1,14 +1,12 @@
 import * as React from 'react';
-import ProjectDataManagementView from './data-management/ProjectDataManagementView';
-import ProjectVisualizationsView from './visualizations/ProjectVisualizationsView';
 import { Tabs, Tab } from 'react-bootstrap';
 import { IProjectDashboard } from '../../clientTypes';
+import ConnectedProjectDataManagementView from './data-management/ProjectDataManagementView';
+import ConnectedProjectVisualizationsView from './visualizations/ProjectVisualizationsView';
 
 
 interface IProjectToolsTabViewProps {
     project: IProjectDashboard;
-    onVisualizationCreated: () => void;
-    onDataAdded: () => void;
 }
 
 enum ProjectToolActions {
@@ -21,10 +19,10 @@ const ProjectToolsTabView: React.FC<IProjectToolsTabViewProps> = props => {
     return (
         <Tabs defaultActiveKey={ProjectToolActions.ADD_DATA} id="project-tool-actions">
             <Tab eventKey={ProjectToolActions.VISUALIZE} title={ProjectToolActions.VISUALIZE}>
-                <ProjectVisualizationsView visualizations={props.project.visualizations} onVisualizationCreated={() => props.onVisualizationCreated() }/>
+                <ConnectedProjectVisualizationsView visualizations={props.project.visualizations} />
             </Tab>
             <Tab eventKey={ProjectToolActions.ADD_DATA} title={ProjectToolActions.ADD_DATA}>
-                <ProjectDataManagementView onVisualizationCreated={() => props.onVisualizationCreated()} onDataAdded={()=> props.onDataAdded()} data={ props.project.data } projectTopics={ props.project.topics } />
+                <ConnectedProjectDataManagementView data={ props.project.data } projectTopics={ props.project.topics } />
             </Tab>
         </Tabs>
     )
