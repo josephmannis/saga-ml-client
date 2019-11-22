@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Visualization from './Visualization';
-import ProjectVisualizationCreationFlow from './ProjectVisualizationCreationFlow';
+import ProjectVisualizationCreationForm from './ProjectVisualizationCreationForm';
 import { IProjectVisualization } from '../../../clientTypes';
 
 export interface IProjectVisualizationsViewProps {
@@ -17,7 +17,7 @@ const ProjectVisualizationsView: React.FC<IProjectVisualizationsViewProps> = pro
 
   return (
     <Container fluid className='p-5'>
-      {showVisualizationCreation && <ProjectVisualizationCreationFlow onVisualiationCreated={() => props.onVisualizationCreated() } onVisualizationCreationCancelled={() => toggleVisualizationCreation(false) }/>}
+      {showVisualizationCreation && <ProjectVisualizationCreationForm onVisualiationCreated={() => props.onVisualizationCreated() } onVisualizationCreationCancelled={() => toggleVisualizationCreation(false) }/>}
       <Row>
           <Col>
             { props.visualizations.map((vis, i) => <Visualization key={i} model={vis}/>) }
