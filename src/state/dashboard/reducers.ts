@@ -18,22 +18,20 @@ function randomDate(start: Date, end: Date): Date {
 }
 
 
-function randomDataPoint(): IVisualizationDataPoint {
+function randomDataRow(): string[] {
     const startDate = new Date(2015, 0);
     const endDate = new Date(2019, 0);
+    const randomTime = randomDate(startDate, endDate);
+    const dateString = (randomTime.getMonth() + 1) + "/" + (randomTime.getDate()) + "/" + (randomTime.getFullYear() - 2000);
     const possibleTags = ['education', 'immigration', 'healthcare', 'republican', 'democrat', 'trump'];
-    const tags = [possibleTags[Math.floor(Math.random()*possibleTags.length)]];
-    return {
-        timeStamp: randomDate(startDate, endDate),
-        type: 'tweet',
-        text: 'some tweet',
-        tags
-    };
-}
+    const tagsString = possibleTags[Math.floor(Math.random()*possibleTags.length)];
 
-function randomDataPointList(length: number): IVisualizationDataPoint[] {
-    return Array(length).fill(0).map(randomDataPoint);
+    return ["some text", dateString, tagsString];
 }
+//
+function randomIProjectDataRows(length: number): string[][] {
+ return Array(length).fill(0).map(randomDataRow);
+ }
 
 function sampleVis(): IProjectVisualization[] {
     return [
