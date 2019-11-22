@@ -99,5 +99,10 @@ const filterData = (data: IProjectData, startDateString: string, endDateString: 
   return {columnTitles, dataRows: filteredDataRows};
 };
 
-export { dataTransform, extractTags, filterData };
+const getDateRange = (data: IProjectData): string[] => {
+  return ["2000-01-01", "2019-12-31"];
+};
+
+
+export { dataTransform, extractTags, filterData, getDateRange };
 

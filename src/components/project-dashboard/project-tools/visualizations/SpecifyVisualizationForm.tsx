@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import SearchBar from '../../../shared/SearchBar';
 import SearchResult from '../../../home/project-search/SearchResult';
 import {IDataSource, IProjectData, IProjectVisualizationType} from '../../../clientTypes';
-import { extractTags, filterData } from './utility';
+import { extractTags, filterData, getDateRange } from './utility';
 import {Button} from "react-bootstrap";
 import {Choice} from "@rocketseat/unform";
 import ProjectDataTable from "../data-management/ProjectDataTable";
@@ -10,7 +10,7 @@ import {start} from "repl";
 
 interface ISearchDataSourceFormProps {
   chartType: number;
-  setChartState: (IProjectVisualization: {}) => void;
+  setSelectedData: (data: IProjectData) => void;
   data: IProjectData;
 }
 
@@ -24,19 +24,22 @@ const years = Array.from(Array(20).keys()).map(i => {
 
 
 const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => {
-  const { chartType, setChartState, data } = props;
+  const { chartType, setSelectedData, data } = props;
+  const [initStartDate, initEndDate] = getDateRange(data);
   const [visPreview, setVisPreview] = useState({});
-  const [startDate, setStartDate] = useState("2000-01-01");
-  const [endDate, setEndDate] = useState("2019-12-31");
+  const [startDate, setStartDate] = useState(initStartDate);
+  const [endDate, setEndDate] = useState(initEndDate);
 
   const allTags = extractTags(data);
   const [selectedTags, setSelectedTags] = useState(allTags);
 
   const selectedData = filterData(data, startDate, endDate, selectedTags);
+  setSelectedData(selectedData);
 
   const startEndDateSelector = (
     <div>
       Time Range
+      <br />
       <label>
         Start Date:
         <DateSelector date={startDate} setDate={setStartDate}/>
@@ -51,10 +54,12 @@ const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => 
   const tagToIncludeSelector =(
     <div>
       Data
-      <label>
+      <br />
+      <div>
         Tags to Include:
+        <br />
         <TagSelector allTags={allTags} selectedTags={selectedTags} setSelectedTags={setSelectedTags}/>
-      </label>
+      </div>
     </div>
   );
 
@@ -111,12 +116,6 @@ const TagSelector: React.FC<ITagSelector> = props => {
     );
 };
 
-{/*<Choice name={"tags to include"}*/}
-{/*        options={choiceFormat}*/}
-{/*        multiple*/}
-{/*        onChange={e => console.log(e.target.value)}*/}
-{/*/>*/}
-
 interface ILabeledCheckBox {
   tag: string;
   callback: (tag: string, add: boolean) => void;
@@ -124,7 +123,9 @@ interface ILabeledCheckBox {
 
 const LabeledCheckBox: React.FC<ILabeledCheckBox> = props => {
   const { tag, callback } = props;
-  return (<label>
+  return (
+    <div>
+    <label>
     {tag}:
     <input type="checkbox"
            name={tag}
@@ -132,7 +133,11 @@ const LabeledCheckBox: React.FC<ILabeledCheckBox> = props => {
            onChange={e => callback(e.target.value, e.target.checked)}
            defaultChecked
     />
-  </label>);
+  </label>
+      <br />
+
+    </div>
+  );
 };
 
 export default SpecifyVisualizationForm;
