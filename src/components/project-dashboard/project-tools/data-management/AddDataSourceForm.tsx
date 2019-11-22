@@ -17,8 +17,8 @@ const AddDataSourceForm: React.FC<IAddDataSourceFormProps> = props => {
     const [hashtagValues, updateHashtags] = React.useState<string[]>([]);
     const [handleValues, updateHandles] = React.useState<string[]>([]);
     
-    const onAddFromCSV = () => {
-        
+    const onAddFromCSV = (data: any) => {
+        console.log(data)
     }
 
     const onDataAdded = (dataRows: any) => {
@@ -35,7 +35,9 @@ const AddDataSourceForm: React.FC<IAddDataSourceFormProps> = props => {
         <Container fluid>
             <Row className='p-3 justify-content-between'>
                     <h3 className='font-weight-bold'>Find Data Source</h3>
-                    <Button variant='outline-primary' onClick={() => onAddFromCSV()}> Add From CSV </Button>
+                <Form onSubmit={data => onAddFromCSV(data)}>
+                    <Input name='csv' type='file'/> 
+                </Form>
                 </Row>
                 <Row>
                     <Col xs='6' className='pb-3'>
