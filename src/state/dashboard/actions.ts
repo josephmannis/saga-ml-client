@@ -3,7 +3,10 @@ import { IProjectDashboard } from "../../components/clientTypes"
 // Types
 export enum DashboardActions {
     FETCH_PROJECT = 'FETCH_PROJECTS',
-    ADD_PROJECT_DATA = 'ADD_PROJECT_DATA'
+    ADD_PROJECT_DATA = 'ADD_PROJECT_DATA',
+    ADD_PROJECT_COMMENT = 'ADD_PROJECT_COMMENT',
+    UPVOTE_PROJECT_COMMENT = 'UPVOTE_PROJECT_COMMENT',
+    DOWNVOTE_PROJECT_COMMENT = 'DOWNVOTE_PROJECT_COMMENT'
 }
 
 interface FetchProjectAction {
@@ -17,9 +20,28 @@ interface AddProjectDataAction {
     newData: string[][];
 }
 
+interface AddProjectCommentAction {
+    type: typeof DashboardActions.ADD_PROJECT_COMMENT;
+    authorId: string;
+    comment: string;
+}
+
+interface UpvoteProjectCommentAction {
+    type: typeof DashboardActions.UPVOTE_PROJECT_COMMENT;
+    commentId: string;
+}
+
+interface DownvoteProjectCommentAction {
+    type: typeof DashboardActions.DOWNVOTE_PROJECT_COMMENT;
+    commentId: string;
+}
+
 export type DashBoardActionType =
 | FetchProjectAction
 | AddProjectDataAction
+| AddProjectCommentAction 
+| UpvoteProjectCommentAction
+| DownvoteProjectCommentAction
 
 // Creators
 export function fetchProject(project: IProjectDashboard): DashBoardActionType {
@@ -36,3 +58,12 @@ export function addDataToProject(projectId: string, newData: string[][]): DashBo
         newData: newData
     }
 }
+
+export function addProjectComment(authorId: string, comment: string): DashBoardActionType {
+    return {
+        type: DashboardActions.ADD_PROJECT_COMMENT,
+        authorId: authorId,
+        comment: comment
+    }
+}
+
