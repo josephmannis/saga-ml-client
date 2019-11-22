@@ -1,9 +1,10 @@
-import { IProjectDashboard } from "../../components/clientTypes"
+import {IProjectDashboard, IProjectVisualization} from "../../components/clientTypes"
 
 // Types
 export enum DashboardActions {
     FETCH_PROJECT = 'FETCH_PROJECTS',
     ADD_PROJECT_DATA = 'ADD_PROJECT_DATA',
+    ADD_VISUALIZATION = 'ADD_VISUALIZATION',
     ADD_PROJECT_COMMENT = 'ADD_PROJECT_COMMENT',
     UPVOTE_PROJECT_COMMENT = 'UPVOTE_PROJECT_COMMENT',
     DOWNVOTE_PROJECT_COMMENT = 'DOWNVOTE_PROJECT_COMMENT'
@@ -18,6 +19,12 @@ interface AddProjectDataAction {
     type: typeof DashboardActions.ADD_PROJECT_DATA;
     projectId: string;
     newData: string[][];
+}
+
+interface AddVisualizationAction {
+    type: typeof DashboardActions.ADD_VISUALIZATION;
+    projectId: string;
+    newVisualization: IProjectVisualization;
 }
 
 interface AddProjectCommentAction {
@@ -39,7 +46,8 @@ interface DownvoteProjectCommentAction {
 export type DashBoardActionType =
 | FetchProjectAction
 | AddProjectDataAction
-| AddProjectCommentAction 
+| AddVisualizationAction
+| AddProjectCommentAction
 | UpvoteProjectCommentAction
 | DownvoteProjectCommentAction
 
@@ -56,6 +64,14 @@ export function addDataToProject(projectId: string, newData: string[][]): DashBo
         type: DashboardActions.ADD_PROJECT_DATA,
         projectId: projectId,
         newData: newData
+    }
+}
+
+export function addVisualizationToProject(projectId: string, newVisualization: IProjectVisualization): DashBoardActionType {
+    return {
+        type: DashboardActions.ADD_VISUALIZATION,
+        projectId: projectId,
+        newVisualization
     }
 }
 
