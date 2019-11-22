@@ -8,6 +8,7 @@ import { ConnectedProjectSearch } from './components/home/project-search/Project
 import {DashboardState} from "./state/dashboard/reducers";
 import ConnectedHomePage from './components/home/HomePage';
 import ConnectedProjectDashboard from './components/project-dashboard/ProjectDashboard';
+import ConnectedSignupPage from './components/signup/SignupPage';
 
 interface AppProps {
   home: HomeState;
@@ -16,7 +17,7 @@ interface AppProps {
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <div className="App h-100">
       <Router>
         <Header/>
         <Switch>
@@ -26,9 +27,13 @@ const App: React.FC = () => {
           <Route path='/search'>
             <ConnectedProjectSearch />
           </Route>
+          <Route path='/signup'>
+            <ConnectedSignupPage/>
+          </Route>
           <Route path='/'>
             <ConnectedHomePage />
           </Route>
+
         </Switch>
       </Router>
     </div>
