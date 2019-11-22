@@ -62,8 +62,8 @@ const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFl
                       </Col>
                   </Row>
 
-                  <Col xs='10' className='p-0'>
-                      {formStep === 0 && <TypeOfVisualizationForm setChartType={setChartType} />}
+                  <Col xs className='py-5'>
+                      {formStep === 0 && <TypeOfVisualizationForm selectedType={chartType} setChartType={setChartType} />}
                       {formStep === 1 && <SpecifyVisualizationForm data={data}
                                                                    setSelectedData={setSelectedData}
                                                                    setVisualizationFields={setVisualizationFields}

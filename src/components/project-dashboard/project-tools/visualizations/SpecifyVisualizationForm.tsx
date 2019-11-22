@@ -3,7 +3,7 @@ import SearchBar from '../../../shared/SearchBar';
 import SearchResult from '../../../home/project-search/SearchResult';
 import {IDataSource, IProjectData, IProjectVisualizationType} from '../../../clientTypes';
 import {extractTags, filterData, getDateRange, randomColor} from './utility';
-import {Button} from "react-bootstrap";
+import {Button, Row, Col} from "react-bootstrap";
 import {Choice} from "@rocketseat/unform";
 import ProjectDataTable from "../data-management/ProjectDataTable";
 import {start} from "repl";
@@ -29,61 +29,63 @@ const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => 
 
   setVisualizationFields(startDate, endDate, selectedTags);
 
+  const tableContainer = {
+    height: '400px'
+  }
 
   const startEndDateSelector = (
     <div>
-      Time Range
-      <br />
+      <h4 className='font-weight-bold'>Time Range</h4>
       <label>
         Start Date:
-        <DateSelector date={startDate} setDate={setStartDate}/>
+        <DateSelector className='form-control mr-3' date={startDate} setDate={setStartDate}/>
       </label>
       <label>
         End Date:
-        <DateSelector date={endDate} setDate={setEndDate}/>
+        <DateSelector className='form-control' date={endDate} setDate={setEndDate}/>
       </label>
     </div>
   );
 
   const tagToIncludeSelector =(
     <div>
-      Data
-      <br />
-      <div>
-        Tags to Include:
-        <br />
+      <h4 className='font-weight-bold'>Data</h4>
+      <p className='mb-3'> Tags to Include: </p>
+      <Col xs='3'>
         <TagSelector allTags={allTags} selectedTags={selectedTags} setSelectedTags={setSelectedTags}/>
-      </div>
+      </Col>
     </div>
   );
 
   return (
-    <div style={{
-      display: "flex",
-      flex: 1,
-    }}>
-      <div style={{flex: 1,}}>
-        { startEndDateSelector }
-        { tagToIncludeSelector }
-      </div>
-      <div style={{flex: 1,}}>
-        Data Preview:
-        <ProjectDataTable data={selectedData}/>
-      </div>
-    </div>
+    <Row>
+        <Col xs>
+          { startEndDateSelector }
+          { tagToIncludeSelector }
+        </Col>
+        <Col xs>
+          <h4 className='font-weight-bold'>Data Preview: </h4>
+
+          <div style={tableContainer} className='overflow-auto'>
+            <ProjectDataTable data={selectedData}/>
+          </div>
+        </Col>
+    </Row>
+
   )
 };
 
 interface IDateSelector {
   date: string;
   setDate: (string: string) => void;
+  className: string;
 }
 
 const DateSelector: React.FC<IDateSelector> = props => {
   const {date, setDate} = props;
 
   return (
-    <input type="date" value={date} onChange={(event) => setDate(event.target.value)}/>
+    <input className={props.className} type="date" value={date} onChange={(event) => setDate(event.target.value)}/>
     );
 };
 
@@ -104,9 +106,9 @@ const TagSelector: React.FC<ITagSelector> = props => {
   };
 
   return (
-    <div>
+    <Row>
      {allTags.map(tag => <LabeledCheckBox tag={tag} callback={callback} key={tag}/>)}
-    </div>
+    </Row>
     );
 };
 
