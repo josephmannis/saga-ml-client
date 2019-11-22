@@ -1,4 +1,5 @@
 import { IProjectData } from '../../../clientTypes';
+import {start} from "repl";
 
 
 const getTagsColumnIndex = (projectData: IProjectData): number => {
@@ -63,5 +64,40 @@ const dataTransform = (projectData: IProjectData) => {
 
 };
 
-export default dataTransform;
+const extractTags = (data: IProjectData): string[]  => {
+  const tagIdx = getTagsColumnIndex(data);
+  const tags: string[] = Array.from(new Set(data.dataRows.flatMap(
+    curRow => tagsOfRow(curRow, tagIdx)
+  )));
+  return tags;
+};
+
+const dateInRange = (date: Date, startDate: Date, endDate: Date): boolean => {
+  return date > startDate && date < endDate;
+};
+
+const rowHasTagFromTagList = (tagsOfRow: string[], tagsList: string[]): boolean => {
+  console.log(tagsOfRow);
+  console.log(tagsList);
+  return tagsOfRow.some(tag => tagsList.includes(tag));
+};
+
+const filterData = (data: IProjectData, startDateString: string, endDateString: string, tags: string[]): IProjectData  => {
+  const { columnTitles, dataRows } = data;
+  const tagIdx = getTagsColumnIndex(data);
+  const dateIdx = getDateColumnIndex(data);
+  const startDate = new Date(startDateString);
+  const endDate = new Date(endDateString);
+
+  const filterFunc = (row: string[]) => {
+    return dateInRange(new Date(row[dateIdx]), startDate, endDate)
+      && rowHasTagFromTagList(tagsOfRow(row, tagIdx), tags);
+  };
+
+  const filteredDataRows: string[][] = dataRows.filter(filterFunc);
+  console.log(filteredDataRows);
+  return {columnTitles, dataRows: filteredDataRows};
+};
+
+export { dataTransform, extractTags, filterData };
 

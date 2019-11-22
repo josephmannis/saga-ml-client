@@ -4,20 +4,18 @@ import {ADD_DATA_SOURCE_PROMPT} from "../../../../assets/strings";
 import AddTwitterDataForm from "../data-management/AddTwitterDataForm";
 import {useDispatch} from "react-redux";
 import TypeOfVisualizationForm from "./TypeOfVisualizationForm";
-import {IProjectVisualization, IProjectVisualizationType} from "../../../clientTypes";
+import {IProjectData, IProjectVisualization, IProjectVisualizationType} from "../../../clientTypes";
 import SpecifyVisualizationForm from "./SpecifyVisualizationForm";
 
 
 interface IProjectVisualizationCreationFlowProps {
     onVisualiationCreated: () => void;
     onVisualizationCreationCancelled: () => void;
-}
-
-interface IProjectVisualizationCreationFlowState {
-
+    data: IProjectData;
 }
 
 const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFlowProps> = props => {
+    const {data, onVisualizationCreationCancelled } = props;
     const [showForm, toggleForm] = useState(true);
     const [formStep, progressStep] = useState(0);
     const [chartType, setChartType] = useState(IProjectVisualizationType.LINE);
@@ -26,7 +24,7 @@ const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFl
 
 
     return (
-      <Modal dialogClassName='formModal' show={showForm} onHide={() => props.onVisualizationCreationCancelled()}>
+      <Modal dialogClassName='formModal' show={showForm} onHide={() => onVisualizationCreationCancelled()}>
           <Modal.Body>
               <Container fluid>
                   <Row className='p-3 justify-content-between'>
@@ -41,7 +39,7 @@ const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFl
 
                   <Col xs='10' className='p-0'>
                       {formStep === 0 && <TypeOfVisualizationForm setChartType={setChartType} />}
-                      {formStep === 1 && <SpecifyVisualizationForm chartType={chartType} setChartState={setChartState}/>}
+                      {formStep === 1 && <SpecifyVisualizationForm data={data} chartType={chartType} setChartState={setChartState}/>}
                   </Col>
 
                   <Row className='justify-content-end'>

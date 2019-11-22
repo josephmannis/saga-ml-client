@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {Line} from 'react-chartjs-2';
 import { IProjectVisualization, IVisualizationDataPoint, IProjectVisualizationType } from '../../../clientTypes';
-import dataTransform from "./utility";
+import { dataTransform } from "./utility";
 
 interface IVisualizationProps {
     model: IProjectVisualization;

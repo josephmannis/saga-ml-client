@@ -19,7 +19,9 @@ const ProjectToolsTabView: React.FC<IProjectToolsTabViewProps> = props => {
     return (
         <Tabs defaultActiveKey={ProjectToolActions.ADD_DATA} id="project-tool-actions">
             <Tab eventKey={ProjectToolActions.VISUALIZE} title={ProjectToolActions.VISUALIZE}>
-                <ConnectedProjectVisualizationsView visualizations={props.project.visualizations} />
+                <ConnectedProjectVisualizationsView  data={ props.project.data }
+                                                     visualizations={props.project.visualizations}
+                                                     onVisualizationCreated={() => {}} />
             </Tab>
             <Tab eventKey={ProjectToolActions.ADD_DATA} title={ProjectToolActions.ADD_DATA}>
                 <ConnectedProjectDataManagementView data={ props.project.data } projectTopics={ props.project.topics } />
