@@ -44,8 +44,7 @@ export interface IProjectVisualization {
     startTime: Date; // The start of the time window of the visualization
     endTime: Date; // The end of the time window   
     type: IProjectVisualizationType; // Bar or Pie or etc
-    labels: string[];
-    dataPoints: IVisualizationDataPoint[]
+    labels: {[label: string]: string};
 }
 
 export enum IProjectVisualizationType {

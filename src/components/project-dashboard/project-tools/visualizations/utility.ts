@@ -1,5 +1,11 @@
-import { IProjectData } from '../../../clientTypes';
+import {
+  IProjectData,
+  IProjectVisualization,
+  IProjectVisualizationType,
+  IVisualizationDataPoint
+} from '../../../clientTypes';
 import {start} from "repl";
+import {transcode} from "buffer";
 
 
 const getTagsColumnIndex = (projectData: IProjectData): number => {
@@ -26,7 +32,16 @@ const dateOfRowToDate = (dateOfRow: string): Date => {
   return new Date(year, month);
 };
 
-const dataTransform = (projectData: IProjectData) => {
+interface ITransformedDataPoint {
+  label: string,
+  data: {t: Date; y: number;}[];
+}
+
+interface ITransformedData {
+ datasets: ITransformedDataPoint[];
+}
+//{label: string, data: {t: Date; y: number;}[]}[]
+const dataTransform = (projectData: IProjectData): ITransformedData  => {
   const tagIdx = getTagsColumnIndex(projectData);
   const dateIdx = getDateColumnIndex(projectData);
 
@@ -48,8 +63,7 @@ const dataTransform = (projectData: IProjectData) => {
           acc[tag] = {};
         }
         if (!acc[tag][curDate]) {
-          acc[tag][curDate].t = dateOfRowToDate(curDate);
-          acc[tag][curDate].y = 0;
+          acc[tag][curDate] = {t: dateOfRowToDate(curDate), y: 0};
         }
         acc[tag][curDate].y += 1;
       });
@@ -57,11 +71,31 @@ const dataTransform = (projectData: IProjectData) => {
   }, {});
 
   const datasetsToInclude = Object.keys(tagToDataSet)
-    .map(tag => {return {label: tag, data: Object.values(tagToDataSet[tag])}})
+    .map(tag => {return {label: tag, data: Object.values(tagToDataSet[tag])}});
 
   datasetsToInclude
     .forEach(cur => {cur.data.sort((a, b) => b.t.getTime() - a.t.getTime())});
 
+  return {datasets: datasetsToInclude};
+};
+
+interface ISummedData {
+  labels: string[];
+  datasets: [
+    {
+      data: number[];
+    }
+  ]
+}
+
+const sumTransformedData = (transformedData: ITransformedData): ISummedData => {
+  return {
+    labels: transformedData.datasets.map(obj => obj.label),
+    datasets: [
+      {
+        data: transformedData.datasets.map(obj => obj.data.reduce((a, b) => a + b.y, 0))
+      }],
+  };
 };
 
 const extractTags = (data: IProjectData): string[]  => {
@@ -77,17 +111,13 @@ const dateInRange = (date: Date, startDate: Date, endDate: Date): boolean => {
 };
 
 const rowHasTagFromTagList = (tagsOfRow: string[], tagsList: string[]): boolean => {
-  console.log(tagsOfRow);
-  console.log(tagsList);
   return tagsOfRow.some(tag => tagsList.includes(tag));
 };
 
-const filterData = (data: IProjectData, startDateString: string, endDateString: string, tags: string[]): IProjectData  => {
+const filterData = (data: IProjectData, startDate: Date, endDate: Date, tags: string[]): IProjectData  => {
   const { columnTitles, dataRows } = data;
   const tagIdx = getTagsColumnIndex(data);
   const dateIdx = getDateColumnIndex(data);
-  const startDate = new Date(startDateString);
-  const endDate = new Date(endDateString);
 
   const filterFunc = (row: string[]) => {
     return dateInRange(new Date(row[dateIdx]), startDate, endDate)
@@ -95,7 +125,6 @@ const filterData = (data: IProjectData, startDateString: string, endDateString: 
   };
 
   const filteredDataRows: string[][] = dataRows.filter(filterFunc);
-  console.log(filteredDataRows);
   return {columnTitles, dataRows: filteredDataRows};
 };
 
@@ -103,6 +132,25 @@ const getDateRange = (data: IProjectData): string[] => {
   return ["2000-01-01", "2019-12-31"];
 };
 
+const formatDataForVis = (data: IProjectData, vis: IProjectVisualization): object => {
+  const filteredData = filterData(data, vis.startTime, vis.endTime, Object.keys(vis.labels));
+  const transformedData = dataTransform(filteredData);
+  switch (vis.type) {
+    case IProjectVisualizationType.LINE:
+      return {datasets: transformedData.datasets.map(obj => {return {...obj, borderColor: vis.labels[obj.label]}})};//.map(obj => {return {...obj, borderColor: vis.labels[obj.label]}})
+    case IProjectVisualizationType.PIE:
+      const summedData = sumTransformedData(transformedData);
+      return {datasets: [{data: summedData.datasets[0].data, backgroundColor: Object.values(vis.labels)}], labels: summedData.labels};
+    default:
+      return {}
+  }
+};
 
-export { dataTransform, extractTags, filterData, getDateRange };
+
+const randomColor = (): string => {
+  return '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6); //https://stackoverflow.com/a/1152508
+};
+
+
+export { dataTransform, extractTags, filterData, getDateRange, formatDataForVis, randomColor };
 

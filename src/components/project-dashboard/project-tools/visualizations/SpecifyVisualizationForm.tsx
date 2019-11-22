@@ -9,31 +9,21 @@ import ProjectDataTable from "../data-management/ProjectDataTable";
 import {start} from "repl";
 
 interface ISearchDataSourceFormProps {
-  chartType: number;
   setSelectedData: (data: IProjectData) => void;
   data: IProjectData;
 }
 
-const months = ["January", "February", "March", "April", "May", "June", "July",
-  "August", "September", "October", "November", "December"];
-
-const years = Array.from(Array(20).keys()).map(i => {
-  return i += 2000
-});
-
-
 
 const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => {
-  const { chartType, setSelectedData, data } = props;
+  const { setSelectedData, data } = props;
   const [initStartDate, initEndDate] = getDateRange(data);
-  const [visPreview, setVisPreview] = useState({});
   const [startDate, setStartDate] = useState(initStartDate);
   const [endDate, setEndDate] = useState(initEndDate);
 
   const allTags = extractTags(data);
   const [selectedTags, setSelectedTags] = useState(allTags);
 
-  const selectedData = filterData(data, startDate, endDate, selectedTags);
+  const selectedData = filterData(data, new Date(startDate), new Date(endDate), selectedTags);
   setSelectedData(selectedData);
 
   const startEndDateSelector = (

@@ -14,14 +14,15 @@ export interface IProjectVisualizationsViewProps {
 }
 
 const ProjectVisualizationsView: React.FC<IProjectVisualizationsViewProps> = props => {
+  const { data } = props;
   const [showVisualizationCreation, toggleVisualizationCreation] = React.useState(false);
 
   return (
     <Container fluid className='p-5'>
-      {showVisualizationCreation && <ProjectVisualizationCreationForm data={props.data} onVisualiationCreated={() => props.onVisualizationCreated() } onVisualizationCreationCancelled={() => toggleVisualizationCreation(false) }/>}
+      {showVisualizationCreation && <ProjectVisualizationCreationForm data={data} onVisualiationCreated={() => props.onVisualizationCreated() } onVisualizationCreationCancelled={() => toggleVisualizationCreation(false) }/>}
       <Row>
           <Col>
-            { props.visualizations.map((vis, i) => <Visualization key={i} model={vis}/>) }
+            { props.visualizations.map((vis, i) => <Visualization key={i} vis={vis} data={data}/>) }
           </Col>
 
           <Col xs={2} sm={2} md={2} lg={2}>

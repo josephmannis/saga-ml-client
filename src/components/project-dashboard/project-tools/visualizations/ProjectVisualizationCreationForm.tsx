@@ -42,12 +42,12 @@ const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFl
 
                   <Col xs='10' className='p-0'>
                       {formStep === 0 && <TypeOfVisualizationForm setChartType={setChartType} />}
-                      {formStep === 1 && <SpecifyVisualizationForm data={data} chartType={chartType} setSelectedData={setSelectedData}/>}
+                      {formStep === 1 && <SpecifyVisualizationForm data={data} setSelectedData={setSelectedData}/>}
                   </Col>
 
                   <Row className='justify-content-end'>
                       {formStep === 1 && <Button onClick={() => {console.log(selectedData)}} type='submit'>Finish</Button>}
-                      {formStep < 1 && <Button onClick={() => {console.log(selectedData); return progressStep(formStep + 1)}}>Continue</Button>}
+                      {formStep < 1 && <Button onClick={() => progressStep(formStep + 1)}>Continue</Button>}
                   </Row>
               </Container>
           </Modal.Body>

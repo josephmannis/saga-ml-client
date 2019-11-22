@@ -40,22 +40,20 @@ function sampleVis(): IProjectVisualization[] {
         {
             id: 'fake',
             title: "Line sample",
-            description: "line sample grpah description",
+            description: "line sample graph description",
             startTime: new Date(2018, 0),
-            endTime: new Date(2019, 0),
-            labels: ['education', 'immigration', 'healthcare'],
+            endTime: new Date(2019, 11),
+            labels: {'education': '#6c0f18', 'immigration': '#27944f', 'trump': '#0b1cf0'},
             type: IProjectVisualizationType.LINE,
-            dataPoints: []
         },
         {
             id: 'fake',
             title: "Pie sample",
-            description: "pie sample grpah description",
+            description: "pie sample graph description",
             startTime: new Date(2015, 0),
-            endTime: new Date(2019, 0),
-            labels: ['education', 'immigration', 'healthcare'],
+            endTime: new Date(2019, 11),
+            labels: {'education': '#6c0f18', 'immigration': '#27944f',  'trump': '#0b1cf0'},
             type: IProjectVisualizationType.PIE,
-            dataPoints: []
         }
     ]
 }
