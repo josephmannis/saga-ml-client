@@ -78,3 +78,8 @@ export interface IProjectComment {
     body: string; // the body of the comment
     replies: string[]; // a list of ids of the reply comments
 }
+
+export interface IUser {
+    id: string;
+    username: string;
+}

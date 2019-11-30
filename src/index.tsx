@@ -5,13 +5,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Provider } from 'react-redux';
-import configureStore from './state/store';
+import {persistor, store} from './state/store';
+import ConnectedApp from './App';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Button } from 'react-bootstrap';
 
-const store = configureStore();
 
 const Root = () => (
     <Provider store={store}>
-        <App/>
+        <PersistGate loading={<div> loading... </div>} persistor={persistor}>
+            <ConnectedApp/>
+        </PersistGate>
     </Provider>
 )
 
