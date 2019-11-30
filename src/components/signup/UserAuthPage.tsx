@@ -48,8 +48,8 @@ const UserAuthPage: React.FC<IUserAuthPageProps> = props => {
             <Col xs className='h-100'>
                 <Row className='justify-content-center align-items-center h-100'>
                     <Col lg='4' sm='6' xs='8' className='shadow p-5 rounded'>
-                        <Col xs>
-                            <img className='mb-4 w-50' src={logo}/>
+                        <Col xs className='text-center'>
+                            <img className='mb-4 mx-5' src={logo}/>
                             <h3 className='font-weight-bold mb-4'>saga.ml</h3>
                         </Col>
                         <Col xs className='text-left'>

@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import {persistor, store} from './state/store';
 import ConnectedApp from './App';
 import { PersistGate } from 'redux-persist/integration/react';
-import { Button } from 'react-bootstrap';
 
 
 const Root = () => (
