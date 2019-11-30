@@ -27,7 +27,7 @@ const ConnectedApp: React.FC = () => {
 
 const App: React.FC<AppProps> = props => {
   return (
-    <div className="App h-100">
+    <div className="h-100">
       <Router>
         {props.user.currentUser && <Header/> }
         {!props.user.currentUser && <Redirect to='/'/>}

@@ -13,7 +13,7 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
     return (
         <Form onSubmit={(data) => props.onSearch(data.query)}>
             <InputGroup>
-                    <Input className='form-control' name='query' placeholder={props.hintText} />
+                    <Input className='form-control w-auto' name='query' placeholder={props.hintText} />
                 <InputGroup.Append>
                     <Button type='submit' variant="outline-secondary">Search</Button>
                 </InputGroup.Append>

@@ -1,9 +1,9 @@
 import { homeReducer } from "./saga-home/reducers";
 import { dashboardReducer} from "./dashboard/reducers";
 import { userReducer } from './user/reducers';
+import { searchReducer } from './search/reducers';
 import { combineReducers, createStore } from 'redux';
 import storage from 'redux-persist/lib/storage';
-import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { persistStore, persistReducer } from 'redux-persist';
 
 
@@ -15,7 +15,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     homeReducer,
     dashboardReducer,
-    userReducer
+    userReducer,
+    searchReducer,
 });
 
 const pReducer = persistReducer(persistConfig, rootReducer);

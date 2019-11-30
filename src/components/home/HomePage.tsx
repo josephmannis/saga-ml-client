@@ -36,18 +36,18 @@ export const HomePage: React.FC<IHomePageProps> = props => {
     }
     
     return (
-        <Container fluid className='p-0'>
+        <div className='p-0 h-100'>
             {goToProject && <Redirect to='/project'/>}
             {showProjectCreation && <ConnectedCreateProjectForm/>}
-            <Row noGutters className='align-content-start'>
-                <Col xs={4} className='border-right'>
+            <Row noGutters className='align-content-start h-100'>
+                <Col xs={4} className='border-right h-100'>
                     <ProjectPanel onProjectCreationRequested={() => toggleProjectCreation()} projects={ props.userProjects } onProjectSelected = { (projectID: string) => {selectProject(projectID)} }/>
                 </Col>
                 <Col xs>
                     <ProjectDiscovery publishedProjects={props.featuredProjects}/>
                 </Col>
             </Row>
-        </Container>
+        </div>
     )
 }
 

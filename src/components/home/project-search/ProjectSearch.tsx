@@ -1,7 +1,10 @@
 import React from 'react';
 import SearchResult from './SearchResult';
+import { useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 import { IProjectListing } from '../../clientTypes';
+import { AppState } from '../../../state/store';
+import { Redirect } from 'react-router';
 
 
 interface IProjectSearchResultsProps {
@@ -10,34 +13,32 @@ interface IProjectSearchResultsProps {
 }
 
 export const ConnectedProjectSearch: React.FC = () => {
-    // Bad and fake news
-    const projectResults = [
-        {
-            id: 'not real',
-            title: 'fake',
-            coverImageUrl: 'www.fake.com',
-            description: 'Presidential Debates of Donald Trump',
-            topics: ['trump', 'healthcare'],
-            ownerId: '3'
-        }
-    ]
+    const [ selectedProject, selectProject ] = React.useState(false);
+    const { searchResults } = useSelector((state: AppState) => state.searchReducer )
 
     const onProjectSelected = (projectId: string) => {
-        console.log('navigate to project with id' + projectId)
+        selectProject(true);
     }
 
+    console.log(searchResults)
+
     return (
-        <ProjectSearchResults projectResults={projectResults} onItemClicked={onProjectSelected}/>
+        <div>
+            {selectedProject && <Redirect to='/project'/>}
+            <ProjectSearchResults projectResults={searchResults} onItemClicked={onProjectSelected}/>
+        </div>    
     )
 }
 
 const ProjectSearchResults: React.FC<IProjectSearchResultsProps> = props => {
+    let results = props.projectResults;
+
     return (
         <Row className='justify-content-center'>
             <Col className='p-3 text-left' xs='6'>
                 <h2 className='font-weight-bold'>Search Results</h2>
-                <p>1 Result</p>
-                {props.projectResults.map((result) => <SearchResult itemTitle={result.title} itemDescription={result.description} itemTags={result.topics} itemId={result.id} onItemClicked={itemId => props.onItemClicked(itemId)}  />)}
+                <p>{results.length} Results </p>
+                {results.map((result) => <SearchResult itemTitle={result.title} itemDescription={result.description} itemTags={result.topics} itemId={result.id} onItemClicked={itemId => props.onItemClicked(itemId)}  />)}
             </Col>
         </Row>
     )
