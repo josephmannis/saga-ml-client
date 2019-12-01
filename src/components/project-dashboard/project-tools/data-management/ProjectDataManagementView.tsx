@@ -9,6 +9,8 @@ import { ProjectDataTable } from './ProjectDataTable';
 import AddDataSourceForm from './AddDataSourceForm';
 import { useDispatch } from "react-redux";
 import { DashboardActions } from '../../../../state/dashboard/actions';
+import InfoTooltip from '../../../global/InfoTooltip';
+import { PROJECT_DATA_TOOLTIP } from '../../../../assets/strings';
 
 interface IConnectedProjectDataManagementViewProps {
   data: IProjectData;
@@ -57,7 +59,14 @@ const ProjectDataManagementView: React.FC<IProjectDataManagementViewProps> = pro
         <Row className='pl-3 justify-content-end'>
           <Col xs='10'>
             <Row className='justify-content-between pb-5'> 
-                <h2 className='font-weight-bold'> All Data </h2>
+              <Col xs>
+                <Col xs>
+                  <Row className='align-items-center'>
+                    <h2 className='font-weight-bold'> All Data </h2>
+                    <InfoTooltip tooltipBody={PROJECT_DATA_TOOLTIP}/>
+                  </Row>
+                </Col>
+              </Col>
                 <Button onClick={() => toggleDataAddedForm(true)}> Add Data </Button>
             </Row>
           </Col>
