@@ -27,7 +27,6 @@ export const HomePage: React.FC<IHomePageProps> = props => {
     const [goToProject, redirectToProject] = useState(false);
 
     const selectProject = (projectID: string) => {
-        console.log('selecting project' + projectID)
         redirectToProject(true);
     }
 

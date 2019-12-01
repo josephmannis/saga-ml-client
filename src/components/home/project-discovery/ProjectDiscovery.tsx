@@ -3,6 +3,8 @@ import { Container, Row, Col, CardColumns } from 'react-bootstrap';
 import ProjectPreview from './ProjectPreview';
 import { Link } from 'react-router-dom';
 import { IProjectListing } from '../../clientTypes';
+import InfoTooltip from '../../global/InfoTooltip';
+import { BROWSE_PROJECTS_TOOLIP } from '../../../assets/strings';
 
 interface IProjectDiscoveryProps {
     publishedProjects: IProjectListing[];
@@ -15,8 +17,9 @@ const ProjectDiscovery: React.FC<IProjectDiscoveryProps> = props => {
                 <Col xs='11'>
                     <Row className='justify-content-start'>
                         <Col xs>
-                            <Row className='justify-content-start'>
+                            <Row className='justify-content-start align-content-center'>
                                 <h3 className='font-weight-bold mb-5'>Browse Projects</h3>
+                                <InfoTooltip tooltipBody={BROWSE_PROJECTS_TOOLIP}/>
                             </Row>
 
                             <Row className='justify-content-between'>

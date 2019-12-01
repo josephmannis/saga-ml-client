@@ -1,12 +1,13 @@
 import React, { KeyboardEvent, useState } from 'react';
 import { Modal, Container, Col, Row, Button } from 'react-bootstrap';
-import { PROJECT_CREATION_PROMPT } from '../../assets/strings';
+import { PROJECT_CREATION_PROMPT, TOPICS_TOOLTIP } from '../../assets/strings';
 import '../../styles/components/form.css';
 import { Form, Input } from '@rocketseat/unform';
 import CreatableSelect from 'react-select';
 import { useDispatch } from "react-redux";
 import { HomeActions } from '../../state/saga-home/actions';
 import { Redirect } from 'react-router';
+import InfoTooltip from '../global/InfoTooltip';
 
 
 interface ICreateProjectFormProps {
@@ -114,11 +115,10 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
     public render() {
         return (
             <Modal dialogClassName='formModal' show={true} onHide={() => this.props.onFormCancelled()}>
-                <Modal.Header  closeButton>
-                    <Modal.Title>Create Project</Modal.Title>
+                <Modal.Header className='border-0' closeButton>
+                    <h3 className='font-weight-bold px-3 pt-3'>Create Project</h3>
                 </Modal.Header>
-
-                <Modal.Body>
+                <Modal.Body className='pt-0'>
                     <Container fluid>
                         <Row>
                             <Col xs='6' className='py-3'>
@@ -143,7 +143,13 @@ class CreateProjectForm extends React.Component<ICreateProjectFormProps, ICreate
                                     </Col>
                                 </Row>
                                
-                                <h5 className='font-weight-bold'>Project Topics</h5>
+                                <Col xs>
+                                    <Row>
+                                        <h5 className='font-weight-bold'>Project Topics</h5>
+                                        <InfoTooltip tooltipBody={TOPICS_TOOLTIP}/>
+                                    </Row>
+                                </Col>
+                                
                                 <CreatableSelect
                                     className='my-3'
                                     isClearable
