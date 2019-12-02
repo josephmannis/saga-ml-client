@@ -13,7 +13,7 @@ interface IConnectedProjectDashboardProps {
 const ConnectedProjectDashboard: React.FC = () => {
   const { project } = useSelector((state: AppState) => state.dashboardReducer)
 
-  return ( 
+  return (
     <ProjectDashboard project={project}/>
   )
 }

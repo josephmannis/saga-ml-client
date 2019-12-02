@@ -8,13 +8,14 @@ import { BROWSE_PROJECTS_TOOLIP } from '../../../assets/strings';
 
 interface IProjectDiscoveryProps {
     publishedProjects: IProjectListing[];
+    onProjectSelected: (projectId: string) => void;
 }
 
 const ProjectDiscovery: React.FC<IProjectDiscoveryProps> = props => {
     return (
-        <Container fluid className={'pt-3 justify-content-end'}>
+        <Container fluid className={'pt-3'}>
             <Row className='justify-content-end'>
-                <Col xs='11'>
+                <Col xs>
                     <Row className='justify-content-start'>
                         <Col xs>
                             <Row className='justify-content-start align-content-center'>
@@ -24,7 +25,7 @@ const ProjectDiscovery: React.FC<IProjectDiscoveryProps> = props => {
 
                             <Row className='justify-content-between'>
                                 <CardColumns>
-                                    {props.publishedProjects.map((item, i) => <Link key={i} to={`/project+${item.id}`}><ProjectPreview key={i} imageUrl={'https://via.placeholder.com/150'} title={item.title} description={item.description}/> </Link> )}
+                                    {props.publishedProjects.map((item, i) => <ProjectPreview projectId={item.id} onProjectSelected={(id: string) => props.onProjectSelected(id)} key={i} imageUrl={'https://via.placeholder.com/150'} title={item.title} description={item.description}/>)}
                                 </CardColumns>
                             </Row>
                         </Col>

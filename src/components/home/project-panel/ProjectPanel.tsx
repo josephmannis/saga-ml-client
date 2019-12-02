@@ -21,7 +21,7 @@ const projectItem = {
 
 const ProjectPanel: React.FC<IProjectPanelProps> = props => {
     return (
-         <Container fluid className=''>
+         <Container fluid className='h-100'>
              <Col className='p-0' xs>
                  <Row className='py-3 justify-content-between' noGutters>
                      <Col xs>
@@ -36,7 +36,7 @@ const ProjectPanel: React.FC<IProjectPanelProps> = props => {
                  </Row>
 
                 <ListGroup variant='flush'>
-                    {props.projects.map((item, index) => <ListGroup.Item className='text-left' style={projectItem} action key={index} onClick={() => {props.onProjectSelected(item.id)}}>{item.title}</ListGroup.Item>)}
+                    {props.projects.map((item, index) => <ListGroup.Item className='text-left' style={projectItem} action key={index} onClick={() => props.onProjectSelected(item.id)}>{item.title}</ListGroup.Item>)}
                 </ListGroup>
              </Col>
          </Container>

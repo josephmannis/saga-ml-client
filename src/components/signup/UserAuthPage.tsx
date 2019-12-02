@@ -53,11 +53,11 @@ const UserAuthPage: React.FC<IUserAuthPageProps> = props => {
                             <h3 className='font-weight-bold mb-4'>saga.ml</h3>
                         </Col>
                         <Col xs className='text-left'>
-                            <Form onSubmit={data => onSubmit(data)}>
+                            <Form autoComplete='off' onSubmit={data => onSubmit(data)}>
                                 <h5 className='mb-3'>username</h5>
-                                <Input required className='form-control mb-4' name='username' placeholder='username'/>
+                                <Input autoComplete='off' required className='form-control mb-4' name='username' placeholder='username'/>
                                 <h5 className='mb-3'>password</h5>
-                                <Input required className='form-control mb-4' name='password' placeholder='email' type='password'/>
+                                <Input autoComplete='off' required className='form-control mb-4' name='password' placeholder='email' type='password'/>
                                 <Button className='mb-4' type='submit'>{isLogin ? 'Login' : 'Sign up'}</Button>
                                 <p>
                                     {isLogin ? 'don\'t have an account?' : 'already have an account?' }

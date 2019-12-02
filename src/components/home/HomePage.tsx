@@ -4,46 +4,66 @@ import ProjectDiscovery from './project-discovery/ProjectDiscovery';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AppState } from '../../state/store';
-import { IProjectListing } from '../clientTypes';
+import { IProjectListing, IProjectDashboard } from '../clientTypes';
 import ConnectedCreateProjectForm from './CreateProjectForm';
 import { Redirect } from 'react-router';
+import { fetchProject } from '../../state/dashboard/actions';
+import { fetchPublishedProjects, fetchUserProjects } from '../../state/saga-home/actions';
 
 
 interface IHomePageProps {
     userProjects: IProjectListing[];
     featuredProjects: IProjectListing[];
+    onProjectSelected: (projectId: string) => void;
 }
 
 const ConnectedHomePage: React.FC = () => {
     const { featuredProjects, userProjects } = useSelector((state: AppState) => state.homeReducer )
+    const dispatch = useDispatch();
+    const [goToProject, redirectToProject] = useState(false);
 
-    return (<HomePage userProjects={userProjects} featuredProjects={featuredProjects}/>)
+    React.useEffect(() => {
+        dispatch(fetchPublishedProjects());
+        dispatch(fetchUserProjects());
+    }, [])
+
+    const onProjectSelected = (projectId: string) => {
+        console.log(projectId);
+        dispatch(fetchProject(projectId));
+        redirectToProject(true);
+    }
+
+    return (
+        <div>
+            {goToProject && <Redirect to='/project'/>}
+            <HomePage onProjectSelected={id => onProjectSelected(id)} userProjects={userProjects} featuredProjects={featuredProjects}/>
+        </div>
+    )
 }
+
 
 export const HomePage: React.FC<IHomePageProps> = props => {
     const [showProjectCreation, toggleModal] = useState(false);
-    const [goToProject, redirectToProject] = useState(false);
-
-    const selectProject = (projectID: string) => {
-        redirectToProject(true);
-    }
 
     const toggleProjectCreation = () => {
         toggleModal(!showProjectCreation);
     }
+
+    const onProjectSelected = (id: string) => {
+        props.onProjectSelected(id);
+    }
     
     return (
         <div className='p-0 h-100'>
-            {goToProject && <Redirect to='/project'/>}
             {showProjectCreation && <ConnectedCreateProjectForm/>}
             <Row noGutters className='align-content-start h-100'>
-                <Col xs={4} className='border-right h-100'>
-                    <ProjectPanel onProjectCreationRequested={() => toggleProjectCreation()} projects={ props.userProjects } onProjectSelected = { (projectID: string) => {selectProject(projectID)} }/>
+                <Col xs='4' className='border-right pt-3'>
+                    <ProjectPanel onProjectCreationRequested={() => toggleProjectCreation()} projects={ props.userProjects } onProjectSelected = { id => onProjectSelected(id) }/>
                 </Col>
-                <Col xs>
-                    <ProjectDiscovery publishedProjects={props.featuredProjects}/>
+                <Col xs className='px-5 pt-3'>
+                    <ProjectDiscovery onProjectSelected={id => onProjectSelected(id)} publishedProjects={props.featuredProjects}/>
                 </Col>
             </Row>
         </div>
