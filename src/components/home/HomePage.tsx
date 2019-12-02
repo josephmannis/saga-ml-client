@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import ProjectPanel from './project-panel/ProjectPanel';
-import ProjectDiscovery from './project-discovery/ProjectDiscovery';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useSelector, useDispatch } from "react-redux";
-import { AppState } from '../../state/store';
-import { IProjectListing, IProjectDashboard } from '../clientTypes';
-import ConnectedCreateProjectForm from './CreateProjectForm';
+import Row from 'react-bootstrap/Row';
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router';
 import { fetchProject } from '../../state/dashboard/actions';
 import { fetchPublishedProjects, fetchUserProjects } from '../../state/saga-home/actions';
+import { AppState } from '../../state/store';
+import { IProjectListing } from '../clientTypes';
+import ConnectedCreateProjectForm from './CreateProjectForm';
+import ProjectDiscovery from './project-discovery/ProjectDiscovery';
+import ProjectPanel from './project-panel/ProjectPanel';
 
 
 interface IHomePageProps {

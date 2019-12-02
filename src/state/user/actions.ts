@@ -1,6 +1,5 @@
-import { IUser } from '../../components/clientTypes';
-import { store } from '../store';
 import { v1 } from 'uuid';
+import { store } from '../store';
 
 export enum UserActions {
     LOGIN_USER = 'LOGIN_USER',

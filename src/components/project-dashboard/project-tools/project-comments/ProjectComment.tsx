@@ -1,8 +1,8 @@
 import React from 'react';
-import { IProjectComment } from '../../../clientTypes';
-import { Card, Row, Col, Button } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import downvote from '../../../../assets/ico/downvote.svg';
 import upvote from '../../../../assets/ico/upvote.svg';
+import { IProjectComment } from '../../../clientTypes';
 
 
 interface IProjectCommentProps {
@@ -28,10 +28,10 @@ const ProjectComment: React.FC<IProjectCommentProps> = props => {
                 <Row>
                     <Col xs='1'>
                         <button style={iconButton} onClick={() => props.onUpvote(props.comment.id)}> 
-                            <img style={voteIcon} src={upvote}/>
+                            <img style={voteIcon} src={upvote} alt='upvote'/>
                          </button>
                         <button style={iconButton} onClick={() => props.onDownvote(props.comment.id)}> 
-                            <img style={voteIcon} src={downvote}/>
+                            <img style={voteIcon} src={downvote} alt='downvote'/>
                         </button>
                     </Col>
                     <Col xs>

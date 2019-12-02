@@ -1,16 +1,16 @@
 import * as React from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Filters from "../../../shared/Filters";
-import { IProjectData } from '../../../clientTypes';
-import { Button, Modal } from 'react-bootstrap';
-import { ProjectDataTable } from './ProjectDataTable';
-import AddDataSourceForm from './AddDataSourceForm';
 import { useDispatch } from "react-redux";
-import { DashboardActions, addDataToProject } from '../../../../state/dashboard/actions';
-import InfoTooltip from '../../../global/InfoTooltip';
 import { PROJECT_DATA_TOOLTIP } from '../../../../assets/strings';
+import { addDataToProject } from '../../../../state/dashboard/actions';
+import { IProjectData } from '../../../clientTypes';
+import InfoTooltip from '../../../global/InfoTooltip';
+import Filters from "../../../shared/Filters";
+import AddDataSourceForm from './AddDataSourceForm';
+import { ProjectDataTable } from './ProjectDataTable';
 
 interface IConnectedProjectDataManagementViewProps {
   projectId: string;

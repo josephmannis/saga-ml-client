@@ -1,6 +1,6 @@
-import {DashboardActions, DashBoardActionType} from './actions';
 import { IProjectDashboard } from '../../components/clientTypes';
 import { fetchProjectById } from '../backend';
+import { DashboardActions, DashBoardActionType } from './actions';
 
 // State types
 export interface DashboardState {

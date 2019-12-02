@@ -1,9 +1,9 @@
-import React from 'react';
-import {Col, Row, Container, Button } from 'react-bootstrap';
-import logo from '../../assets/logo.svg';
 import { Form, Input } from '@rocketseat/unform';
+import React from 'react';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import logo from '../../assets/logo.svg';
 import { AppState } from '../../state/store';
 import { login, signup } from '../../state/user/actions';
 
@@ -49,7 +49,7 @@ const UserAuthPage: React.FC<IUserAuthPageProps> = props => {
                 <Row className='justify-content-center align-items-center h-100'>
                     <Col lg='4' sm='6' xs='8' className='shadow p-5 rounded'>
                         <Col xs className='text-center'>
-                            <img className='mb-4 mx-5' src={logo}/>
+                            <img className='mb-4 mx-5' src={logo} alt='saga logo'/>
                             <h3 className='font-weight-bold mb-4'>saga.ml</h3>
                         </Col>
                         <Col xs className='text-left'>

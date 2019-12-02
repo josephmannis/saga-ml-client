@@ -1,13 +1,9 @@
-import React, {useState} from 'react';
-import {Button, Col, Container, Modal, Row} from "react-bootstrap";
-import {ADD_DATA_SOURCE_PROMPT} from "../../../../assets/strings";
-import AddTwitterDataForm from "../data-management/AddTwitterDataForm";
-import {useDispatch} from "react-redux";
-import TypeOfVisualizationForm from "./TypeOfVisualizationForm";
-import {IProjectData, IProjectVisualization, IProjectVisualizationType} from "../../../clientTypes";
+import React, { useState } from 'react';
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { IProjectData, IProjectVisualization, IProjectVisualizationType } from "../../../clientTypes";
 import SpecifyVisualizationForm from "./SpecifyVisualizationForm";
-import {extractTags, getDateRange, randomColor} from "./utility";
-import {start} from "repl";
+import TypeOfVisualizationForm from "./TypeOfVisualizationForm";
+import { extractTags, getDateRange, randomColor } from "./utility";
 
 
 interface IProjectVisualizationCreationFlowProps {
@@ -18,7 +14,6 @@ interface IProjectVisualizationCreationFlowProps {
 
 const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFlowProps> = props => {
     const {data, onVisualizationCreationCancelled, onFormCompleted } = props;
-    const [showForm, toggleForm] = useState(true);
     const [formStep, progressStep] = useState(0);
     const [chartType, setChartType] = useState(IProjectVisualizationType.LINE);
     const selectedData: IProjectData = {...data};
@@ -51,7 +46,7 @@ const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFl
     };
 
     return (
-      <Modal dialogClassName='formModal' show={showForm} onHide={() => onVisualizationCreationCancelled()}>
+      <Modal dialogClassName='formModal' show={true} onHide={() => onVisualizationCreationCancelled()}>
           <Modal.Body>
               <Container fluid>
                   <Row className='p-3 justify-content-between'>

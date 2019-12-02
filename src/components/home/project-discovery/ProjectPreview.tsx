@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, ListGroup, ListGroupItem, CardImg} from 'react-bootstrap';
+import { Card, CardImg } from 'react-bootstrap';
 
 interface IPublishedProjectProps {
     imageUrl: string;

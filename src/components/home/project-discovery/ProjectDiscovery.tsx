@@ -1,10 +1,9 @@
 import React from 'react';
-import { Container, Row, Col, CardColumns } from 'react-bootstrap';
-import ProjectPreview from './ProjectPreview';
-import { Link } from 'react-router-dom';
+import { CardColumns, Col, Container, Row } from 'react-bootstrap';
+import { BROWSE_PROJECTS_TOOLIP } from '../../../assets/strings';
 import { IProjectListing } from '../../clientTypes';
 import InfoTooltip from '../../global/InfoTooltip';
-import { BROWSE_PROJECTS_TOOLIP } from '../../../assets/strings';
+import ProjectPreview from './ProjectPreview';
 
 interface IProjectDiscoveryProps {
     publishedProjects: IProjectListing[];

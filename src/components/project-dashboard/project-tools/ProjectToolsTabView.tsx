@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
+import { Tab, Tabs } from 'react-bootstrap';
 import { IProjectDashboard } from '../../clientTypes';
 import ConnectedProjectDataManagementView from './data-management/ProjectDataManagementView';
-import ConnectedProjectVisualizationsView from './visualizations/ProjectVisualizationsView';
 import { ConnectedProjectCommentView } from './project-comments/ProjectCommentView';
+import ConnectedProjectVisualizationsView from './visualizations/ProjectVisualizationsView';
 
 
 interface IProjectToolsTabViewProps {

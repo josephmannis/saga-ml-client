@@ -64,7 +64,7 @@ const ProjectVisualizationsView: React.FC<IProjectVisualizationsViewProps> = pro
                                                                       onVisualizationCreationCancelled={() => toggleVisualizationCreation(false) }/>}
       <Row>
         {props.visualizations.length > 0 && visualizationsList()}
-        {props.visualizations.length == 0 && 
+        {props.visualizations.length === 0 && 
           <Col xs>
             This project has no visualizations.
           </Col>

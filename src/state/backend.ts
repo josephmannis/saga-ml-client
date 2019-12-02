@@ -1,5 +1,5 @@
-import { IProjectDashboard, IProjectVisualization, IProjectVisualizationType, IProjectListing, } from "../components/clientTypes";
 import { v1 } from 'uuid';
+import { IProjectDashboard, IProjectListing } from "../components/clientTypes";
 
 const USER_PROJECTS_KEY = 'USER_PROJECTS';
 const PUBLISHED_PROJECTS_KEY = 'PUBLISHED_PROJECTS';
