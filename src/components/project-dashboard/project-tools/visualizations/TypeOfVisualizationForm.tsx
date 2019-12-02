@@ -30,8 +30,8 @@ const TypeOfVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => {
                   <Row className='justify-content-center'>
                     <img style={imagePreview} className='p-3' src={line}/>
                   </Row>
-                  <h4 className='font-weight-bold'>Pie Chart</h4>
-                  <p>Good for visualizing type distributions.</p>
+                  <h4 className='font-weight-bold'>Line Chart</h4>
+                  <p>Good for visualizing change over time.</p>
                 </Col>
               </Card.Body>
             </Card>
@@ -42,8 +42,8 @@ const TypeOfVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => {
                 <Row className='justify-content-center'>
                   <img style={imagePreview} className='p-3' src={pie}/>
                 </Row>
-                <h4 className='font-weight-bold'>Line Chart</h4>
-                <p>Good for visualizing change over time.</p>
+                <h4 className='font-weight-bold'>Pie Chart</h4>
+                <p>Good for visualizing type distributions.</p>
               </Card.Body>
             </Card>
           </Col>

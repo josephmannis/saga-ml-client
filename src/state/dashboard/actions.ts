@@ -18,6 +18,7 @@ interface FetchProjectAction {
 interface AddProjectDataAction {
     type: typeof DashboardActions.ADD_PROJECT_DATA;
     projectId: string;
+    newColumnTitles: string[];
     newData: string[][];
 }
 
@@ -59,10 +60,11 @@ export function fetchProject(projectId: string): DashBoardActionType {
     }
 }
 
-export function addDataToProject(projectId: string, newData: string[][]): DashBoardActionType {
+export function addDataToProject(projectId: string, newColumnTitles: string[], newData: string[][]): DashBoardActionType {
     return { 
         type: DashboardActions.ADD_PROJECT_DATA,
         projectId: projectId,
+        newColumnTitles: newColumnTitles,
         newData: newData
     }
 }

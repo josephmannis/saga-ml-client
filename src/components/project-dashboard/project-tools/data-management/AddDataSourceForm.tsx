@@ -10,7 +10,7 @@ import ProjectDataTable from './ProjectDataTable';
 import FileUploadButton from '../../../global/FileInputButton';
 
 interface IAddDataSourceFormProps {
-    onFormCompleted: (data: string[][]) => void;
+    onFormCompleted: (columnTitles: string[], data: string[][]) => void;
     onFormCancelled: () => void;
 }
 
@@ -37,6 +37,7 @@ const AddDataSourceForm: React.FC<IAddDataSourceFormProps> = props => {
     const onDataAdded = (dataRows: string[][]) => {
         // TODO: Fakey fake fake. Faker. 
         props.onFormCompleted(
+            ['content', 'date', 'tags'],
             [
                 ['I want nothing. I want nothing. I want no quid pro quo. Tell zellinsky to do the right thing. This is the final word from the pres of the u.s.', '10/5/19', 'education'],
                 ['Despite the constant negative press covfefe', '10/7/19', 'education']
