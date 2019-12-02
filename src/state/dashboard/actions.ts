@@ -1,4 +1,4 @@
-import {IProjectDashboard, IProjectVisualization} from "../../components/clientTypes"
+import { IProjectVisualization } from "../../components/clientTypes"
 
 // Types
 export enum DashboardActions {

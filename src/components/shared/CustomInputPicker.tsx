@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import CreatableSelect from 'react-select';
 
 // TODO: Debug this
@@ -61,7 +61,6 @@ const CustomInputPicker: React.FC<ICustomInputPickerProps> = props => {
     }
 
     useEffect(() => {
-        console.log(currentItems.map(input => input.value));
         props.onValuesChanged(currentItems.map(input => input.value));
     }, [currentItems]);
     

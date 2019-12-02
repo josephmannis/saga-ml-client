@@ -1,12 +1,8 @@
-import React, {useState} from 'react';
-import SearchBar from '../../../shared/SearchBar';
-import SearchResult from '../../../home/project-search/SearchResult';
-import {IDataSource, IProjectData, IProjectVisualizationType} from '../../../clientTypes';
-import {extractTags, filterData, getDateRange, randomColor} from './utility';
-import {Button, Row, Col} from "react-bootstrap";
-import {Choice, Input} from "@rocketseat/unform";
+import React, { useState } from 'react';
+import { Col, Row } from "react-bootstrap";
+import { IProjectData } from '../../../clientTypes';
 import ProjectDataTable from "../data-management/ProjectDataTable";
-import {start} from "repl";
+import { extractTags, filterData, getDateRange } from './utility';
 
 interface ISearchDataSourceFormProps {
   setSelectedData: (data: IProjectData) => void;
@@ -38,8 +34,8 @@ const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => 
   const titleAndDescriptionSelector = (
     <div>
       <h4 className='font-weight-bold'>Name</h4>
-      <input type='text' className='form-control' placeholder='Title' onChange={e => setTitle(e.target.value)}></input>
-      <input type='text' className='form-control' placeholder='Description' onChange={e => setDescription(e.target.value)}></input>
+      <input required type='text' className='form-control' placeholder='Title' onChange={e => setTitle(e.target.value)}></input>
+      <input required type='text' className='form-control' placeholder='Description' onChange={e => setDescription(e.target.value)}></input>
     </div>
   )
 

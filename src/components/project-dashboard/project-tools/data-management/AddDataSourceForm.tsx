@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Row, Container, Col, Button } from 'react-bootstrap';
-import { ADD_DATA_SOURCE_PROMPT } from '../../../../assets/strings';
 import { Form, Input } from '@rocketseat/unform';
+import React, { useState } from 'react';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { ADD_DATA_SOURCE_PROMPT } from '../../../../assets/strings';
+import { IDataSource } from '../../../clientTypes';
+import FileUploadButton from '../../../global/FileInputButton';
+import SearchResult from '../../../home/project-search/SearchResult';
 import CustomInputPicker from '../../../shared/CustomInputPicker';
 import SearchBar from '../../../shared/SearchBar';
-import SearchResult from '../../../home/project-search/SearchResult';
-import { IDataSource } from '../../../clientTypes';
 import ProjectDataTable from './ProjectDataTable';
-import FileUploadButton from '../../../global/FileInputButton';
 
 interface IAddDataSourceFormProps {
     onFormCompleted: (columnTitles: string[], data: string[][]) => void;
@@ -27,6 +27,9 @@ const AddDataSourceForm: React.FC<IAddDataSourceFormProps> = props => {
     const [csvData, updateCsvData] = React.useState<string[]>([]);
 
     const onAddFromCSV = (data: FileList | null) => {
+        let hashtags = hashtagValues;
+        let handles = handleValues;
+        
         if (data) {
             updateCsvData([]);
             showDataSourceForm(false);

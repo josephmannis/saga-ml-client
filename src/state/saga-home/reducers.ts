@@ -1,7 +1,6 @@
-import { HomeActions, HomeActionType, fetchPublishedProjects } from './actions';
-import { IProjectListing, IProjectDashboard } from '../../components/clientTypes';
-import {v1 } from 'uuid';
-import { fetchFeaturedProjects, fetchUserProjects, createProject} from '../backend';
+import { IProjectListing } from '../../components/clientTypes';
+import { createProject, fetchFeaturedProjects, fetchUserProjects } from '../backend';
+import { HomeActions, HomeActionType } from './actions';
 
 // State types
 export interface HomeState {

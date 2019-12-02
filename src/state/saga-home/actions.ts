@@ -1,4 +1,3 @@
-import { IProjectListing } from '../../components/clientTypes';
 
 // Types
 export enum HomeActions {

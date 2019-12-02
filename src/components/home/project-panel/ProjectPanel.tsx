@@ -1,13 +1,12 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { Link } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import { PROJECTS_TOOLTIP } from '../../../assets/strings';
 import { IProjectListing } from '../../clientTypes';
 import InfoTooltip from '../../global/InfoTooltip';
-import { PROJECTS_TOOLTIP } from '../../../assets/strings';
 
 interface IProjectPanelProps {
     projects: IProjectListing[];

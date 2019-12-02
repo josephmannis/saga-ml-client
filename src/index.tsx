@@ -1,13 +1,12 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import 'bootstrap/dist/css/bootstrap.css';
 import { Provider } from 'react-redux';
-import {persistor, store} from './state/store';
-import ConnectedApp from './App';
 import { PersistGate } from 'redux-persist/integration/react';
+import ConnectedApp from './App';
+import './index.css';
+import * as serviceWorker from './serviceWorker';
+import { persistor, store } from './state/store';
 
 
 const Root = () => (

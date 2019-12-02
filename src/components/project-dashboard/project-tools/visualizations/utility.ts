@@ -1,11 +1,4 @@
-import {
-  IProjectData,
-  IProjectVisualization,
-  IProjectVisualizationType,
-  IVisualizationDataPoint
-} from '../../../clientTypes';
-import {start} from "repl";
-import {transcode} from "buffer";
+import { IProjectData, IProjectVisualization, IProjectVisualizationType } from '../../../clientTypes';
 
 
 const getTagsColumnIndex = (projectData: IProjectData): number => {
