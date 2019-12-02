@@ -8,11 +8,12 @@ import { Button, Modal } from 'react-bootstrap';
 import { ProjectDataTable } from './ProjectDataTable';
 import AddDataSourceForm from './AddDataSourceForm';
 import { useDispatch } from "react-redux";
-import { DashboardActions } from '../../../../state/dashboard/actions';
+import { DashboardActions, addDataToProject } from '../../../../state/dashboard/actions';
 import InfoTooltip from '../../../global/InfoTooltip';
 import { PROJECT_DATA_TOOLTIP } from '../../../../assets/strings';
 
 interface IConnectedProjectDataManagementViewProps {
+  projectId: string;
   data: IProjectData;
   projectTopics: string[];
 }
@@ -20,39 +21,33 @@ interface IConnectedProjectDataManagementViewProps {
 const ConnectedProjectDataManagementView: React.FC<IConnectedProjectDataManagementViewProps> = props => {
   const dispatch = useDispatch();
 
-  const onDataAdded = (data: string[][]) => {
-    const newData = {
-      type: DashboardActions.ADD_PROJECT_DATA,
-      projectId: 'fake rn',
-      newData: data
-    }
-
-    dispatch(newData);
+  const onDataAdded = (columnTitles: string[], data: string[][]) => {
+    dispatch(addDataToProject(props.projectId, columnTitles, data));
     console.log(data);
   }
 
   return (
-    <ProjectDataManagementView data={props.data} projectTopics={props.projectTopics} onDataAdded={data => onDataAdded(data)} />
+    <ProjectDataManagementView projectId={props.projectId} data={props.data} projectTopics={props.projectTopics} onDataAdded={(columnTitles, data) => onDataAdded(columnTitles, data)} />
   )
 }
 
 interface IProjectDataManagementViewProps extends IConnectedProjectDataManagementViewProps {
-  onDataAdded: (data: any) => void;
+  onDataAdded: (columnTitles: string[], data: string[][]) => void;
 }
 
 const ProjectDataManagementView: React.FC<IProjectDataManagementViewProps> = props => {
   const [showDataAddedForm, toggleDataAddedForm] = React.useState(false);
   
-  const onDataFormCompleted = (data: any) => {
+  const onDataFormCompleted = (columnTitles: string[], data: string[][]) => {
     toggleDataAddedForm(false);
-    props.onDataAdded(data);
+    props.onDataAdded(columnTitles, data);
   }
 
   return (
       <Container fluid className='p-5'>
         <Modal dialogClassName='formModal' show={showDataAddedForm}>
           <Modal.Body>
-              <AddDataSourceForm onFormCompleted={(data) => onDataFormCompleted(data)} onFormCancelled={() => toggleDataAddedForm(false)}/>
+              <AddDataSourceForm onFormCompleted={(columntitles, data) => onDataFormCompleted(columntitles, data)} onFormCancelled={() => toggleDataAddedForm(false)}/>
           </Modal.Body>
         </Modal>
         
