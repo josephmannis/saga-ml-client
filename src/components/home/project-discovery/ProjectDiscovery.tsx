@@ -13,9 +13,9 @@ interface IProjectDiscoveryProps {
 
 const ProjectDiscovery: React.FC<IProjectDiscoveryProps> = props => {
     return (
-        <Container fluid className={'pt-3 justify-content-end'}>
+        <Container fluid className={'pt-3'}>
             <Row className='justify-content-end'>
-                <Col xs='11'>
+                <Col xs>
                     <Row className='justify-content-start'>
                         <Col xs>
                             <Row className='justify-content-start align-content-center'>

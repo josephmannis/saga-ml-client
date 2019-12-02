@@ -21,7 +21,7 @@ const projectItem = {
 
 const ProjectPanel: React.FC<IProjectPanelProps> = props => {
     return (
-         <Container fluid className=''>
+         <Container fluid className='h-100'>
              <Col className='p-0' xs>
                  <Row className='py-3 justify-content-between' noGutters>
                      <Col xs>

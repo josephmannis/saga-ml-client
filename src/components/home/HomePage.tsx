@@ -59,10 +59,10 @@ export const HomePage: React.FC<IHomePageProps> = props => {
         <div className='p-0 h-100'>
             {showProjectCreation && <ConnectedCreateProjectForm/>}
             <Row noGutters className='align-content-start h-100'>
-                <Col xs={4} className='border-right h-100'>
+                <Col xs='4' className='border-right pt-3'>
                     <ProjectPanel onProjectCreationRequested={() => toggleProjectCreation()} projects={ props.userProjects } onProjectSelected = { id => onProjectSelected(id) }/>
                 </Col>
-                <Col xs>
+                <Col xs className='px-5 pt-3'>
                     <ProjectDiscovery onProjectSelected={id => onProjectSelected(id)} publishedProjects={props.featuredProjects}/>
                 </Col>
             </Row>
