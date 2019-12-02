@@ -12,6 +12,7 @@ initialize();
 const persistConfig = {
     key: 'root',
     storage: storage,
+    whitelist: ['userReducer', 'dashboardReducer', 'searchReducer']
 };
 
 const rootReducer = combineReducers({

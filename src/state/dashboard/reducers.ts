@@ -1,6 +1,5 @@
 import {DashboardActions, DashBoardActionType} from './actions';
 import { IProjectDashboard } from '../../components/clientTypes';
-import { prototype } from 'events';
 import { fetchProjectById } from '../backend';
 
 // State types
