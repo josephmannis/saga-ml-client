@@ -12,7 +12,7 @@ export enum DashboardActions {
 
 interface FetchProjectAction {
     type: typeof DashboardActions.FETCH_PROJECT;
-    project: IProjectDashboard;
+    projectId: string;
 }
 
 interface AddProjectDataAction {
@@ -52,10 +52,10 @@ export type DashBoardActionType =
 | DownvoteProjectCommentAction
 
 // Creators
-export function fetchProject(project: IProjectDashboard): DashBoardActionType {
+export function fetchProject(projectId: string): DashBoardActionType {
     return {
         type: DashboardActions.FETCH_PROJECT,
-        project: project
+        projectId: projectId
     }
 }
 

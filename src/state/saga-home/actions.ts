@@ -9,12 +9,10 @@ export enum HomeActions {
 
 interface FetchFeaturedProjectsAction {
     type: typeof HomeActions.FETCH_FEATURED_PROJECTS;
-    publishedProjects: IProjectListing[];
 } 
 
 interface FetchUserProjectsAction {
     type: typeof HomeActions.FETCH_USER_PROJECTS;
-    userProjects: IProjectListing[];
 }
 
 interface CreateUserProjectAction {
@@ -31,21 +29,19 @@ export type HomeActionType =
 | CreateUserProjectAction
 
 // Creators
-export function fetchPublishedProjects(projects: IProjectListing[]): HomeActionType {
+export function fetchPublishedProjects(): HomeActionType {
     return {
-        type: HomeActions.FETCH_FEATURED_PROJECTS,
-        publishedProjects: projects
+        type: HomeActions.FETCH_FEATURED_PROJECTS
     }
 }
 
-export function fetchUserProjects(projects: IProjectListing[]): HomeActionType {
+export function fetchUserProjects(): HomeActionType {
     return {
-        type: HomeActions.FETCH_USER_PROJECTS,
-        userProjects: projects
+        type: HomeActions.FETCH_USER_PROJECTS
     }
 }
 
-export function createUserProject(title: string, description: string, topics: string[], ownerId: string): HomeActionType {
+export function createUserProject(title: string, description: string, topics: string[], ownerId: string): HomeActionType {        
     return {
         type: HomeActions.CREATE_USER_PROJECT,
         projectTitle: title,

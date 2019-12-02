@@ -8,6 +8,7 @@ import { BROWSE_PROJECTS_TOOLIP } from '../../../assets/strings';
 
 interface IProjectDiscoveryProps {
     publishedProjects: IProjectListing[];
+    onProjectSelected: (projectId: string) => void;
 }
 
 const ProjectDiscovery: React.FC<IProjectDiscoveryProps> = props => {
@@ -24,7 +25,7 @@ const ProjectDiscovery: React.FC<IProjectDiscoveryProps> = props => {
 
                             <Row className='justify-content-between'>
                                 <CardColumns>
-                                    {props.publishedProjects.map((item, i) => <Link key={i} to={`/project+${item.id}`}><ProjectPreview key={i} imageUrl={'https://via.placeholder.com/150'} title={item.title} description={item.description}/> </Link> )}
+                                    {props.publishedProjects.map((item, i) => <ProjectPreview projectId={item.id} onProjectSelected={(id: string) => props.onProjectSelected(id)} key={i} imageUrl={'https://via.placeholder.com/150'} title={item.title} description={item.description}/>)}
                                 </CardColumns>
                             </Row>
                         </Col>

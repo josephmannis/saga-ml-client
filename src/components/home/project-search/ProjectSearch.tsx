@@ -1,10 +1,11 @@
 import React from 'react';
 import SearchResult from './SearchResult';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 import { IProjectListing } from '../../clientTypes';
 import { AppState } from '../../../state/store';
 import { Redirect } from 'react-router';
+import { fetchProject } from '../../../state/dashboard/actions';
 
 
 interface IProjectSearchResultsProps {
@@ -15,12 +16,12 @@ interface IProjectSearchResultsProps {
 export const ConnectedProjectSearch: React.FC = () => {
     const [ selectedProject, selectProject ] = React.useState(false);
     const { searchResults } = useSelector((state: AppState) => state.searchReducer )
+    const dispatch = useDispatch();
 
     const onProjectSelected = (projectId: string) => {
+        dispatch(fetchProject(projectId));
         selectProject(true);
     }
-
-    console.log(searchResults)
 
     return (
         <div>

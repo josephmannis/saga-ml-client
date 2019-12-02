@@ -5,7 +5,9 @@ import { searchReducer } from './search/reducers';
 import { combineReducers, createStore } from 'redux';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
+import { initialize } from './backend';
 
+initialize();
 
 const persistConfig = {
     key: 'root',
@@ -25,12 +27,3 @@ export type AppState = ReturnType<typeof rootReducer>
 
 export const store = createStore(pReducer);
 export const persistor = persistStore(store);
-
-
-// export default function configureStore() {
-//     const store = createStore(
-//         rootReducer
-//     );
-
-//     return store;
-// }

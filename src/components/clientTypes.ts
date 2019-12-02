@@ -19,7 +19,6 @@ presentational component.
 export interface IProjectListing {
     id: string; // the id of the project
     title: string; // the project title
-    coverImageUrl: string;
     description: string; // the description of the project
     topics: string[]; // the topics that this project uses for topic modeling
     ownerId: string; // the id of the project's owner
