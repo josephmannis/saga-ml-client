@@ -1,6 +1,5 @@
 import React from 'react';
 import {Card, ListGroup, ListGroupItem, CardImg} from 'react-bootstrap';
-const gradient = require('random-gradient')
 
 interface IPublishedProjectProps {
     imageUrl: string;

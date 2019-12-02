@@ -49,15 +49,26 @@ const ProjectVisualizationsView: React.FC<IProjectVisualizationsViewProps> = pro
     props.onVisualizationAdded(visualization);
   };
 
+  const visualizationsList = () => {
+    return (
+      <Col>
+        { props.visualizations.map((vis, i) => <Visualization key={i} vis={vis} data={data}/>) }
+      </Col>
+    )
+  }
+
   return (
     <Container fluid className='p-5'>
       {showVisualizationCreation && <ProjectVisualizationCreationForm data={data}
                                                                       onFormCompleted={onVisualizationFormCompleted}
                                                                       onVisualizationCreationCancelled={() => toggleVisualizationCreation(false) }/>}
       <Row>
-          <Col>
-            { props.visualizations.map((vis, i) => <Visualization key={i} vis={vis} data={data}/>) }
+        {props.visualizations.length > 0 && visualizationsList()}
+        {props.visualizations.length == 0 && 
+          <Col xs>
+            This project has no visualizations.
           </Col>
+        }
 
           <Col xs={2} sm={2} md={2} lg={2}>
             <Button onClick={() => toggleVisualizationCreation(true)} className="flex" variant="primary">Create New</Button>

@@ -38,7 +38,9 @@ const ProjectVisualizationCreationForm: React.FC<IProjectVisualizationCreationFl
         labels: extractTags(data).reduce((obj, tag) => {return {...obj, [tag]: randomColor()}}, {})
     };
 
-    const setVisualizationFields = (startDate: string, endDate: string, labels: string[]) => {
+    const setVisualizationFields = (title: string, description: string, startDate: string, endDate: string, labels: string[]) => {
+        newVisualization.title = title;
+        newVisualization.description = description;
         newVisualization.startTime = new Date(startDate);
         newVisualization.endTime = new Date(endDate);
         newVisualization.labels = labels.reduce((obj, tag) => {return {...obj, [tag]: randomColor()}}, {})
