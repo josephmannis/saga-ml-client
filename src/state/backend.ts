@@ -94,34 +94,11 @@ function randomIProjectDataRows(length: number): string[][] {
  return Array(length).fill(0).map(randomDataRow);
  }
 
-function sampleVis(): IProjectVisualization[] {
-    return [
-        {
-            id: 'fake',
-            title: "Line sample",
-            description: "line sample graph description",
-            startTime: new Date(2018, 0),
-            endTime: new Date(2019, 11),
-            labels: {'education': '#6c0f18', 'immigration': '#27944f', 'trump': '#0b1cf0'},
-            type: IProjectVisualizationType.LINE,
-        },
-        {
-            id: 'fake',
-            title: "Pie sample",
-            description: "pie sample graph description",
-            startTime: new Date(2015, 0),
-            endTime: new Date(2019, 11),
-            labels: {'education': '#6c0f18', 'immigration': '#27944f',  'trump': '#0b1cf0'},
-            type: IProjectVisualizationType.PIE,
-        }
-    ]
-}
-
 export default function makePublicProject(id: string, title: string, description: string, topics: string[], ownerId: string) {
     let project: IProjectDashboard = 
         {
             id, title, description, topics, ownerId,
-            visualizations: sampleVis(),
+            visualizations: [],
             data: {
                 columnTitles: ['content', 'date', 'tags'],
                 dataRows:  randomIProjectDataRows(1000)

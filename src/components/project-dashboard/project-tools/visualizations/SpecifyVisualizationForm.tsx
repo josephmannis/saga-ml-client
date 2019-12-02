@@ -4,13 +4,13 @@ import SearchResult from '../../../home/project-search/SearchResult';
 import {IDataSource, IProjectData, IProjectVisualizationType} from '../../../clientTypes';
 import {extractTags, filterData, getDateRange, randomColor} from './utility';
 import {Button, Row, Col} from "react-bootstrap";
-import {Choice} from "@rocketseat/unform";
+import {Choice, Input} from "@rocketseat/unform";
 import ProjectDataTable from "../data-management/ProjectDataTable";
 import {start} from "repl";
 
 interface ISearchDataSourceFormProps {
   setSelectedData: (data: IProjectData) => void;
-  setVisualizationFields: (startDate: string, endDate: string, labels: string[]) => void;
+  setVisualizationFields: (title: string, description: string, startDate: string, endDate: string, labels: string[]) => void;
   data: IProjectData;
 }
 
@@ -20,6 +20,8 @@ const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => 
   const [initStartDate, initEndDate] = getDateRange(data);
   const [startDate, setStartDate] = useState(initStartDate);
   const [endDate, setEndDate] = useState(initEndDate);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const allTags = extractTags(data);
   const [selectedTags, setSelectedTags] = useState(allTags);
@@ -27,11 +29,19 @@ const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => 
   const selectedData = filterData(data, new Date(startDate), new Date(endDate), selectedTags);
   setSelectedData(selectedData);
 
-  setVisualizationFields(startDate, endDate, selectedTags);
+  setVisualizationFields(title, description, startDate, endDate, selectedTags);
 
   const tableContainer = {
     height: '400px'
   }
+
+  const titleAndDescriptionSelector = (
+    <div>
+      <h4 className='font-weight-bold'>Name</h4>
+      <input type='text' className='form-control' placeholder='Title' onChange={e => setTitle(e.target.value)}></input>
+      <input type='text' className='form-control' placeholder='Description' onChange={e => setDescription(e.target.value)}></input>
+    </div>
+  )
 
   const startEndDateSelector = (
     <div>
@@ -60,6 +70,7 @@ const SpecifyVisualizationForm: React.FC<ISearchDataSourceFormProps> = props => 
   return (
     <Row>
         <Col xs>
+          { titleAndDescriptionSelector }
           { startEndDateSelector }
           { tagToIncludeSelector }
         </Col>
