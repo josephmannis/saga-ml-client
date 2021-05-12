@@ -17,7 +17,7 @@
     "@types/sjcl": "^1.0.28",
     "@types/uuid": "^3.4.6",
     "bootstrap": "^4.3.1",
-    "chart.js": "^2.9.2",
+    "chart.js": "^2.9.4",
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-chartjs-2": "^2.8.0",
